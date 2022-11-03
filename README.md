@@ -5,3 +5,6 @@ DontBeFake, Computer Science 35L: Software Construction Laboratory, Fall 2022, U
 Install:
 
 npm install react-bootstrap bootstrap
+npm install mongodb express cors dotenv
+
+
