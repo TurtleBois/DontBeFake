@@ -2,7 +2,9 @@
 DontBeFake, Computer Science 35L: Software Construction Laboratory, Fall 2022, Universal of California Los Angeles
 
 # Documentation:
-Install:
+Make sure you have Node installed.
+
+In the Visual Studio Code terminal also install:
 
 npm install react-bootstrap bootstrap
 
