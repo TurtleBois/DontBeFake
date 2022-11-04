@@ -9,6 +9,7 @@ import {
   } from "react-router-dom";
   import Home from "./Home";
   import About from "./About";
+  import Profile from "./Profile";
 
 export default class NavbarComp extends Component {
     render() {
@@ -23,6 +24,7 @@ export default class NavbarComp extends Component {
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
                             <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
+                            <Nav.Link as={Link} to={"/profile"}>My Profile</Nav.Link>
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Something1</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Something2</NavDropdown.Item>
@@ -39,6 +41,7 @@ export default class NavbarComp extends Component {
                     <Routes>
                     <Route exact path="/about" element={<About/>}/>
                     <Route exact path="/home" element={<Home/>}/>
+                    <Route exact path="/profile" element={<Profile/>}/>
                     </Routes>
                 </div>
             </Router>
