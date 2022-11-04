@@ -1,13 +1,13 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarComp from './components/NavbarComp.js';
+
 function App() {
    return (
       <div className="App">
          <h1>DontBeFake.</h1>
+         <NavbarComp/>
       </div>
    );
 }
