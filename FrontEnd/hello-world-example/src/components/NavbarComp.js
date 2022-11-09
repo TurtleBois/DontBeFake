@@ -10,6 +10,7 @@ import {
   import Home from "./Home";
   import About from "./About";
   import Profile from "./Profile";
+import LogIn from "./LogIn";
 
 export default class NavbarComp extends Component {
     render() {
@@ -22,6 +23,7 @@ export default class NavbarComp extends Component {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
+                            <Nav.Link as={Link} to={"/"}></Nav.Link>
                             <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
                             <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
                             <Nav.Link as={Link} to={"/profile"}>My Profile</Nav.Link>
@@ -39,6 +41,7 @@ export default class NavbarComp extends Component {
                 </div>
                 <div>
                     <Routes>
+                    <Route exact path="/" element={<LogIn/>}/>
                     <Route exact path="/about" element={<About/>}/>
                     <Route exact path="/home" element={<Home/>}/>
                     <Route exact path="/profile" element={<Profile/>}/>
