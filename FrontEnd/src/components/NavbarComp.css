@@ -1,0 +1,28 @@
+/* Gets rid of default navbar arrow. */
+.dropdown-toggle::after {
+  display: none !important; 
+}
+
+/* Adjusts padding of navbar. */
+.navbar > .container {
+  max-width: 100%;
+}
+.navbar {
+  padding: 0;
+  padding-left: 10px;
+}
+
+/* For text beside profile dropdown. */
+h10 {
+  font-family: sans-serif;
+  font-size: 15px;
+  padding-top: 5px;
+  padding-right: 1px;
+  color: white;
+}
+
+/* Ensures profile dropdown menu expands below collapsed 
+navbar. */
+.navbar-nav .dropdown-menu {
+  position: absolute;
+}
