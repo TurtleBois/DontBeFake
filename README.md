@@ -9,6 +9,10 @@ Make sure to install the following dependences in the FrontEnd folder:
 npm install react-bootstrap bootstrap
 npm install mongodb express cors dotenv
 npm install bootstrap react-router-dom
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/material @mui/styled-engine-sc styled-components
+
+
 ```
 
 To host the website locally, go into the /src/ file and run:
