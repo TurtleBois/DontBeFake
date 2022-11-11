@@ -10,23 +10,25 @@ import {
   import Home from "./Home";
   import About from "./About";
   import Profile from "./Profile";
-  import CreateProfileTest from "./CreateProfileTest"
+  import Schedule from "./Schedules";
+//   import CreateProfileTest from "./CreateProfileTest"
 
 export default class NavbarComp extends Component {
     render() {
         return (
             <Router>
                 <div>
-                    <Navbar bg="dark" variant="dark" expand="lg">
+                    <Navbar bg="dark" variant="dark" >
                     <Container>
-                        <Navbar.Brand href="#home">Navbar Demo</Navbar.Brand>
+                        {/* <Navbar.Brand href="#home">Navbar Demo</Navbar.Brand> */}
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
                             <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
                             <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
                             <Nav.Link as={Link} to={"/profile"}>My Profile</Nav.Link>
-                            <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
+                            <Nav.Link as={Link} to={"/schedule"}>My Schedules</Nav.Link>
+                            {/* <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link> */}
                             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Something1</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">Something2</NavDropdown.Item>
@@ -44,7 +46,8 @@ export default class NavbarComp extends Component {
                     <Route exact path="/about" element={<About/>}/>
                     <Route exact path="/home" element={<Home/>}/>
                     <Route exact path="/profile" element={<Profile/>}/>
-                    <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
+                    <Route exact path="/schedule" element={<Schedule/>}/>
+                    {/* <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/> */}
                     </Routes>
                 </div>  
             </Router>
