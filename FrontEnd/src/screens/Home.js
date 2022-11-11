@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-export default class Home extends Component {
-    render() {
-        return (
-            <h2>Home</h2>
-        )
-    }
+const HomeScreen = () => {
+    return(
+        <h2>Home</h2>
+    )
 }
+
+export default HomeScreen;
