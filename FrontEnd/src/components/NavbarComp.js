@@ -7,9 +7,9 @@ import {
     Route,
     Link
   } from "react-router-dom";
-  import Home from "./Home";
-  import About from "./About";
-  import Profile from "./Profile";
+  import Home from "../screens/Home";
+  import About from "../screens/About";
+  import Profile from "../screens/Profile";
   import CreateProfileTest from "./CreateProfileTest"
 
 export default class NavbarComp extends Component {
