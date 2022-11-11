@@ -1,15 +1,7 @@
 import React, { Component } from "react";
 import '../styles/LogIn.css';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-  } from "react-router-dom";
-import Signup from './SignUp.js'
 
-
-const LoginScreen = () => {
+const SignUpScreen = () => {
     return (
         <body>
         <div>
@@ -22,15 +14,15 @@ const LoginScreen = () => {
                 <div>
                     <input className= "input-bar" type="password" id="password" name="password" placeholder="Password."></input>
                 </div>
-                <input className="button" type="submit" value="Login."></input>
+                <div>
+                    <input className= "input-bar" type="password" id="password" name="password" placeholder="ReEnterPassword."></input>
+                </div>
+                <input className="button" type="submit" value="Submit."></input>
             </form>
-            <div>
-            <a href="./SignUp">or SignUp.</a>
-            </div>
+
         </div>
         </body>
-        
     )
 }
 
-export default LoginScreen;
+export default SignUpScreen;
