@@ -8,19 +8,18 @@ import {
     Route,
     Link
   } from "react-router-dom";
-  import Home from "./Home";
-  import About from "./About";
-  import Profile from "./Profile";
-  import CreateProfileTest from "./CreateProfileTest";
-  import Schedules from "./Schedules"
-
-const profilePicture=(
-  <div>
-    <img width="40" height="40" class="rounded-circle"
-        // to be replaced
-        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    />
-  </div>)
+  import Home from "../screens/Home";
+  import About from "../screens/About";
+  import Profile from "../screens/Profile";
+  import Schedules from "../screens/Schedules"
+  import CreateProfileTest from "./CreateProfileTest"
+  const profilePicture=(
+    <div>
+      <img width="40" height="40" class="rounded-circle"
+          // to be replaced
+          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
+      />
+    </div>)
 
 export default class NavbarComp extends Component {
   render() {
