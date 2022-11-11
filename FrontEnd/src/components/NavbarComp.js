@@ -12,6 +12,7 @@ import {
   import About from "./About";
   import Profile from "./Profile";
   import CreateProfileTest from "./CreateProfileTest";
+  import Schedules from "./Schedules"
 
 const profilePicture=(
   <div>
@@ -35,7 +36,9 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
                   <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
                   <Nav.Link as={Link} to={"/profile"}>My Profile</Nav.Link>
+                  <Nav.Link as={Link} to={"/schedules"}>Schedule</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
+
                 </Nav>
                 {/* The Nav.Item below could be done better.
                     For the text beside the profile icon.
@@ -59,6 +62,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/home" element={<Home/>}/>
             <Route exact path="/about" element={<About/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
+            <Route exact path="/schedules" element={<Schedules/>}/>
             <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
           </Routes>
         </div>  
