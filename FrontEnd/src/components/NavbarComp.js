@@ -53,7 +53,7 @@ export default class NavbarComp extends Component {
               </Navbar.Collapse>
               <Nav className="ms-auto">
                 <NavDropdown title={profilePicture} id="basic-nav-dropdown" align="end">
-                  <NavDropdown.Item href="logout">Logout</NavDropdown.Item>
+                  <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Container>
