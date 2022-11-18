@@ -1,13 +1,5 @@
 import React, { Component } from "react";
 import '../styles/LogIn.css';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-  } from "react-router-dom";
-import Signup from './SignUp.js'
-
 
 const LoginScreen = () => {
     return (

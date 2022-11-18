@@ -1,4 +1,4 @@
-import './NavbarComp.css';
+import '../styles/NavbarComp.css';
 import React, { Component } from "react";
 import Container from 'react-bootstrap/Container';
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
@@ -8,14 +8,18 @@ import {
     Route,
     Link
   } from "react-router-dom";
-  import Home from "../screens/Home";
-  import About from "../screens/About";
-  import Profile from "../screens/Profile";
-  import Schedules from "../screens/Schedules"
-  import CreateProfileTest from "./CreateProfileTest"
+import Home from "../screens/Home";
+import About from "../screens/About";
+import Profile from "../screens/Profile";
+import Schedules from "../screens/Schedules";
+import CreateProfileTest from "./CreateProfileTest";
+import LoginScreen from "../screens/LogIn";
+import SignUpScreen from '../screens/SignUp';
+
   const profilePicture=(
     <div>
       <img width="40" height="40" class="rounded-circle"
+          alt="pfp"
           // to be replaced
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
       />
@@ -37,7 +41,6 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/profile"}>My Profile</Nav.Link>
                   <Nav.Link as={Link} to={"/schedules"}>Schedule</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
-
                 </Nav>
                 {/* The Nav.Item below could be done better.
                     For the text beside the profile icon.
@@ -63,6 +66,8 @@ export default class NavbarComp extends Component {
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
             <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
+            <Route exact path="/login" element={<LoginScreen/>}/>
+            <Route exact path="/signup" element={<SignUpScreen/>}/>
           </Routes>
         </div>  
       </Router>
