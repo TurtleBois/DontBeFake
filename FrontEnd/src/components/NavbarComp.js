@@ -11,22 +11,8 @@ import {
 import Home from "../screens/Home";
 import About from "../screens/About";
 import Profile from "../screens/Profile";
-<<<<<<< HEAD
-import Schedules from "../screens/Schedules"
-import Calender from "../screens/Calender"
-
-
-import CreateProfileTest from "./CreateProfileTest"
-
-const profilePicture=(
-  <div>
-    <img width="40" height="40" class="rounded-circle"
-        // to be replaced
-        src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-    />
-  </div>)
-=======
 import Schedules from "../screens/Schedules";
+import Calender from "../screens/Calender";
 import CreateProfileTest from "./CreateProfileTest";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
@@ -39,7 +25,6 @@ import SignUpScreen from '../screens/SignUp';
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
       />
     </div>)
->>>>>>> 03e8daef13080a5d6aa9360ee167f9a2fd84a4c5
 
 export default class NavbarComp extends Component {
   render() {
@@ -82,12 +67,9 @@ export default class NavbarComp extends Component {
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
             <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
-<<<<<<< HEAD
-            <Route exact path="/calen" element={<Calender/>}/>
-=======
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
->>>>>>> 03e8daef13080a5d6aa9360ee167f9a2fd84a4c5
+            <Route exact path="/calen" element={<Calender/>}/>
           </Routes>
         </div>  
       </Router>
