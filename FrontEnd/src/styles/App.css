@@ -43,11 +43,13 @@ h1 {
   padding-left: 15px;
   padding-right: 15px;
   margin: 0;
+
+  color: #ffffff;
   background: linear-gradient(to bottom, 
-                              white 0%,
-                              white 62%, 
-                              gold 62%, 
-                              gold 100%);
+                              rgb(0, 0, 0) 0%,
+                              rgb(0, 0, 0) 62%, 
+                              rgb(0, 0, 0) 62%, 
+                              rgb(0, 0, 0) 100%);
 }
 
 h2 {
