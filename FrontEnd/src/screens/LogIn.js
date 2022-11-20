@@ -28,8 +28,8 @@ const LoginScreen = () => {
         var username = form.username
         var password = sha1(form.password)
         for(var record of records) {
-            if(username == record["username"]) {
-               if(password == record["password"]) {
+            if(username === record["username"]) {
+               if(password === record["password"]) {
                     navigate("/profile")
                }
                else {

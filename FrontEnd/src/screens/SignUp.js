@@ -24,7 +24,7 @@ const SignUpScreen = () => {
       var sha1 = require('sha1');
       var p1 = sha1(form.password);
       var p2 = sha1(form.password2);
-      if(p1 != p2) {
+      if(p1 !== p2) {
         // TODO: make it clear they fucked up
         window.location.reload(false);
         return;
@@ -51,7 +51,7 @@ const SignUpScreen = () => {
         <div>
             <div className="background">.</div>
             <div className="title">DontBeFake.
-                <div className="login-text">Login.</div>
+                <div className="login-text">Signup.</div>
             </div>
             <form  onSubmit={onSubmit}>
                 <input

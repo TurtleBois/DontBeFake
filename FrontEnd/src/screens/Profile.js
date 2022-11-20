@@ -1,10 +1,13 @@
 import React, { useState, useEffect, Component } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 
+
+
 const ProfileScreen = () => {
     return (
         <div>
             <h2>Profile</h2>
+            
             <Col className="profileContainer"
                 style={{
                     display: "flex",
@@ -27,22 +30,3 @@ const ProfileScreen = () => {
 }
 
 export default ProfileScreen;
-
-/*export default class Profile extends Component {
-    render() {
-        return (
-            <div>
-                <h2>Profile</h2>
-                <Col className="profileContainer"
-                    style={{
-                        display: "flex",
-                        alignItmes: "center",
-                        justifyContent: "center",
-                    }}>
-                    <Row>profilepic</Row>
-                </Col>
-            </div>
-            
-        )
-    }
-}*/
