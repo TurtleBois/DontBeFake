@@ -10,7 +10,6 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 import calenderIcon from './caleIcon.jpg'
 
@@ -29,12 +28,6 @@ import calenderIcon from './caleIcon.jpg'
           alt="Calender"
         />
         <CardContent>
-          {/* <Typography gutterBottom variant="h5" component="div">
-            CARD
-          </Typography> */}
-          {/* <Typography variant="body2" color="text.secondary">
-            This is a schedule
-          </Typography> */}
         </CardContent>
       </CardActionArea>
     </Card>
