@@ -39,7 +39,7 @@ export default class NavbarComp extends Component {
                 <Nav className="me-auto">
                   <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
                   <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
-                  <Nav.Link as={Link} to={"/profile"}>My Profile</Nav.Link>
+                  {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedule</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
                 </Nav>
@@ -54,6 +54,7 @@ export default class NavbarComp extends Component {
               </Navbar.Collapse>
               <Nav className="ms-auto">
                 <NavDropdown title={profilePicture} id="basic-nav-dropdown" align="end">
+                  <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
@@ -66,10 +67,10 @@ export default class NavbarComp extends Component {
             <Route exact path="/about" element={<About/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
+            <Route exact path="/Calendar" element={<Calender/>}/>
             <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
-            <Route exact path="/calen" element={<Calender/>}/>
           </Routes>
         </div>  
       </Router>

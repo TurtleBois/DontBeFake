@@ -20,7 +20,7 @@ import calenderIcon from './caleIcon.jpg'
     return (
       <Card>
       <CardActionArea
-        href="/calen" variant="contained">
+        href="/Calendar" variant="contained">
         <CardMedia
           component="img"
           height="210"

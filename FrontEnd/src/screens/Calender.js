@@ -112,16 +112,38 @@ class Calender extends React.Component {
           saturday: Array(14).fill(null),
           sunday: Array(14).fill(null),
           coloring: Array(91).fill('black'),
-          
+          eventNames: [],
+          startTimes: [],
+          endTimes: [],
 
         };
       }
+
+      
+      callbackFunction = (name, start, end) => {
+        // const coloring = this.state.coloring.slice();
+        // coloring[i] = 'red'
+        // this.setState({coloring: coloring,})
+        console.log("name:"+ name)
+        console.log("start:"+ start)
+        console.log("end:"+ end)
+        // this.setState({eventNames: this.state.eventNames.push(name)})
+        // this.setState({startTimes: this.state.eventNames.push(start)})
+        // this.setState({endTimes: this.state.eventNames.push(end)})
+      }
+
+      
+
       
       handleClick(i){
         const coloring = this.state.coloring.slice();
         coloring[i] = 'red'
         this.setState({coloring: coloring,})
+        // console.log("name:"+ this.state.eventNames[0])
+        // console.log("start:"+ this.state.startTimes[0])
+        // console.log("end:"+ this.state.endTimes[0])
       }
+
 
 
     render() {
@@ -161,7 +183,7 @@ class Calender extends React.Component {
                         {Array.from(Array(91)).map((_, index) => (
                             
                             <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[index]} } >
-                                <Slot onClick={() => this.handleClick(index)}/>
+                                <Slot  parentCallback = {this.callbackFunction} onClick={() => this.handleClick(index)} />
                             </Grid>
 
                         ))}
