@@ -84,13 +84,6 @@ class Calender extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          monday: Array(14).fill(null),
-          tuesday: Array(14).fill(null),
-          wendsday: Array(14).fill(null),
-          thursday: Array(14).fill(null),
-          friday: Array(14).fill(null),
-          saturday: Array(14).fill(null),
-          sunday: Array(14).fill(null),
           coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
           eventNames: new Array(),
           startTimes: new Array(),
@@ -109,7 +102,13 @@ class Calender extends React.Component {
 
       callbackFunction = (i,name, start, end) => {
         const weekday = Math.floor(i/27);
-
+        for(let j = start ; j < end; j++) {
+            if(this.state.coloring[(27*weekday)+j] != 'rgba(90, 52, 52, 0)')
+            {
+                alert("You have a overlapping event — DontBeFake");
+                return
+            }
+        }  
         const eventNames = this.state.eventNames.slice();
         const startTimes = this.state.startTimes.slice();
         const endTimes = this.state.endTimes.slice();
@@ -118,24 +117,19 @@ class Calender extends React.Component {
         startTimes.push(start)
         endTimes.push(end)
 
-
+        
+        
         for(let j = start ; j < end; j++) {
-            if(this.state.coloring[(27*weekday)+j] != 'rgba(90, 52, 52, 0)')
-            {
-                alert("You have a overlapping event — DontBeFake");
-                return
-            }
-        }  
-        for(let j = start ; j < end; j++) {
-            this.state.coloring[(27*weekday)+j] = 'red'
+            this.state.coloring[(27*weekday)+j] = "hsl(" + this.state.numEvents*15+ ", 80%, 50%)"
         }  
 
 
+        
         this.setState({eventNames: eventNames,})
         this.setState({startTimes: startTimes,})
         this.setState({endTimes: endTimes,})
 
-        
+        this.setState({numEvents : this.state.numEvents +1})
 
         console.log("i:"+ i)
         console.log("start:"+ this.state.startTimes)

@@ -94,7 +94,8 @@ class Slot extends React.Component {
 
         <CardActionArea
             variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
-              height: 40}}>
+              height: 40}}
+              >
             
         </CardActionArea>
 
@@ -109,7 +110,7 @@ class Slot extends React.Component {
         }}
         >
 
-        <Typography sx={{ p: 4 }}>
+        <Typography sx={{ p: 4 }} >
           
           
         <TextField
@@ -145,7 +146,7 @@ class Slot extends React.Component {
           </Box>
          
 
-          <Button variant="outlined"  onClick = {() => {this.sendData(); this.handleClose()  }}>confirm</Button>
+          <Button variant="outlined"  onClick = {() => {this.sendData(); this.handleClose()  } } >confirm</Button>
         
         
         </Typography>
