@@ -4,6 +4,15 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Slot from "../utility/timeSlot";
 
+
+
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
+import Stack from '@mui/material/Stack';
+
+
+
+
 function timeSide(index)
 {   
     const thirty = (index%2) ? "30" : "00"
@@ -82,11 +91,12 @@ class Calender extends React.Component {
           friday: Array(14).fill(null),
           saturday: Array(14).fill(null),
           sunday: Array(14).fill(null),
-          coloring: Array(189).fill('black'),
+          coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
           eventNames: new Array(),
           startTimes: new Array(),
           endTimes: new Array(),
           numEvents: 0,
+          alert: false,
 
         };
       }
@@ -107,6 +117,15 @@ class Calender extends React.Component {
         eventNames.push(name)
         startTimes.push(start)
         endTimes.push(end)
+
+
+        for(let j = start ; j < end; j++) {
+            if(this.state.coloring[(27*weekday)+j] != 'rgba(90, 52, 52, 0)')
+            {
+                alert("You have a overlapping event — DontBeFake");
+                return
+            }
+        }  
         for(let j = start ; j < end; j++) {
             this.state.coloring[(27*weekday)+j] = 'red'
         }  
@@ -139,8 +158,13 @@ class Calender extends React.Component {
       }
 
     render() {
+
+
         
         return (
+ 
+            
+
             <Grid
             container
             direction="row">
@@ -164,11 +188,11 @@ class Calender extends React.Component {
                     '--Grid-borderWidth': '1px',
                     borderTop: 'var(--Grid-borderWidth) solid',
                     borderLeft: 'var(--Grid-borderWidth) solid',
-                    borderColor: 'white',
+                    borderColor: 'rgba(133, 133, 133, 1)',
                     '& > div': {
                         borderRight: 'var(--Grid-borderWidth) solid',
                         borderBottom: 'var(--Grid-borderWidth) solid',
-                        borderColor: 'white',
+                        borderColor: 'rgba(133, 133, 133, 1)',
                     },
                     }}>
                         

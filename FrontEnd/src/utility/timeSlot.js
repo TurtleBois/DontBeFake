@@ -39,11 +39,6 @@ function timeScale(index)
 }
 
 
-function startDefault(i)
-{
-  return i % 27
-}
-
 
 class Slot extends React.Component {
 
@@ -63,7 +58,7 @@ class Slot extends React.Component {
   }
 
   sendData = () => {
-    this.props.parentCallback(this.props.value,this.state.name,this.state.start,this.state.end);
+    this.props.parentCallback(this.props.value,this.state.name,Math.floor(this.props.value%27),this.state.end);
   }
 
   handleClick = (event) => 
@@ -128,23 +123,7 @@ class Slot extends React.Component {
 
 
         <Box sx={{ minWidth: 120}}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">start</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={this.state.start}
-                label="start"
-                onChange={this.handleChangeStart}
-              >
-
-                {Array.from(Array(28)).map((_, index) => (
-                        <MenuItem value={index}>{timeScale(index)}</MenuItem>
-                ))}
-
-                
-              </Select>
-            </FormControl>
+            Start: {timeScale(Math.floor(this.props.value%27)) }
           </Box>
          
 
@@ -158,8 +137,8 @@ class Slot extends React.Component {
                 label="end"
                 onChange={this.handleChangeEnd}
               >
-                {Array.from(Array(28)).map((_, index) => (
-                        <MenuItem value={index}>{timeScale(index)}</MenuItem>
+                {Array.from(Array(27 - this.props.value%27)).map((_, index) => (
+                        <MenuItem value={index+ this.props.value%27 + 1}>{timeScale(index + this.props.value%27 + 1)}</MenuItem>
                 ))}
               </Select>
             </FormControl>
