@@ -5,16 +5,17 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Slot from "../utility/timeSlot";
 
 function timeSide(index)
-{
-    if(9 + index === 12) 
+{   
+    const thirty = (index%2) ? "30" : "00"
+    if(9+ Math.floor(index/2) === 12) 
     {
-        return "12:00pm"
+        return "12:" + thirty +"pm"
     }
-    if (9 + index > 12)
+    if ( 9+ Math.floor( index/2) > 12)
     {
-        return index - 3 + ":00pm"
+        return (Math.floor(index/2) - 3) + ":" + thirty +"pm"
     }
-    return index + 9 + ":00am"
+    return (Math.floor(index/2) + 9) + ":" + thirty +"am"
 }
 
 function weekdays()
@@ -53,47 +54,17 @@ function dayTimes()
     return (<Grid item xs={1}  style={{color: "white"} } container
          direction="column">
             <Grid sx={{
-              height: 13}}>
+              height: 12}}>
             </Grid>
-            {Array.from(Array(14)).map((_, index) => (
-                    <Grid key={index} {...{}} minHeight={50.5}>
+            {Array.from(Array(28)).map((_, index) => (
+                    <Grid key={index} {...{}} minHeight={50.8}>
                         {timeSide(index)}
                     </Grid>
             ))}
     </Grid>)
 }
 
-function gridOfTimes()
-{
-    return<Grid
-    container
-    spacing={1}
-    direction="column"
 
-    maxHeight={700}
-    sx={{
-    '--Grid-borderWidth': '1px',
-    borderTop: 'var(--Grid-borderWidth) solid',
-    borderLeft: 'var(--Grid-borderWidth) solid',
-    borderColor: 'white',
-    '& > div': {
-        borderRight: 'var(--Grid-borderWidth) solid',
-        borderBottom: 'var(--Grid-borderWidth) solid',
-        borderColor: 'white',
-    },
-    }}>
-        
-        {Array.from(Array(91)).map((_, index) => (
-            <Grid key={index} {...{ xs: 12/7}} minHeight={50}  style={{backgroundColor: (index <4) ? 'red' : 'blue'} }  >
-                <Slot/>
-            </Grid>
-
-        ))}
-
-
-
-    </Grid>
-}
 
 
 
@@ -111,22 +82,45 @@ class Calender extends React.Component {
           friday: Array(14).fill(null),
           saturday: Array(14).fill(null),
           sunday: Array(14).fill(null),
-          coloring: Array(91).fill('black'),
-          eventNames: [],
-          startTimes: [],
-          endTimes: [],
+          coloring: Array(189).fill('black'),
+          eventNames: new Array(),
+          startTimes: new Array(),
+          endTimes: new Array(),
+          numEvents: 0,
 
         };
       }
 
-      
-      callbackFunction = (name, start, end) => {
-        // const coloring = this.state.coloring.slice();
-        // coloring[i] = 'red'
-        // this.setState({coloring: coloring,})
-        console.log("name:"+ name)
-        console.log("start:"+ start)
-        console.log("end:"+ end)
+      changeColor(i){
+        const coloring = this.state.coloring.slice();
+        coloring[i] = 'red'
+        this.setState({coloring: coloring,})
+      }
+
+      callbackFunction = (i,name, start, end) => {
+        const weekday = Math.floor(i/27);
+
+        const eventNames = this.state.eventNames.slice();
+        const startTimes = this.state.startTimes.slice();
+        const endTimes = this.state.endTimes.slice();
+
+        eventNames.push(name)
+        startTimes.push(start)
+        endTimes.push(end)
+        for(let j = start ; j < end; j++) {
+            this.state.coloring[(27*weekday)+j] = 'red'
+        }  
+
+
+        this.setState({eventNames: eventNames,})
+        this.setState({startTimes: startTimes,})
+        this.setState({endTimes: endTimes,})
+
+        
+
+        console.log("i:"+ i)
+        console.log("start:"+ this.state.startTimes)
+        console.log("end:"+ this.state.endTimes)
         // this.setState({eventNames: this.state.eventNames.push(name)})
         // this.setState({startTimes: this.state.eventNames.push(start)})
         // this.setState({endTimes: this.state.eventNames.push(end)})
@@ -135,16 +129,14 @@ class Calender extends React.Component {
       
 
       
-      handleClick(i){
-        const coloring = this.state.coloring.slice();
-        coloring[i] = 'red'
-        this.setState({coloring: coloring,})
-        // console.log("name:"+ this.state.eventNames[0])
-        // console.log("start:"+ this.state.startTimes[0])
-        // console.log("end:"+ this.state.endTimes[0])
+      
+
+      renderSlot(i) {
+        return(
+        <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[i]} } >
+            <Slot  parentCallback = {this.callbackFunction} value = {i}/>
+        </Grid>);
       }
-
-
 
     render() {
         
@@ -167,7 +159,7 @@ class Calender extends React.Component {
                     spacing={1}
                     direction="column"
 
-                    maxHeight={700}
+                    maxHeight={1400}
                     sx={{
                     '--Grid-borderWidth': '1px',
                     borderTop: 'var(--Grid-borderWidth) solid',
@@ -180,11 +172,9 @@ class Calender extends React.Component {
                     },
                     }}>
                         
-                        {Array.from(Array(91)).map((_, index) => (
+                        {Array.from(Array(189)).map((_, index) => (
                             
-                            <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[index]} } >
-                                <Slot  parentCallback = {this.callbackFunction} onClick={() => this.handleClick(index)} />
-                            </Grid>
+                            this.renderSlot(index)
 
                         ))}
 

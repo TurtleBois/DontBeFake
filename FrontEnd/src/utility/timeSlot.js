@@ -25,16 +25,23 @@ import Select from '@mui/material/Select';
 
 
 function timeScale(index)
+{   
+    const thirty = (index%2) ? "30" : "00"
+    if(9+ Math.floor(index/2) === 12) 
+    {
+        return "12:" + thirty +"pm"
+    }
+    if ( 9+ Math.floor( index/2) > 12)
+    {
+        return (Math.floor(index/2) - 3) + ":" + thirty +"pm"
+    }
+    return (Math.floor(index/2) + 9) + ":" + thirty +"am"
+}
+
+
+function startDefault(i)
 {
-    if(9 + index === 12) 
-    {
-        return "12:00pm"
-    }
-    if (9 + index > 12)
-    {
-        return index - 3 + ":00pm"
-    }
-    return index + 9 + ":00am"
+  return i % 27
 }
 
 
@@ -50,12 +57,13 @@ class Slot extends React.Component {
       start: null,
       end: null,
       anchorEl: null,
+      isEvent: false,
 
     };
   }
 
   sendData = () => {
-    this.props.parentCallback(this.state.name,this.state.start,this.state.end);
+    this.props.parentCallback(this.props.value,this.state.name,this.state.start,this.state.end);
   }
 
   handleClick = (event) => 
@@ -113,6 +121,7 @@ class Slot extends React.Component {
           required
           id="outlined-required"
           label="Event Name"
+          value={this.state.name}
           onChange={this.handleChangeName}
         />
         
@@ -129,7 +138,7 @@ class Slot extends React.Component {
                 onChange={this.handleChangeStart}
               >
 
-                {Array.from(Array(14)).map((_, index) => (
+                {Array.from(Array(28)).map((_, index) => (
                         <MenuItem value={index}>{timeScale(index)}</MenuItem>
                 ))}
 
@@ -149,7 +158,7 @@ class Slot extends React.Component {
                 label="end"
                 onChange={this.handleChangeEnd}
               >
-                {Array.from(Array(14)).map((_, index) => (
+                {Array.from(Array(28)).map((_, index) => (
                         <MenuItem value={index}>{timeScale(index)}</MenuItem>
                 ))}
               </Select>
@@ -157,7 +166,7 @@ class Slot extends React.Component {
           </Box>
          
 
-          <Button variant="outlined"  onClick = {() => {this.sendData(); this.props.onClick()}}>confirm</Button>
+          <Button variant="outlined"  onClick = {() => {this.sendData(); this.handleClose()  }}>confirm</Button>
         
         
         </Typography>
