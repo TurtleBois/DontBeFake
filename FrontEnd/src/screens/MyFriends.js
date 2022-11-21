@@ -1,8 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
+import "../styles/MyFriends.css";
+import Friend from "../components/Friends";
+import FindMoreFriends from "../components/FindMoreFriends";
+import Grid from '@mui/material/Grid';
 
 const MyFriendsScreen = () => {
     return (
-        <h2>MyFriends</h2>
+        <div>
+            <Friend/>
+            <FindMoreFriends/>
+        </div>
     )
 }
 

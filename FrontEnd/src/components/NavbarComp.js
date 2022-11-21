@@ -46,9 +46,9 @@ export default class NavbarComp extends Component {
               </Navbar.Collapse>
               <Nav className="ms-auto">
                 <Navbar.Collapse>
-                 <div id="user_names">
-                    <div id="name">Name</div>
-                    <div id="username">username</div>
+                 <div class="nav-userinfo">
+                    <b><div id="nav-name">Name</div></b>
+                    <b><div id="nav-username">username</div></b>
                  </div>
                 </Navbar.Collapse>
                 <NavDropdown title={profilePicture} id="basic-nav-dropdown" align="end">

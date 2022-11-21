@@ -13,18 +13,18 @@
 }
 
 /* For text beside profile dropdown. */
-#user_names {
+.nav-userinfo {
   font-family: sans-serif;
 }
 
-#name {
+#nav-name {
   font-size: 15px;
   color: white;
   float: left;
   margin-bottom: -5px;
 }
 
-#username {
+#nav-username {
   font-size: 14px;
   color: gray;
 }
