@@ -19,7 +19,7 @@ import SignUpScreen from '../screens/SignUp';
 
   const profilePicture=(
     <div>
-      <img width="40" height="40" class="rounded-circle"
+      <img id="pfp_dd" width="40" height="40" class="rounded-circle"
           alt="pfp"
           // to be replaced
           src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
@@ -31,7 +31,7 @@ export default class NavbarComp extends Component {
     return (
       <Router>
         <div>
-          <Navbar bg="dark" variant="dark" expand="sm">
+          <Navbar bg="dark" variant="dark" expand="md">
             <Container>
               <Navbar.Brand as={Link} to={"/home"}>DontBeFake.</Navbar.Brand>
               {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
@@ -43,16 +43,14 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/schedules"}>Schedule</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
                 </Nav>
-                {/* The Nav.Item below could be done better.
-                    For the text beside the profile icon.
-                    Problems: 
-                    * disappears when page collapses
-                    * misoriented if placed outside of Navbar.Collapse
-                    * haven't put username text underneath
-                */}
-                <Nav.Item className="ms-auto"> <h10>Name</h10></Nav.Item>
               </Navbar.Collapse>
               <Nav className="ms-auto">
+                <Navbar.Collapse>
+                 <div id="user_names">
+                    <div id="name">Name</div>
+                    <div id="username">username</div>
+                 </div>
+                </Navbar.Collapse>
                 <NavDropdown title={profilePicture} id="basic-nav-dropdown" align="end">
                   <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
                   <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
@@ -67,7 +65,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
-            <Route exact path="/Calendar" element={<Calender/>}/>
+            <Route exact path="/calendar" element={<Calender/>}/>
             <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
