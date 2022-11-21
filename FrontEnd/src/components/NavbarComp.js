@@ -9,7 +9,7 @@ import {
     Link
   } from "react-router-dom";
 import Home from "../screens/Home";
-import About from "../screens/About";
+import MyFriendsScreen from "../screens/MyFriends";
 import Profile from "../screens/Profile";
 import Schedules from "../screens/Schedules";
 import Calender from "../screens/Calender";
@@ -31,14 +31,14 @@ export default class NavbarComp extends Component {
     return (
       <Router>
         <div>
-          <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar bg="dark" variant="dark" expand="sm">
             <Container>
               <Navbar.Brand as={Link} to={"/home"}>DontBeFake.</Navbar.Brand>
               {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
-                  <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
+                  <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
                   <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link>
                   <Nav.Link as={Link} to={"/schedules"}>Schedule</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
@@ -64,7 +64,7 @@ export default class NavbarComp extends Component {
         <div>
           <Routes>
             <Route exact path="/home" element={<Home/>}/>
-            <Route exact path="/about" element={<About/>}/>
+            <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
             <Route exact path="/Calendar" element={<Calender/>}/>
