@@ -33,14 +33,14 @@ export default class NavbarComp extends Component {
         <div>
           <Navbar bg="dark" variant="dark" expand="md">
             <Container>
-              <Navbar.Brand as={Link} to={"/home"}>DontBeFake.</Navbar.Brand>
+              <Navbar.Brand as={Link} to={"/schedules"}>DontBeFake.</Navbar.Brand>
               {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                  <Nav.Link as={Link} to={"/home"}>Home</Nav.Link>
+                  {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
                   <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
-                  <Nav.Link as={Link} to={"/schedules"}>Schedule</Nav.Link>
+                  <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
@@ -61,7 +61,7 @@ export default class NavbarComp extends Component {
         </div>
         <div>
           <Routes>
-            <Route exact path="/home" element={<Home/>}/>
+            {/* <Route exact path="/home" element={<Home/>}/> */}
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
