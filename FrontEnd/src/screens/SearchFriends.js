@@ -8,15 +8,21 @@ const SearchFriendsScreen = () => {
     var numOfUsers = 12;
     var userAlign = "right";
     return (
-        <div>
-            <input 
-            className= "search-bar" 
-            type="search" 
-            id="search" 
-            name="search" 
-            placeholder="SearchForFriends."></input>
+        <body>
+            <form>
+                <input 
+                className= "search-bar" 
+                type="search" 
+                id="search" 
+                name="search" 
+                placeholder="SearchForFriends.">
+                </input>
+                <button 
+                type="submit"
+                id="search-submit"></button>
+            </form>
             
-            <Box mt={2} mb={6} ml={10} mr={2}> 
+            <Box mt={2} mb={6} ml={14} mr={2}> 
                 
                 <Grid container columns={12} rowSpacing={6}>
                     {Array.from(Array(numOfUsers)).map((_, index) => {
@@ -39,7 +45,7 @@ const SearchFriendsScreen = () => {
                     })}
                 </Grid>
             </Box>
-        </div>
+        </body>
     )
 }
 
