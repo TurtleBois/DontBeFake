@@ -9,7 +9,7 @@ const SearchFriendsScreen = () => {
     var userAlign = "right";
     return (
         <body>
-            <form>
+            <form className="search-form">
                 <input 
                 className= "search-bar" 
                 type="search" 
