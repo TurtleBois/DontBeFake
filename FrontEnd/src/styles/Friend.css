@@ -61,3 +61,11 @@
     margin-top: 25px;
     /* border: 1px solid red;  */
 }
+
+.friend-link:link, .friend-link:visited, .friend-link:hover, .friend-link:active { 
+    color: inherit;
+    text-decoration: none; }
+
+.fmf-link:link, .fmf-link:visited, .fmf-link:hover, .fmf-link:active { 
+    color: inherit;
+    text-decoration: none; }
