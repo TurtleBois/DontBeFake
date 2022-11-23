@@ -13,12 +13,20 @@
 }
 
 /* For text beside profile dropdown. */
-h10 {
+.nav-userinfo {
   font-family: sans-serif;
+}
+
+#nav-name {
   font-size: 15px;
-  padding-top: 5px;
-  padding-right: 1px;
   color: white;
+  float: left;
+  margin-bottom: -5px;
+}
+
+#nav-username {
+  font-size: 14px;
+  color: gray;
 }
 
 /* Ensures profile dropdown menu expands below collapsed 
