@@ -85,11 +85,12 @@ class Calender extends React.Component {
         super(props);
         this.state = {
           coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
+          setEvents: Array(189).fill(false),
           eventNames: new Array(),
           startTimes: new Array(),
           endTimes: new Array(),
           numEvents: 0,
-          alert: false,
+
 
         };
       }
@@ -102,6 +103,18 @@ class Calender extends React.Component {
 
       callbackFunction = (i,name, start, end) => {
         const weekday = Math.floor(i/27);
+
+
+        if(name == null)
+        {
+            alert("Please enter a name");
+            return
+        }
+        if(end == null)
+        {
+            alert("Please enter a end time");
+            return
+        }
         for(let j = start ; j < end; j++) {
             if(this.state.coloring[(27*weekday)+j] != 'rgba(90, 52, 52, 0)')
             {
@@ -120,7 +133,8 @@ class Calender extends React.Component {
         
         
         for(let j = start ; j < end; j++) {
-            this.state.coloring[(27*weekday)+j] = "hsl(" + this.state.numEvents*15+ ", 80%, 50%)"
+            this.state.coloring[(27*weekday)+j] = "hsl(" + this.state.numEvents*15+ ", 90%, 50%)"
+            this.state.setEvents[(27*weekday)+j] = true  
         }  
 
 
@@ -131,9 +145,7 @@ class Calender extends React.Component {
 
         this.setState({numEvents : this.state.numEvents +1})
 
-        console.log("i:"+ i)
-        console.log("start:"+ this.state.startTimes)
-        console.log("end:"+ this.state.endTimes)
+        console.log("start:"+ this.state.setEvents)
         // this.setState({eventNames: this.state.eventNames.push(name)})
         // this.setState({startTimes: this.state.eventNames.push(start)})
         // this.setState({endTimes: this.state.eventNames.push(end)})
