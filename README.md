@@ -14,7 +14,6 @@ npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/material @mui/styled-engine-sc styled-components
 npm install sha1
 
-
 ```
 
 To host the website locally, go into the /src/ file and run:
@@ -22,9 +21,23 @@ To host the website locally, go into the /src/ file and run:
 npm start
 ```
 
-To connect the project to the database, go into /Backend/server/ and run:
+To connect the project to the database, go into /server/ and run:
 ```
 node server.js
 ```
+# Frequent Problems:
+```
+Error: error:0308010C:digital envelope routines::unsupported
+```
+This means your node version is too recent, try:
+```
+export NODE_OPTIONS=--openssl-legacy-provider (linux)
+$env:NODE_OPTIONS = "--openssl-legacy-provider" (windows powershell) 
+```
+Cannot connect to MongoDB: 
+
+If you're on mac, then try turning off AirPlay, it uses the same port as our database
+If that doesn't work try changing internet. For some reason, UCLA-WIFI decides not work.
+
 
 
