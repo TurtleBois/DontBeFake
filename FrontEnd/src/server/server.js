@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(require("./routes/record"));
 app.use(require("./routes/profile"));
 app.use(require("./routes/login"));
+app.use(require("./routes/schedule"));
 // get driver connection
 const dbo = require("./db/conn");
  

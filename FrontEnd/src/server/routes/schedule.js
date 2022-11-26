@@ -13,10 +13,10 @@ const ObjectId = require("mongodb").ObjectId;
  
  
 // get a list of all the profiles
-recordRoutes.route("/login").get(function (req, res) {
+recordRoutes.route("/schedule").get(function (req, res) {
  let db_connect = dbo.getDb("profiles");
  db_connect
-   .collection("login")
+   .collection("schedules")
    .find({})
    .toArray(function (err, result) {
      if (err) throw err;
@@ -24,12 +24,12 @@ recordRoutes.route("/login").get(function (req, res) {
    });
 });
  
-//get a login by an ID
-recordRoutes.route("/login/:id").get(function (req, res) {
+//get a schedules by an ID
+recordRoutes.route("/schedule/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  db_connect
-   .collection("profiles")
+   .collection("schedules")
    .findOne(myquery, function (err, result) {
      if (err) throw err;
      res.json(result);
@@ -37,30 +37,30 @@ recordRoutes.route("/login/:id").get(function (req, res) {
 });
  
 // This section will help you create a new login.
-recordRoutes.route("/login/add").post(function (req, response) {
+recordRoutes.route("/schedule/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
-  username: req.body.username,
-  password: req.body.password,
+  profileID: req.body.profileID,
+  state: req.body.state,
  };
- db_connect.collection("login").insertOne(myobj, function (err, res) {
+ db_connect.collection("schedules").insertOne(myobj, function (err, res) {
    if (err) throw err;
    response.json(res);
  });
 });
  
 // This section will help you update a record by id.
-recordRoutes.route("/update/:id").post(function (req, response) {
+recordRoutes.route("/schedule/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  let newvalues = {
    $set: {
-    username: req.body.username,
-    password: req.body.password,
+    profileID: req.body.profileID,
+    state: req.body.state,
    },
  };
  db_connect
-   .collection("login")
+   .collection("schedules")
    .updateOne(myquery, newvalues, function (err, res) {
      if (err) throw err;
      console.log("1 document updated");
@@ -72,7 +72,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
 recordRoutes.route("/:id").delete((req, response) => {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
- db_connect.collection("login").deleteOne(myquery, function (err, obj) {
+ db_connect.collection("schedules").deleteOne(myquery, function (err, obj) {
    if (err) throw err;
    console.log("1 document deleted");
    response.json(obj);
