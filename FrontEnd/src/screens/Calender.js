@@ -1,14 +1,7 @@
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Slot from "../utility/timeSlot";
-
-
-
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
 
 
 
@@ -105,7 +98,7 @@ class Calender extends React.Component {
         const weekday = Math.floor(i/27);
 
 
-        if(name == null)
+        if(name === null || name === "")
         {
             alert("Please enter a name");
             return
@@ -116,7 +109,7 @@ class Calender extends React.Component {
             return
         }
         for(let j = start ; j < end; j++) {
-            if(this.state.coloring[(27*weekday)+j] != 'rgba(90, 52, 52, 0)')
+            if(this.state.coloring[(27*weekday)+j] !== 'rgba(90, 52, 52, 0)')
             {
                 alert("You have a overlapping event — DontBeFake");
                 return
@@ -159,7 +152,7 @@ class Calender extends React.Component {
       renderSlot(i) {
         return(
         <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[i]} } >
-            <Slot  parentCallback = {this.callbackFunction} value = {i}/>
+            <Slot  parentCallback = {this.callbackFunction} value = {i} validSpace = {this.state.coloring[i]}/>
         </Grid>);
       }
 

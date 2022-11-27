@@ -52,13 +52,13 @@ class Slot extends React.Component {
       start: null,
       end: null,
       anchorEl: null,
-      isEvent: false,
-
+      isValueEvent: false,
     };
   }
 
   sendData = () => {
     this.props.parentCallback(this.props.value,this.state.name,Math.floor(this.props.value%27),this.state.end);
+
   }
 
   handleClick = (event) => 
@@ -87,75 +87,81 @@ class Slot extends React.Component {
   {
     const open = Boolean(this.state.anchorEl);
     const id = open ? 'simple-popover' : undefined;
+    if(this.state.isValueEvent)
+    {
 
-    return(
-      <Card variant="outlined"
-      style={{backgroundColor: 'rgba(90, 52, 52, 0)'} }>
+    }
+    else
+    {
+      return(
+        <Card variant="outlined"
+        style={{backgroundColor: 'rgba(90, 52, 52, 0)'} }>
 
-        <CardActionArea
-            variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
-              height: 40}}
-              >
+          <CardActionArea
+              variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
+                height: 40}}
+                >
+              
+          </CardActionArea>
+
+          <Popover
+          id={id}
+          open={open}
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left',
+          }}
+          >
+
+          <Typography sx={{ p: 4 }} >
             
-        </CardActionArea>
+            
+          <TextField
+            required
+            id="outlined-required"
+            label="Event Name"
+            value={this.state.name}
+            onChange={this.handleChangeName}
+          />
+          
 
-        <Popover
-        id={id}
-        open={open}
-        anchorEl={this.state.anchorEl}
-        onClose={this.handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        >
 
-        <Typography sx={{ p: 4 }} >
+          <Box sx={{ minWidth: 120}}>
+              Start: {timeScale(Math.floor(this.props.value%27)) }
+            </Box>
+          
+
+            <Box sx={{ minWidth: 120 }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">end</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={this.state.end}
+                  label="end"
+                  onChange={this.handleChangeEnd}
+                >
+                  {Array.from(Array(27 - this.props.value%27)).map((_, index) => (
+                          <MenuItem value={index+ this.props.value%27 + 1}>{timeScale(index + this.props.value%27 + 1)}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+          
+
+            <Button variant="outlined"  onClick = {() => {this.sendData(); this.handleClose()  } } >confirm</Button>
           
           
-        <TextField
-          required
-          id="outlined-required"
-          label="Event Name"
-          value={this.state.name}
-          onChange={this.handleChangeName}
-        />
+          </Typography>
         
+        </Popover>
 
+        </Card>
 
-        <Box sx={{ minWidth: 120}}>
-            Start: {timeScale(Math.floor(this.props.value%27)) }
-          </Box>
-         
-
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">end</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={this.state.end}
-                label="end"
-                onChange={this.handleChangeEnd}
-              >
-                {Array.from(Array(27 - this.props.value%27)).map((_, index) => (
-                        <MenuItem value={index+ this.props.value%27 + 1}>{timeScale(index + this.props.value%27 + 1)}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-         
-
-          <Button variant="outlined"  onClick = {() => {this.sendData(); this.handleClose()  } } >confirm</Button>
-        
-        
-        </Typography>
-      
-      </Popover>
-
-    </Card>
-
-    );
+        );
+      }
   }
 
 }
@@ -163,136 +169,5 @@ class Slot extends React.Component {
 
 export default Slot 
 
-
-
-/*
-function Slotc(props) {
-  
-
-  //for the pop up
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-
-
-
-  //for the select time
-  const [start, setStart] = React.useState('');
-  const [end, setEnd] = React.useState('');
-  const [name, setName] = React.useState('');
-
-  const handleChangeStart = (event) => {
-    setStart(event.target.value);
-  };
-
-  const handleChangeEnd = (event) => {
-    setEnd(event.target.value);
-  };
-
-  const handleChangeName = (event) => {
-    setName(event.target.value);
-  };
-  
-  
-  
-
-
-
-    return (
-      <Card variant="outlined"
-      style={{backgroundColor: 'rgba(90, 52, 52, 0)'} }>
-
-        <CardActionArea
-            variant="contained" aria-describedby={id}  onClick={handleClick} sx={{
-              height: 40}}>
-            
-        </CardActionArea>
-
-        <Popover
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        >
-
-        <Typography sx={{ p: 4 }}>
-          
-          
-        <TextField
-          required
-          id="outlined-required"
-          label="Event Name"
-          onChange={handleChangeName}
-        />
-        
-
-
-        <Box sx={{ minWidth: 120}}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">start</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={start}
-                label="start"
-                onChange={handleChangeStart}
-              >
-
-                {Array.from(Array(14)).map((_, index) => (
-                        <MenuItem value={index}>{timeScale(index)}</MenuItem>
-                ))}
-
-                
-              </Select>
-            </FormControl>
-          </Box>
-         
-
-          <Box sx={{ minWidth: 120 }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">end</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={end}
-                label="end"
-                onChange={handleChangeEnd}
-              >
-                {Array.from(Array(14)).map((_, index) => (
-                        <MenuItem value={index}>{timeScale(index)}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-         
-
-          <Button variant="outlined"   onClick={props.onClick}>confirm</Button>
-        
-        
-        </Typography>
-      
-      </Popover>
-
-    </Card>
-
-    );
-  }
-
-
-*/
 
 
