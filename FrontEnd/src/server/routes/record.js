@@ -1,3 +1,5 @@
+// THIS IS PURELY A REFERENCE FILE FOR NOW; DELETE LATER
+
 const express = require("express");
  
 // recordRoutes is an instance of the express router.

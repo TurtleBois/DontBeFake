@@ -1,116 +1,139 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Component } from "react";
 import { useNavigate } from "react-router";
 
+import '../styles/CreateProfileTest.css';
+import default_pfp from "../assets/default_pfp.png"     
 
-export default function Create() {
- const [form, setForm] = useState({
-   name: "",
-   position: "",
-   level: "",
- });
- const navigate = useNavigate();
- 
- // These methods will update the state properties.
- function updateForm(value) {
-   return setForm((prev) => {
-     return { ...prev, ...value };
-   });
- }
- 
- // This function will handle the submission.
- async function onSubmit(e) {
-   e.preventDefault();
- 
-   // When a post request is sent to the create url, we'll add a new record to the database.
-   const newPerson = { ...form };
- 
-   await fetch("http://localhost:5000/record/add", {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json",
-     },
-     body: JSON.stringify(newPerson),
-   })
-   .catch(error => {
-     window.alert(error);
-     return;
-   });
- 
-   setForm({ name: "", position: "", level: "" });
-   navigate("/");
- }
- 
- // This following section will display the form that takes the input from the user.
- return (
-   <div>
-     <h2>Create New Record</h2>
-     <form onSubmit={onSubmit}>
-       <div className="form-group">
-         <label htmlFor="name">Name</label>
-         <input
-           type="text"
-           className="form-control"
-           id="name"
-           value={form.name}
-           onChange={(e) => updateForm({ name: e.target.value })}
-         />
-       </div>
-       <div className="form-group">
-         <label htmlFor="position">Position</label>
-         <input
-           type="text"
-           className="form-control"
-           id="position"
-           value={form.position}
-           onChange={(e) => updateForm({ position: e.target.value })}
-         />
-       </div>
-       <div className="form-group">
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionIntern"
-             value="Intern"
-             checked={form.level === "Intern"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionIntern" className="form-check-label">Intern</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionJunior"
-             value="Junior"
-             checked={form.level === "Junior"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionJunior" className="form-check-label">Junior</label>
-         </div>
-         <div className="form-check form-check-inline">
-           <input
-             className="form-check-input"
-             type="radio"
-             name="positionOptions"
-             id="positionSenior"
-             value="Senior"
-             checked={form.level === "Senior"}
-             onChange={(e) => updateForm({ level: e.target.value })}
-           />
-           <label htmlFor="positionSenior" className="form-check-label">Senior</label>
-         </div>
-       </div>
-       <div className="form-group">
-         <input
-           type="submit"
-           value="Create person"
-           className="btn btn-primary"
-         />
-       </div>
-     </form>
-   </div>
- );
+
+const CreateProfileTest = () => {
+    var current_pfp = default_pfp;
+
+    var temp = ""
+
+
+    function set_pfp(event) {
+        var file = event.target.files[0];
+        if(file.length == 0) {
+            return
+        }
+        var new_url = URL.createObjectURL(file);
+        var preview = document.getElementById("display_pfp");
+        preview.src = new_url;
+        handlePhoto(event);
+    }
+
+
+    
+    const [records, setRecords] = useState([]);
+    const navigate = useNavigate();
+    // creates Profile
+
+    const [form, setForm] = useState({
+        name: "",
+        profilePicture: "",
+        userDescription: "",
+    });
+
+    // updates form 
+    function updateForm(value) {
+        return setForm((prev) => {
+        return { ...prev, ...value };
+        });
+    }
+    
+    const handlePhoto = (e) => {
+      function getBase64(file) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            var value = {profilePicture : reader.result};
+            updateForm(value);
+        };
+        reader.onerror = function (error) {
+          console.log('Error: ', error);
+        };
+     }
+      getBase64(e.target.files[0]);
+    }
+
+    async function onSubmit(e) {
+
+    e.preventDefault();
+
+
+     var toReturn = {name: form.name, userDescription: form.userDescription, profilePicture: form.profilePicture};
+     console.log(toReturn);
+      
+      
+      await fetch("http://localhost:5000/profile/add", {
+        method: "POST",
+        headers: {
+        "Content-Type": "application/json",
+        },
+        body: JSON.stringify(toReturn),
+    })
+      .catch(error => {
+          window.alert("error");
+          window.alert("ok error");
+          return;
+      });
+      //setForm({ username: "", password: "", password2: ""});
+      
+
+
+      }
+
+    return (
+        <div>
+            <img 
+            class="rounded-circle"
+            id="display_pfp"
+            src={current_pfp} 
+            alt="My_Logo"
+            img width="300" 
+            height="300" 
+            />
+            <form onSubmit={onSubmit} enctype="multipart/form-data">
+                <label class="custom-file-upload">
+                    <input 
+                    type="file"     
+                    id="change_pfp"
+                    name="avatar"
+                    accept="image/*"
+                    onChange={(event) =>set_pfp(event)} 
+                    /> 
+                    Change Profile Picture
+                </label>
+                <div>
+                    <input 
+                    className= "input-bar" 
+                    type="text" 
+                    name="realName" 
+                    placeholder="Name."
+                    value={form.name}
+                    onChange={(e) => updateForm({ name: e.target.value })}
+                    />
+                </div>
+                <div>
+                    <input 
+                    className= "input-bar" 
+                    type="text" 
+                    id="description" 
+                    name="description" 
+                    placeholder="EnterBio. (Max 150)."
+                    value={form.userDescription}
+                    onChange={(e) => updateForm({ userDescription: e.target.value })}
+                    />
+                </div>
+                <input 
+                  className="button" 
+                  type="submit" 
+                  value="Update." 
+                />
+                
+            </form>
+        </div>
+    )
 }
+
+export default CreateProfileTest;

@@ -66,10 +66,57 @@ function dayTimes()
     </Grid>)
 }
 
+// gets a specific person's calendar, which is current "chang"
+async function getInformation() {
+    const response = await fetch(`http://localhost:5000/schedule/`);
 
+    if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+    }
+    
+    const records = await response.json();
+    for(var record of records) {
+        if(record.profileID == "chang") {
+            return record;
+        }
+    }
+    return null;
+}
 
-
-
+// saves current "calender" into the database
+async function saveInformation(state,newSchedule) {
+    var toReturn = {"profileID": "chang","state" : state}
+    // if the schedule has never existed... somethow
+    if(newSchedule) {
+        await fetch("http://localhost:5000/schedule/add", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(toReturn),
+        })
+        .catch(error => {
+            window.alert(error);
+            return;
+        });
+    }
+    else {
+        // if the schedule has existed before
+        var prevState = await getInformation();
+        var id =  prevState._id;
+        toReturn = {"returnID" : id,"profileID": "chang","state" : state}
+            await fetch(`http://localhost:5000/schedule/update/${id}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(toReturn),
+            
+   });
+    }
+}
 
 
 
@@ -77,16 +124,36 @@ class Calender extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
-          setEvents: Array(189).fill(false),
-          eventNames: new Array(),
-          startTimes: new Array(),
-          endTimes: new Array(),
-          numEvents: 0,
+            coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
+            setEvents: Array(189).fill(false),
+            eventNames: new Array(),
+            startTimes: new Array(),
+            endTimes: new Array(),
+            numEvents: 0,
+        }
+        this.firstTime = false;
+        this.initCalendar();
+    }
 
-
-        };
-      }
+    // wait for the initilization of the calendar from server
+    async initCalendar() {
+        var newState = await getInformation();
+        if(newState == null) {
+            this.firstTime = true;
+            return;
+        }
+        newState = newState.state;
+        this.setState({
+            coloring: newState.coloring,
+            setEvents: newState.setEvents,
+            startTimes: newState.startTimes,
+            endTimes: newState.endTimes,
+            numEvents: newState.numEvents,
+            },
+            () => {
+               // console.log(this.state);
+            });
+    }
 
       changeColor(i){
         const coloring = this.state.coloring.slice();
@@ -94,7 +161,7 @@ class Calender extends React.Component {
         this.setState({coloring: coloring,})
       }
 
-      callbackFunction = (i,name, start, end) => {
+    callbackFunction = (i,name, start, end) => {
         const weekday = Math.floor(i/27);
 
 
@@ -131,14 +198,22 @@ class Calender extends React.Component {
         }  
 
 
-        
-        this.setState({eventNames: eventNames,})
-        this.setState({startTimes: startTimes,})
-        this.setState({endTimes: endTimes,})
+        /// sets  the states and then saves information into the database
+        this.setState({
+            eventNames: eventNames, 
+            startTimes: startTimes, 
+            endTimes: endTimes, 
+            numEvents : this.state.numEvents +1,
+            },
+            () => {
+                saveInformation(this.state,this.firstTime);
+                this.firstTime = false
+            });
 
-        this.setState({numEvents : this.state.numEvents +1})
 
-        console.log("start:"+ this.state.setEvents)
+
+
+        // console.log("start:"+ this.state.setEvents)
         // this.setState({eventNames: this.state.eventNames.push(name)})
         // this.setState({startTimes: this.state.eventNames.push(start)})
         // this.setState({endTimes: this.state.eventNames.push(end)})
@@ -157,19 +232,11 @@ class Calender extends React.Component {
       }
 
     render() {
-
-
-        
         return (
- 
-            
-
             <Grid
             container
             direction="row">
-        
                 {dayTimes()}
-        
                 <Grid 
                 item xs={10.8}
                 container
@@ -193,20 +260,12 @@ class Calender extends React.Component {
                         borderBottom: 'var(--Grid-borderWidth) solid',
                         borderColor: 'rgba(133, 133, 133, 1)',
                     },
-                    }}>
-                        
-                        {Array.from(Array(189)).map((_, index) => (
-                            
+                    }}> 
+                        {Array.from(Array(189)).map((_, index) => (        
                             this.renderSlot(index)
-
                         ))}
-
-
-
                     </Grid>
-        
-                </Grid>
-                
+                </Grid>   
             </Grid>
           );
     }

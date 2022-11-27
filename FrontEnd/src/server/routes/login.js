@@ -13,7 +13,7 @@ const ObjectId = require("mongodb").ObjectId;
  
  
 // get a list of all the profiles
-recordRoutes.route("/profile").get(function (req, res) {
+recordRoutes.route("/login").get(function (req, res) {
  let db_connect = dbo.getDb("profiles");
  db_connect
    .collection("login")
@@ -25,7 +25,7 @@ recordRoutes.route("/profile").get(function (req, res) {
 });
  
 //get a login by an ID
-recordRoutes.route("/profile/:id").get(function (req, res) {
+recordRoutes.route("/login/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  db_connect
@@ -37,7 +37,7 @@ recordRoutes.route("/profile/:id").get(function (req, res) {
 });
  
 // This section will help you create a new login.
-recordRoutes.route("/profile/add").post(function (req, response) {
+recordRoutes.route("/login/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
   username: req.body.username,

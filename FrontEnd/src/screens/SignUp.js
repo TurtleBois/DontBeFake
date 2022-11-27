@@ -31,7 +31,7 @@ const SignUpScreen = () => {
       }
       const newPerson = {username : form.username, password: p1};
       
-      await fetch("http://localhost:5000/profile/add", {
+      await fetch("http://localhost:5000/login/add", {
           method: "POST",
           headers: {
           "Content-Type": "application/json",
