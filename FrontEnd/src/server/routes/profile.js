@@ -10,13 +10,13 @@ const dbo = require("../db/conn");
  
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
- 
+
  
 // get a list of all the profiles
 recordRoutes.route("/profile").get(function (req, res) {
  let db_connect = dbo.getDb("profiles");
  db_connect
-   .collection("login")
+   .collection("profileInfo")
    .find({})
    .toArray(function (err, result) {
      if (err) throw err;
@@ -29,7 +29,7 @@ recordRoutes.route("/profile/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  db_connect
-   .collection("profiles")
+   .collection("profileInfo")
    .findOne(myquery, function (err, result) {
      if (err) throw err;
      res.json(result);
@@ -40,10 +40,11 @@ recordRoutes.route("/profile/:id").get(function (req, res) {
 recordRoutes.route("/profile/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
-  username: req.body.username,
-  password: req.body.password,
+  name: req.body.name,
+  userDescription: req.body.userDescription,
+  profilePicture: req.body.profilePicture,
  };
- db_connect.collection("login").insertOne(myobj, function (err, res) {
+ db_connect.collection("profileInfo").insertOne(myobj, function (err, res) {
    if (err) throw err;
    response.json(res);
  });
@@ -60,7 +61,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
    },
  };
  db_connect
-   .collection("login")
+   .collection("profileInfo")
    .updateOne(myquery, newvalues, function (err, res) {
      if (err) throw err;
      console.log("1 document updated");
@@ -72,7 +73,7 @@ recordRoutes.route("/update/:id").post(function (req, response) {
 recordRoutes.route("/:id").delete((req, response) => {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
- db_connect.collection("login").deleteOne(myquery, function (err, obj) {
+ db_connect.collection("profileInfo").deleteOne(myquery, function (err, obj) {
    if (err) throw err;
    console.log("1 document deleted");
    response.json(obj);
