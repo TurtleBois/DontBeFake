@@ -130,7 +130,8 @@ async function saveInformation(state,newSchedule) {
 
 
 
-class Calender extends React.Component {
+class Calender extends React.Component 
+{
     constructor(props) {
         super(props);
         this.state = {
@@ -205,7 +206,7 @@ class Calender extends React.Component {
             this.state.setEvents[(27*weekday)+j] = this.state.numEvents
         }  
 
-        // console.log(this.state)
+        console.log(this.state)
         // sets  the states and then saves information into the database
         this.setState({
             eventNames: eventNames, 

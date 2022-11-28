@@ -8,7 +8,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import Home from "../screens/Home";
+//import Home from "../screens/Home";
 import MyFriendsScreen from "../screens/MyFriends";
 import Profile from "../screens/Profile";
 import Schedules from "../screens/Schedules";
@@ -17,7 +17,7 @@ import CreateProfileTest from "./CreateProfileTest";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
 import SearchFriendsScreen from '../screens/SearchFriends';
-import { useNavigate } from "react-router";
+//import { useNavigate } from "react-router";
 
 function logout() {
   localStorage.removeItem("DBF_username");

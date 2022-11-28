@@ -1,11 +1,7 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import calenderIcon from './caleIcon.jpg'
-
 
 
 import Popover from '@mui/material/Popover';
@@ -57,7 +53,6 @@ class Slot extends React.Component {
 
   sendData = () => {
     this.props.parentCallback(this.props.value,this.state.name,Math.floor(this.props.value%27),this.state.end);
-
   }
 
   handleClick = (event) => 
