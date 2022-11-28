@@ -1,8 +1,8 @@
 
 import * as React from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
-import Slot from "../utility/timeSlot";
-
+import Slot from "../components/timeSlot";
+import ClosedSlot from "../components/closedTimeSlot";
 
 
 
@@ -210,28 +210,37 @@ class Calender extends React.Component {
                 this.firstTime = false
             });
 
-
-
-
-        // console.log("start:"+ this.state.setEvents)
-        // this.setState({eventNames: this.state.eventNames.push(name)})
-        // this.setState({startTimes: this.state.eventNames.push(start)})
-        // this.setState({endTimes: this.state.eventNames.push(end)})
       }
 
       
 
-      
+      deleteEvent()
+      {
+
+      }
       
 
       renderSlot(i) {
-        return(
-        <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[i]} } >
-            <Slot  parentCallback = {this.callbackFunction} value = {i} validSpace = {this.state.coloring[i]}/>
-        </Grid>);
+        
+        if(this.state.coloring[i] === 'rgba(90, 52, 52, 0)')
+        {
+            return(
+            <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[i]} } >
+                <Slot  parentCallback = {this.callbackFunction} value = {i} />
+            </Grid>);
+        }
+        else
+        {
+            return(
+            <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[i]} } >
+            <ClosedSlot  parentCallback = {this.callbackFunction} value = {i} name = {this.state.eventNames[i]}/>
+            </Grid>);
+            
+        }
       }
 
     render() {
+
         return (
             <Grid
             container
@@ -260,7 +269,8 @@ class Calender extends React.Component {
                         borderBottom: 'var(--Grid-borderWidth) solid',
                         borderColor: 'rgba(133, 133, 133, 1)',
                     },
-                    }}> 
+                        }}> 
+                        
                         {Array.from(Array(189)).map((_, index) => (        
                             this.renderSlot(index)
                         ))}
