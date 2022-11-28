@@ -1,5 +1,5 @@
 
-import Card from "../utility/card";
+import Card from "../components/card";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -19,8 +19,6 @@ export default function ResponsiveGrid() {
 
   );
 }
-
-
 
 
 

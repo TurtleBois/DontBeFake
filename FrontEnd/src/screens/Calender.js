@@ -1,15 +1,8 @@
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import Slot from "../utility/timeSlot";
-
-
-
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
-import Stack from '@mui/material/Stack';
-
+import Slot from "../components/timeSlot";
+import ClosedSlot from "../components/closedTimeSlot";
 
 
 
@@ -141,8 +134,8 @@ class Calender extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
-            setEvents: Array(189).fill(false),
+            //coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
+            setEvents: Array(189).fill(null),
             eventNames: new Array(),
             startTimes: new Array(),
             endTimes: new Array(),
@@ -150,6 +143,7 @@ class Calender extends React.Component {
         }
         this.firstTime = false;
         this.initCalendar();
+        
     }
 
     // wait for the initilization of the calendar from server
@@ -161,28 +155,25 @@ class Calender extends React.Component {
         }
         newState = newState.state;
         this.setState({
-            coloring: newState.coloring,
+            eventNames: newState.eventNames,
+            //coloring: newState.coloring,
             setEvents: newState.setEvents,
             startTimes: newState.startTimes,
             endTimes: newState.endTimes,
             numEvents: newState.numEvents,
             },
             () => {
-               // console.log(this.state);
+                // console.log(this.state);
             });
     }
 
-      changeColor(i){
-        const coloring = this.state.coloring.slice();
-        coloring[i] = 'red'
-        this.setState({coloring: coloring,})
-      }
 
     callbackFunction = (i,name, start, end) => {
+        console.log(this.state)
         const weekday = Math.floor(i/27);
 
 
-        if(name == null)
+        if(name === null || name === "")
         {
             alert("Please enter a name");
             return
@@ -193,7 +184,7 @@ class Calender extends React.Component {
             return
         }
         for(let j = start ; j < end; j++) {
-            if(this.state.coloring[(27*weekday)+j] != 'rgba(90, 52, 52, 0)')
+            if(this.state.setEvents[(27*weekday)+j] !== null)
             {
                 alert("You have a overlapping event — DontBeFake");
                 return
@@ -210,12 +201,12 @@ class Calender extends React.Component {
         
         
         for(let j = start ; j < end; j++) {
-            this.state.coloring[(27*weekday)+j] = "hsl(" + this.state.numEvents*15+ ", 90%, 50%)"
-            this.state.setEvents[(27*weekday)+j] = true  
+            //this.state.coloring[(27*weekday)+j] = "hsl(" + this.state.numEvents*15+ ", 90%, 50%)"
+            this.state.setEvents[(27*weekday)+j] = this.state.numEvents
         }  
 
-
-        /// sets  the states and then saves information into the database
+        // console.log(this.state)
+        // sets  the states and then saves information into the database
         this.setState({
             eventNames: eventNames, 
             startTimes: startTimes, 
@@ -227,64 +218,90 @@ class Calender extends React.Component {
                 this.firstTime = false
             });
 
-
-
-
-        // console.log("start:"+ this.state.setEvents)
-        // this.setState({eventNames: this.state.eventNames.push(name)})
-        // this.setState({startTimes: this.state.eventNames.push(start)})
-        // this.setState({endTimes: this.state.eventNames.push(end)})
-      }
+        }
 
       
 
-      
+        deleteEvent = (i) => {
+             
+            const setEvents = this.state.setEvents.slice();
+            for(let j = 0 ; j < 189; j++)
+            {
+                console.log(setEvents[j]);  
+                console.log(i);  
+                if(setEvents[j] === i)
+                {
+                    setEvents[j] = null
+                }
+            }
+
+            this.setState({
+                setEvents: setEvents
+                },
+                () => {
+                    saveInformation(this.state,this.firstTime);
+                    this.firstTime = false
+            });
+        }
       
 
-      renderSlot(i) {
-        return(
-        <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.coloring[i]} } >
-            <Slot  parentCallback = {this.callbackFunction} value = {i}/>
-        </Grid>);
-      }
-
-    render() {
-        return (
-            <Grid
-            container
-            direction="row">
-                {dayTimes()}
-                <Grid 
-                item xs={10.8}
-                container
-                direction="column"
-                spacing = {0}>
+        renderSlot(i) {
         
-                    {weekdays()}
-                    <Grid
-                    container
-                    spacing={1}
-                    direction="column"
+            if(this.state.setEvents[i] === null)
+            {
+                return(
+                <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.setEvents[i] === null? 'rgba(90, 52, 52, 0)': "hsl(" + this.state.setEvents[i] *15+ ", 90%, 50%)"} } >
+                    <Slot  parentCallback = {this.callbackFunction} value = {i} />
+                </Grid>);
+            }
+            else
+            {
+                return(
+                <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.setEvents[i] === null? 'rgba(90, 52, 52, 0)': "hsl(" + this.state.setEvents[i] *15+ ", 90%, 50%)"} } >
+                <ClosedSlot delete = {this.deleteEvent} value = {this.state.setEvents[i]} name={this.state.eventNames[this.state.setEvents[i]]}/>
+                </Grid>);
+            }
+        }
 
-                    maxHeight={1400}
-                    sx={{
-                    '--Grid-borderWidth': '1px',
-                    borderTop: 'var(--Grid-borderWidth) solid',
-                    borderLeft: 'var(--Grid-borderWidth) solid',
-                    borderColor: 'rgba(133, 133, 133, 1)',
-                    '& > div': {
-                        borderRight: 'var(--Grid-borderWidth) solid',
-                        borderBottom: 'var(--Grid-borderWidth) solid',
+        render() {
+
+            return (
+                <Grid
+                container
+                direction="row">
+                    {dayTimes()}
+                    <Grid 
+                    item xs={10.8}
+                    container
+                    direction="column"
+                    spacing = {0}>
+            
+                        {weekdays()}
+                        <Grid
+                        container
+                        spacing={1}
+                        direction="column"
+
+                        maxHeight={1400}
+                        sx={{
+                        '--Grid-borderWidth': '1px',
+                        borderTop: 'var(--Grid-borderWidth) solid',
+                        borderLeft: 'var(--Grid-borderWidth) solid',
                         borderColor: 'rgba(133, 133, 133, 1)',
-                    },
-                    }}> 
-                        {Array.from(Array(189)).map((_, index) => (        
-                            this.renderSlot(index)
-                        ))}
-                    </Grid>
-                </Grid>   
-            </Grid>
-          );
+                        '& > div': {
+                            borderRight: 'var(--Grid-borderWidth) solid',
+                            borderBottom: 'var(--Grid-borderWidth) solid',
+                            borderColor: 'rgba(133, 133, 133, 1)',
+                        },
+                            }}> 
+                            
+                            {Array.from(Array(189)).map((_, index) => (        
+                                this.renderSlot(index)
+                            ))}
+                        </Grid>
+                    </Grid>   
+                </Grid>
+            );
     }
 }
 
