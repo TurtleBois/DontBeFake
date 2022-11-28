@@ -17,18 +17,91 @@ import CreateProfileTest from "./CreateProfileTest";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
 import SearchFriendsScreen from '../screens/SearchFriends';
+import { useNavigate } from "react-router";
 
-  const profilePicture=(
-    <div>
-      <img id="pfp_dd" width="40" height="40" class="rounded-circle"
-          alt="pfp"
-          // to be replaced
-          src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-      />
-    </div>)
+function logout() {
+  localStorage.removeItem("DBF_username");
+}
+
+async function getInformation() {
+  var DBF_username = localStorage.getItem("DBF_username");
+  if(DBF_username == null) {
+      // this should NEVER happen
+      DBF_username = "chang";
+  }
+  
+  const response = await fetch(`http://localhost:5000/profile/`);
+
+  if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+  }
+  
+  const records = await response.json();
+  for(var record of records) {
+      if(record.username === DBF_username) {
+          return record;
+      }
+  }
+  return null;
+}
 
 export default class NavbarComp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      name:  "",
+      loginOrLogout: "Login.",
+      pfp: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", // default skin
+    }
+    this.init();
+  }
+
+  async init() {
+    // name initilization
+
+    var profileInfo = await getInformation();
+    if(profileInfo == null) {
+      return;
+    }
+
+    //username initalization
+    var DBF_username = localStorage.getItem("DBF_username");
+    var status = "Login."
+    if(DBF_username !== null) {
+      status = "Logout."
+    }
+
+    if(profileInfo != null) {
+      if(profileInfo.profilePicture === "") { //profile hasn't chosen a pfp yet
+        this.setState({name: profileInfo.name,username: DBF_username, loginOrLogout: status,},
+          () => {
+             this.render(); // re-renders after initalization is done.
+         });
+
+      }
+      else {
+      this.setState({name: profileInfo.name,username: DBF_username, loginOrLogout: status, pfp: profileInfo.profilePicture},
+        () => {
+           this.render(); // re-renders after initalization is done.
+       });
+      }
+    }
+  }
+
   render() {
+
+    const profilePicture=(
+      <div>
+        <img id="pfp_dd" width="40" height="40" class="rounded-circle"
+            alt="pfp"
+            src={this.state.pfp}
+        />
+      </div>)
+
+
     return (
       <Router>
         <div>
@@ -42,19 +115,19 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
-                  <Nav.Link as={Link} to={"/CreateProfileTest"}>Create Profile Test</Nav.Link>
+                  <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">
                 <Navbar.Collapse>
                  <div class="nav-userinfo">
-                    <b><div id="nav-name">Name</div></b>
-                    <b><div id="nav-username">username</div></b>
+                    <b><div id="nav-name">{this.state.name}</div></b>
+                    <b><div id="nav-username">{"@"+this.state.username}</div></b>
                  </div>
                 </Navbar.Collapse>
                 <NavDropdown title={profilePicture} id="basic-nav-dropdown" align="end">
                   <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
-                  <NavDropdown.Item href="/login">Logout</NavDropdown.Item>
+                  <NavDropdown.Item onClick={logout} href="/login">{this.state.loginOrLogout}</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </Container>

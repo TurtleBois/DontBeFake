@@ -42,8 +42,35 @@ const SignUpScreen = () => {
           window.alert(error);
           return;
       });
+
+      // creates an empty profile so the database doesn't implode on itself.
+      const newProfileInformation = 
+      {
+        username: form.username, 
+        name: "",
+        profilePicture: "",
+        userDescription: "",
+      }
+      await fetch("http://localhost:5000/profile/add", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newProfileInformation),
+      })
+      .catch(error => {
+          window.alert(error);
+          return;
+      });
+      localStorage.setItem("DBF_username", form.username);
+      localStorage.setItem("name","");
+      localStorage.setItem("profilePicture", "");
+      localStorage.setItem("userDescription", "");
+      
+
       setForm({ username: "", password: "", password2: ""});
       navigate("/profile");
+      window.location.reload(); // this is so navbar fixes itself
       }
 
     return (
