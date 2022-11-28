@@ -22,6 +22,31 @@ const LoginScreen = () => {
         });
     }
 
+    async function loadProfileInformation() {
+        var DBF_username = localStorage.getItem("DBF_username");
+        if(DBF_username == null) {
+            // this should NEVER happen
+            DBF_username = "chang";
+        }
+        const response = await fetch(`http://localhost:5000/profile/`);
+    
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+        }
+        const records = await response.json();
+        for(var record of records) {
+            if(record.username === DBF_username) {
+                return record;
+            }
+        }
+        return null;
+    }
+
+
+
+    
 
     async function onLogin(e) {
         e.preventDefault();
@@ -30,7 +55,17 @@ const LoginScreen = () => {
         for(var record of records) {
             if(username === record["username"]) {
                if(password === record["password"]) {
-                    navigate("/profile")
+                    localStorage.setItem("DBF_username", username);
+                    // GET EVERYTHING ELSE FIRST
+                    var information = await loadProfileInformation();
+                    
+                    localStorage.setItem("DBF_username", username);
+                    localStorage.setItem("name", record.name);
+                    localStorage.setItem("profilePicture", record.profilePicture);
+                    localStorage.setItem("userDescription", record.userDescription);
+
+                    navigate("/profile");
+                    window.location.reload(); // this is so navbar fixes itself
                }
                else {
                 // TODO:

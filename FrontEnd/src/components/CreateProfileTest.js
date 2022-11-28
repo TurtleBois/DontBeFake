@@ -5,12 +5,14 @@ import '../styles/CreateProfileTest.css';
 import default_pfp from "../assets/default_pfp.png"     
 
 
+var please_call_once = false;
 const CreateProfileTest = () => {
+    console.log(current_pfp);
     var current_pfp = default_pfp;
-
+    if(localStorage.getItem("profilePicture") != "") { // why the fuck is it an empty string here but not anywhere else???
+        current_pfp = localStorage.getItem("profilePicture");
+    }
     var temp = ""
-
-
     function set_pfp(event) {
         var file = event.target.files[0];
         if(file.length == 0) {
@@ -21,17 +23,15 @@ const CreateProfileTest = () => {
         preview.src = new_url;
         handlePhoto(event);
     }
-
-
-    
-    const [records, setRecords] = useState([]);
     const navigate = useNavigate();
-    // creates Profile
+    // creates form
 
-    const [form, setForm] = useState({
-        name: "",
-        profilePicture: "",
-        userDescription: "",
+    console.log(localStorage);
+    const [form, setForm] = useState({  
+        username: localStorage.getItem("DBF_username"), 
+        name: localStorage.getItem("name") == "undefined" ? "" : localStorage.getItem("name"),
+        profilePicture: localStorage.getItem("profilePicture") == "undefined" ? "" : localStorage.getItem("profilePicture"),
+        userDescription: localStorage.getItem("userDescription") == "undefined" ? "" : localStorage.getItem("userDescription"),
     });
 
     // updates form 
@@ -39,6 +39,7 @@ const CreateProfileTest = () => {
         return setForm((prev) => {
         return { ...prev, ...value };
         });
+        
     }
     
     const handlePhoto = (e) => {
@@ -55,34 +56,58 @@ const CreateProfileTest = () => {
      }
       getBase64(e.target.files[0]);
     }
+    
+    async function onSubmit(e) {  
+      e.preventDefault();
+      var toReturn = {
+        username: form.username, 
+        name: form.name, 
+        userDescription: form.userDescription, 
+        profilePicture: form.profilePicture,
+    };
+        var data_id = localStorage.getItem("mongoDB_ID");
 
-    async function onSubmit(e) {
+        const response = await fetch(`http://localhost:5000/profile/`);
+    
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+        }
+        const records = await response.json();
+        var data_id = -1;
+        for(var record of records) {
+            if(record.username === localStorage.getItem("DBF_username")) { 
+                data_id = record._id;
+                break;
+            }
+        }
 
-    e.preventDefault();
 
 
-     var toReturn = {name: form.name, userDescription: form.userDescription, profilePicture: form.profilePicture};
-     console.log(toReturn);
+        console.log(data_id);
+        await fetch(`http://localhost:5000/profile/update/${data_id}`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(toReturn),
+        })
+        .catch(error => {
+            window.alert("error");
+            window.alert("ok error");
+            return;
+        });
+
+        localStorage.setItem("name", toReturn.name);
+        localStorage.setItem("profilePicture", toReturn.profilePicture);
+        localStorage.setItem("userDescription", toReturn.userDescription);
+  
+        navigate("/profile");
+        window.location.reload(); // this is so navbar fixes itself
+      } 
+
       
-      
-      await fetch("http://localhost:5000/profile/add", {
-        method: "POST",
-        headers: {
-        "Content-Type": "application/json",
-        },
-        body: JSON.stringify(toReturn),
-    })
-      .catch(error => {
-          window.alert("error");
-          window.alert("ok error");
-          return;
-      });
-      //setForm({ username: "", password: "", password2: ""});
-      
-
-
-      }
-
     return (
         <div>
             <img 
@@ -93,7 +118,9 @@ const CreateProfileTest = () => {
             img width="300" 
             height="300" 
             />
-            <form onSubmit={onSubmit} enctype="multipart/form-data">
+            <form 
+            onSubmit={onSubmit} 
+            enctype="multipart/form-data">
                 <label class="custom-file-upload">
                     <input 
                     type="file"     
@@ -107,6 +134,7 @@ const CreateProfileTest = () => {
                 <div>
                     <input 
                     className= "input-bar" 
+                    id ="nameInput"
                     type="text" 
                     name="realName" 
                     placeholder="Name."

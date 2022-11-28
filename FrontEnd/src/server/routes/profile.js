@@ -40,6 +40,7 @@ recordRoutes.route("/profile/:id").get(function (req, res) {
 recordRoutes.route("/profile/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
+  username: req.body.username,
   name: req.body.name,
   userDescription: req.body.userDescription,
   profilePicture: req.body.profilePicture,
@@ -51,13 +52,16 @@ recordRoutes.route("/profile/add").post(function (req, response) {
 });
  
 // This section will help you update a record by id.
-recordRoutes.route("/update/:id").post(function (req, response) {
+recordRoutes.route("/profile/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
+ console.log(myquery);
  let newvalues = {
    $set: {
     username: req.body.username,
-    password: req.body.password,
+    name: req.body.name,
+    userDescription: req.body.userDescription,
+    profilePicture: req.body.profilePicture,
    },
  };
  db_connect
