@@ -114,9 +114,10 @@ export default class NavbarComp extends Component {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
-                  <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
+                  
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
+                  <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
                   <Nav.Link as={Link} to={"/creategroup"}>Create Group</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>

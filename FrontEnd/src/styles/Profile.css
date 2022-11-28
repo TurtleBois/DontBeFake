@@ -1,0 +1,40 @@
+.background {
+    background-color: #121212;
+    margin-top: 5px;
+}
+
+.info {
+    font: Arial;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    margin-top: 20px;
+}
+
+.bio {
+    font: Arial;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+    margin-top: 20px;
+}
+
+.edit-link{
+    width: auto;
+    cursor: pointer;    
+    text-align: center;
+    background-color: #121212;
+    display:inline-flex;
+
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    color:white;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 20px;
+}
+
+a:link {text-decoration: none;}
+
+body{
+    background-color: #121212
+}
