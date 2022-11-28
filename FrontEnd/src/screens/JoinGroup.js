@@ -33,12 +33,37 @@ async function generateGroupID(length) {
     return result;
 }
 
-const LoginScreen = () => {
+const JoinGroup = () => {
     const navigate = useNavigate();
 
-    function joinGroup(e) {
+    async function joinGroup(e) {
         e.preventDefault(); // prevents refresh
-        
+        var groupID = document.getElementById("groupIDInput").value;
+        // check if 1.) group exists and 2.) person is in the group
+        const response = await fetch("http://localhost:5000/group/");
+        if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+        }
+        const records = await response.json();
+        var invalid = true;
+        for (var record of records) {
+            if(record.groupID == groupID) {
+                invalid = false;
+                console.log(record.members);
+                if(record.members.includes(localStorage.getItem("DBF_username") )) {
+                    navigate(`/group=${groupID}`);
+                }
+                else {
+                    alert("You are not part of this group. — DontBeFake.");
+                }
+            }
+        }
+
+        if(invalid) {
+            alert("Invalid Group ID — DontBeFake.");
+        }
     }
 
     async function createGroup(e) {
@@ -85,7 +110,7 @@ const LoginScreen = () => {
         var newGroup = {    
             groupName: "New Group",
             groupID: groupID,
-            members: [DBF_username], 
+            members: [{DBF_username: DBF_username,role: "leader", fakeStatus: false}], 
             events: [],
         }; 
         await fetch("http://localhost:5000/group/add", {
@@ -99,7 +124,7 @@ const LoginScreen = () => {
             window.alert(error);
             return;
         });
-        navigate('/creategroup');
+        navigate(`/group=${groupID}`);
     }
 
     return (
@@ -129,4 +154,4 @@ const LoginScreen = () => {
     )
 }
 
-export default LoginScreen;
+export default JoinGroup;

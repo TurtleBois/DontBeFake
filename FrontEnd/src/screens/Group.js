@@ -5,62 +5,62 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
 
-// move to profile
-async function generateGroupID(length) {
-    var result = "";
-    var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
-    var charLength = chars.length;
-    for ( var i = 0; i < length; i++ ) {
-        result += chars.charAt(Math.floor(Math.random() * charLength));
-    }
-    
-    const response = await fetch(`http://localhost:5000/login/`);
-      
+
+
+// these do something i think
+var friendAlign = "right";
+var fmfAlign = "center";
+
+async function getGroup(id) {
+    const response = await fetch("http://localhost:5000/group/");
     if (!response.ok) {
       const message = `An error occurred: ${response.statusText}`;
       window.alert(message);
       return;
     }
     const records = await response.json();
-    // prevents duplicates incase someone wins the lottery 10 times in a row
-
     for (var record of records) {
-        if(record.groupID == result) {
-            return generateGroupID(length);
+        if(record.groupID == id) {
+            return record;
         }
     }
-    
-    return result;
+    return null;
 }
 
-// these do something i think
-var friendAlign = "right";
-var fmfAlign = "center";
-class CreateGroup extends React.Component {
+class Group extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
             groupID: "",
             numOfMembers: 0,
+            groupName:"Loading..",
         }
         this.init();
+
     }
 
     async init() {
-       var newGroupID = await generateGroupID(12);
+        var newGroupID = window.location.href.split('=')[1];
+        var record = await getGroup(newGroupID);
+        if(record == null) {
+            // TODO: send to this group does not exist.
+        }
         this.setState({
             groupID: newGroupID,
-            numOfMembers: 0,
+            numOfMembers: record.members.length,
+            groupName: record.groupName,
             },
             () => {
-               this.render();
+                this.render();
             });
     }
+    
     
     render() {
         return (
             <div>
-            <div className="title">UntitledGroup. </div>
+            <div className="title">{this.state.groupName}. </div>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
 
 
@@ -86,10 +86,6 @@ class CreateGroup extends React.Component {
                                 </Grid> 
                             )  
                         })}
-                        {/* Makes Grid item for FindMoreFriends. */}
-                        <Grid item sm={6} align={fmfAlign} style={{maxWidth: '100%'}}>
-                            <FindMoreFriends/>
-                        </Grid>
                     </Grid>
                 </Box>
             </div>
@@ -98,4 +94,4 @@ class CreateGroup extends React.Component {
 
 
 }
-export default CreateGroup;
+export default Group;

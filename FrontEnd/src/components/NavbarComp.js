@@ -17,7 +17,7 @@ import CreateProfileTest from "./CreateProfileTest";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
 import SearchFriendsScreen from '../screens/SearchFriends';
-import GroupCreate from '../screens/Group';
+import Group from '../screens/Group';
 import JoinGroup from '../screens/JoinGroup';
 import { useNavigate } from "react-router";
 
@@ -78,14 +78,14 @@ export default class NavbarComp extends Component {
 
     if(profileInfo != null) {
       if(profileInfo.profilePicture === "") { //profile hasn't chosen a pfp yet
-        this.setState({name: profileInfo.name,username: DBF_username, loginOrLogout: status,},
+        this.setState({name: profileInfo.name,username: "@"+DBF_username, loginOrLogout: status,},
           () => {
              this.render(); // re-renders after initalization is done.
          });
 
       }
       else {
-      this.setState({name: profileInfo.name,username: DBF_username, loginOrLogout: status, pfp: profileInfo.profilePicture},
+      this.setState({name: profileInfo.name,username: "@"+DBF_username, loginOrLogout: status, pfp: profileInfo.profilePicture},
         () => {
            this.render(); // re-renders after initalization is done.
        });
@@ -119,7 +119,6 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
                   <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
-                  <Nav.Link as={Link} to={"/creategroup"}>Create Group</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
@@ -127,7 +126,7 @@ export default class NavbarComp extends Component {
                 <Navbar.Collapse>
                  <div class="nav-userinfo">
                     <b><div id="nav-name">{this.state.name}</div></b>
-                    <b><div id="nav-username">{"@"+this.state.username}</div></b>
+                    <b><div id="nav-username">{this.state.username}</div></b>
                  </div>
                 </Navbar.Collapse>
                 <NavDropdown title={profilePicture} id="basic-nav-dropdown" align="end">
@@ -149,7 +148,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
             <Route exact path="/search" element={<SearchFriendsScreen/>}/>
-            <Route exact path="/creategroup" element={<GroupCreate/>}/>
+            <Route path="/group=:groupID" element={<Group/>}/>
             <Route exact path="/joingroup" element={<JoinGroup/>}/>
           </Routes>
         </div>  
