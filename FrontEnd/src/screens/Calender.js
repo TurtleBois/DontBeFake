@@ -75,6 +75,11 @@ function dayTimes()
 
 // gets a specific person's calendar, which is current "chang"
 async function getInformation() {
+    var DBF_username = localStorage.getItem("DBF_username");
+    if(DBF_username == null) {
+        // this should NEVER happen
+        DBF_username = "chang";
+    }
     const response = await fetch(`http://localhost:5000/schedule/`);
 
     if (!response.ok) {
@@ -85,7 +90,7 @@ async function getInformation() {
     
     const records = await response.json();
     for(var record of records) {
-        if(record.profileID == "chang") {
+        if(record.profileID === DBF_username) {
             return record;
         }
     }
@@ -94,7 +99,12 @@ async function getInformation() {
 
 // saves current "calender" into the database
 async function saveInformation(state,newSchedule) {
-    var toReturn = {"profileID": "chang","state" : state}
+    var DBF_username = localStorage.getItem("DBF_username");
+    if(DBF_username == null) {
+        // this should NEVER happen
+        DBF_username = "chang";
+    }
+    var toReturn = {"profileID": DBF_username,"state" : state}
     // if the schedule has never existed... somethow
     if(newSchedule) {
         await fetch("http://localhost:5000/schedule/add", {
@@ -113,7 +123,7 @@ async function saveInformation(state,newSchedule) {
         // if the schedule has existed before
         var prevState = await getInformation();
         var id =  prevState._id;
-        toReturn = {"returnID" : id,"profileID": "chang","state" : state}
+        toReturn = {"returnID" : id,"profileID": DBF_username,"state" : state}
             await fetch(`http://localhost:5000/schedule/update/${id}`, {
             method: "POST",
             headers: {
