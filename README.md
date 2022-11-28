@@ -13,7 +13,6 @@ npm install bootstrap react-router-dom
 npm install @mui/material @emotion/react @emotion/styled
 npm install @mui/material @mui/styled-engine-sc styled-components
 npm install sha1
-npm install image-data-uri
 ```
 
 To host the website locally, go into the /src/ file and run:
