@@ -17,6 +17,8 @@ import CreateProfileTest from "./CreateProfileTest";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
 import SearchFriendsScreen from '../screens/SearchFriends';
+import GroupCreate from '../screens/Group';
+import JoinGroup from '../screens/JoinGroup';
 import { useNavigate } from "react-router";
 
 function logout() {
@@ -116,6 +118,8 @@ export default class NavbarComp extends Component {
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
+                  <Nav.Link as={Link} to={"/creategroup"}>Create Group</Nav.Link>
+                  <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">
@@ -144,6 +148,8 @@ export default class NavbarComp extends Component {
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
             <Route exact path="/search" element={<SearchFriendsScreen/>}/>
+            <Route exact path="/creategroup" element={<GroupCreate/>}/>
+            <Route exact path="/joingroup" element={<JoinGroup/>}/>
           </Routes>
         </div>  
       </Router>

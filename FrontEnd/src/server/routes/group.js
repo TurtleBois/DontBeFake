@@ -10,13 +10,13 @@ const dbo = require("../db/conn");
  
 // This help convert the id from string to ObjectId for the _id.
 const ObjectId = require("mongodb").ObjectId;
-
  
-// get a list of all the profiles
-recordRoutes.route("/profile").get(function (req, res) {
- let db_connect = dbo.getDb("profiles");
+ 
+// get a list of all the groups
+recordRoutes.route("/group").get(function (req, res) {
+ let db_connect = dbo.getDb("groups");
  db_connect
-   .collection("profileInfo")
+   .collection("groups")
    .find({})
    .toArray(function (err, result) {
      if (err) throw err;
@@ -24,50 +24,48 @@ recordRoutes.route("/profile").get(function (req, res) {
    });
 });
  
-//get a login by an ID
-recordRoutes.route("/profile/:id").get(function (req, res) {
+//get a group by an ID
+recordRoutes.route("/group/:id").get(function (req, res) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  db_connect
-   .collection("profileInfo")
+   .collection("groups")
    .findOne(myquery, function (err, result) {
      if (err) throw err;
      res.json(result);
    });
 });
  
-// This section will help you create a new login.
-recordRoutes.route("/profile/add").post(function (req, response) {
+// This section will help you create a new group.
+recordRoutes.route("/group/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
-  username: req.body.username,
-  name: req.body.name,
-  userDescription: req.body.userDescription,
-  profilePicture: req.body.profilePicture,
-  joinedGroups: req.body.joinedGroups,
+    groupName: req.body.groupName,
+    groupID: req.body.groupID,
+    members: req.body.members, 
+    events: req.body.events,
  };
- db_connect.collection("profileInfo").insertOne(myobj, function (err, res) {
+ 
+ db_connect.collection("groups").insertOne(myobj, function (err, res) {
    if (err) throw err;
    response.json(res);
  });
 });
  
-// This section will help you update a record by id.
-recordRoutes.route("/profile/update/:id").post(function (req, response) {
+// This section will help you update a group by id.
+recordRoutes.route("/group/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
- console.log(myquery);
  let newvalues = {
    $set: {
-    username: req.body.username,
-    name: req.body.name,
-    userDescription: req.body.userDescription,
-    profilePicture: req.body.profilePicture,
-    joinedGroups: req.body.joinedGroups,
+    groupName: req.body.groupName,
+    groupID: req.body.groupID,
+    members: req.body.members, 
+    events: req.body.events,
    },
  };
  db_connect
-   .collection("profileInfo")
+   .collection("groups")
    .updateOne(myquery, newvalues, function (err, res) {
      if (err) throw err;
      console.log("1 document updated");
@@ -75,11 +73,11 @@ recordRoutes.route("/profile/update/:id").post(function (req, response) {
    });
 });
  
-// This section will help you delete a record
+// This section will help you group a record
 recordRoutes.route("/:id").delete((req, response) => {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
- db_connect.collection("profileInfo").deleteOne(myquery, function (err, obj) {
+ db_connect.collection("groups").deleteOne(myquery, function (err, obj) {
    if (err) throw err;
    console.log("1 document deleted");
    response.json(obj);

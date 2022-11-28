@@ -17,6 +17,7 @@ app.use(require("./routes/record"));
 app.use(require("./routes/profile"));
 app.use(require("./routes/login"));
 app.use(require("./routes/schedule"));
+app.use(require("./routes/group"));
 // get driver connection
 const dbo = require("./db/conn");
 
