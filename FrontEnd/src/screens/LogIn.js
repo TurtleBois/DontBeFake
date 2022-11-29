@@ -52,28 +52,34 @@ const LoginScreen = () => {
         e.preventDefault();
         var username = form.username
         var password = sha1(form.password)
+
+        var loginValid = false;
         for(var record of records) {
             if(username === record["username"]) {
                if(password === record["password"]) {
+                    console.log(record);
                     localStorage.setItem("DBF_username", username);
                     // GET EVERYTHING ELSE FIRST
                     var information = await loadProfileInformation();
                     
                     localStorage.setItem("DBF_username", username);
-                    localStorage.setItem("name", record.name);
-                    localStorage.setItem("profilePicture", record.profilePicture);
-                    localStorage.setItem("userDescription", record.userDescription);
+                    localStorage.setItem("name", information.name);
+                    localStorage.setItem("profilePicture", information.profilePicture);
+                    localStorage.setItem("userDescription", information.userDescription);
+                    localStorage.setItem("_id", information._id);
 
                     navigate("/profile");
                     window.location.reload(); // this is so navbar fixes itself
+                    loginValid = true;
                }
                else {
                 alert("Incorrect Password — DontBeFake");
+                return;
                }
             }
-            else {
-                alert("Invalid Username — DontBeFake");
-            }
+        }
+        if(!loginValid){
+            alert("Username not Found — DontBeFake");
         }
     }
 
