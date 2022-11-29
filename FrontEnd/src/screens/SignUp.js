@@ -63,14 +63,33 @@ const SignUpScreen = () => {
           window.alert(error);
           return;
       });
+
+      const response = await fetch(`http://localhost:5000/profile/`);
+    
+      if (!response.ok) {
+          const message = `An error occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+      }
+      const records = await response.json();
+
+      var dataBase_id = -1;
+      for(var record of records) {
+        if(record.username === form.username) {
+            dataBase_id = record._id;
+        }
+    }
+
       localStorage.setItem("DBF_username", form.username);
       localStorage.setItem("name","");
       localStorage.setItem("profilePicture", "");
       localStorage.setItem("userDescription", "");
+      localStorage.setItem("_id", dataBase_id);
       
 
       setForm({ username: "", password: "", password2: ""});
-      navigate("/profile");
+
+      navigate("/CreateProfileTest"); //TODO: change to editprofile
       window.location.reload(); // this is so navbar fixes itself
       }
 

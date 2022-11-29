@@ -42,27 +42,76 @@ const JoinGroup = () => {
         // check if 1.) group exists and 2.) person is in the group
         const response = await fetch("http://localhost:5000/group/");
         if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
         }
         const records = await response.json();
+        
         var invalid = true;
         for (var record of records) {
+            // if input ID is valid
             if(record.groupID == groupID) {
                 invalid = false;
-                console.log(record.members);
-                if(record.members.includes(localStorage.getItem("DBF_username") )) {
-                    navigate(`/group=${groupID}`);
+                var id = localStorage.getItem("_id");
+                const response = await fetch(`http://localhost:5000/profile/${id}`);
+                if (!response.ok) {
+                    const message = `An error occurred: ${response.statusText}`;
+                    window.alert(message);
+                    return;
                 }
-                else {
-                    alert("You are not part of this group. — DontBeFake.");
-                }
+                const profile = await response.json();
+                
+                var currentGroups = profile.joinedGroups;
+                if(currentGroups != null) {
+                    for (var group of currentGroups) {
+                        if(group == groupID) {
+                            alert("You are already in this group. -DoneBeFake.");
+                            return;
+                        }
+                    }
+                }  
+                // update profiles
+                var value = profile.joinedGroups;
+                    if(value == null) {
+                        var newArray = [];
+                        newArray.push(groupID);
+                        value = {joinedGroups: newArray };
+                    }
+                    else {
+                        var changed = profile.joinedGroups;
+                        changed.push(groupID);
+                        value = {joinedGroups: changed};
+                    }
+                    var toReturn = {...profile, ...value};
+                    await fetch(`http://localhost:5000/profile/update/${id}`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(toReturn),         
+                        
+                });
+                    var recordID = record._id;
+                    var toChange = record.members;
+                    toChange.push({DBF_username: localStorage.getItem("DBF_username"),role: "member", fakeStatus: false});
+                    var value = {members : toChange};
+                    var updateRecord = {...record, ...value};
+                    await fetch(`http://localhost:5000/group/update/${recordID}`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updateRecord),         
+                        
+                });
+                
+                navigate(`/group=${groupID}`);
             }
         }
 
         if(invalid) {
-            alert("Invalid Group ID — DontBeFake.");
+            alert("This group does not exist. — DontBeFake.");
         }
     }
 
