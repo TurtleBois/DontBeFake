@@ -68,13 +68,11 @@ const LoginScreen = () => {
                     window.location.reload(); // this is so navbar fixes itself
                }
                else {
-                // TODO:
-                // invalid password
+                // alert("Incorrect Password — DontBeFake");
                }
             }
             else {
-                // TODO:
-                // invalid username
+                // alert("Invalid Username — DontBeFake");
             }
         }
     }

@@ -5,9 +5,7 @@ import '../styles/CreateProfileTest.css';
 import default_pfp from "../assets/default_pfp.png"     
 
 
-var please_call_once = false;
 const CreateProfileTest = () => {
-    console.log(current_pfp);
     var current_pfp = default_pfp;
     if(localStorage.getItem("profilePicture") != "") { // why the fuck is it an empty string here but not anywhere else???
         current_pfp = localStorage.getItem("profilePicture");
@@ -26,7 +24,6 @@ const CreateProfileTest = () => {
     const navigate = useNavigate();
     // creates form
 
-    console.log(localStorage);
     const [form, setForm] = useState({  
         username: localStorage.getItem("DBF_username"), 
         name: localStorage.getItem("name") == "undefined" ? "" : localStorage.getItem("name"),
@@ -85,7 +82,6 @@ const CreateProfileTest = () => {
 
 
 
-        console.log(data_id);
         await fetch(`http://localhost:5000/profile/update/${data_id}`, {
             method: "POST",
             headers: {
@@ -107,7 +103,7 @@ const CreateProfileTest = () => {
         window.location.reload(); // this is so navbar fixes itself
       } 
 
-      
+
     return (
         <div>
             <img 
@@ -158,7 +154,7 @@ const CreateProfileTest = () => {
                   type="submit" 
                   value="Update." 
                 />
-                
+
             </form>
         </div>
     )
