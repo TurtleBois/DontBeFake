@@ -92,21 +92,21 @@ const JoinGroup = () => {
                         body: JSON.stringify(toReturn),         
                         
                 });
-                    var recordID = record._id;
-                    var toChange = record.members;
-                    toChange.push({DBF_username: localStorage.getItem("DBF_username"),role: "member", fakeStatus: false});
-                    var value = {members : toChange};
-                    var updateRecord = {...record, ...value};
-                    await fetch(`http://localhost:5000/group/update/${recordID}`, {
-                        method: "POST",
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(updateRecord),         
-                        
-                });
+                var recordID = record._id;
+                var toChange = record.members;
+                toChange.push({DBF_username: localStorage.getItem("DBF_username"),role: "member", fakeStatus: false});
+                var value = {members : toChange};
+                var updateRecord = {...record, ...value};
                 
-                navigate(`/group=${groupID}`);
+                await fetch(`http://localhost:5000/group/update/${recordID}`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updateRecord),         
+                    
+                }).then( navigate(`/group=${groupID}`));
+                        
             }
         }
 
