@@ -4,9 +4,10 @@ import User from "../components/Users";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
-const SearchFriendsScreen = () => {
+const SearchGroupScreen = () => {
     var numOfUsers = 12;
     var userAlign = "right";
+    console.log(document.getElementById("search").value);
     return (
         <body>
             <form className="search-form">
@@ -15,11 +16,9 @@ const SearchFriendsScreen = () => {
                 type="search" 
                 id="search" 
                 name="search" 
-                placeholder="SearchForGroups.">
-                value={form.value}
+                placeholder="SearchForFriends.">
                 </input>
                 <button 
-                type="submit"
                 id="search-submit"></button>
             </form>
             
@@ -50,4 +49,4 @@ const SearchFriendsScreen = () => {
     )
 }
 
-export default SearchFriendsScreen;
+export default SearchGroupScreen;

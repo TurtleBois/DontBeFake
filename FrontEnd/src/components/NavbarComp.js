@@ -16,11 +16,14 @@ import Calender from "../screens/Calender";
 import CreateProfileTest from "./CreateProfileTest";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
-import SearchFriendsScreen from '../screens/SearchFriends';
+import SearchGroupScreen from '../screens/SearchGroups';
 import Group from '../screens/Group';
 import JoinGroup from '../screens/JoinGroup';
 import viewGroups from '../screens/viewGroups';
 import { useNavigate } from "react-router";
+import YouShouldLogInScreen from '../screens/YouShouldLogin';
+import Error from '../screens/Error';
+import VotingScreen from '../screens/Voting';
 
 function logout() {
   localStorage.removeItem("DBF_username");
@@ -140,7 +143,7 @@ export default class NavbarComp extends Component {
         </div>
         <div>
           <Routes>
-            {/* <Route exact path="/home" element={<Home/>}/> */}
+            <Route exact path="/" element={<LoginScreen/>}/> 
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
@@ -148,9 +151,12 @@ export default class NavbarComp extends Component {
             <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
-            <Route exact path="/search" element={<SearchFriendsScreen/>}/>
             <Route path="/group=:groupID" element={<Group/>}/>
             <Route exact path="/joingroup" element={<JoinGroup/>}/>
+            <Route exact path="/searchgroups" element={<SearchGroupScreen/>}/>
+            <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
+            <Route exact path="/error" element={<Error/>}/>
+            <Route exact path="/voting" element={<VotingScreen/>}/>
           </Routes>
         </div>  
       </Router>

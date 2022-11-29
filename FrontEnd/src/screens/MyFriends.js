@@ -28,7 +28,7 @@ const MyFriendsScreen = () => {
                         {/* Makes Grid item for Friend at index. */}
                         return (
                             <Grid item sm={6} key={index} align={friendAlign} style={{ maxWidth: '100%'}}>
-                                <Friend/>
+                                <Friend name={"Powell Cat"}/>
                             </Grid> 
                         )  
                     })}
