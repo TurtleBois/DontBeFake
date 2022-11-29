@@ -19,6 +19,7 @@ import SignUpScreen from '../screens/SignUp';
 import SearchFriendsScreen from '../screens/SearchFriends';
 import Group from '../screens/Group';
 import JoinGroup from '../screens/JoinGroup';
+import viewGroups from '../screens/viewGroups';
 import { useNavigate } from "react-router";
 
 function logout() {
