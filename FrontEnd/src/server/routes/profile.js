@@ -56,7 +56,6 @@ recordRoutes.route("/profile/add").post(function (req, response) {
 recordRoutes.route("/profile/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
- console.log(myquery);
  let newvalues = {
    $set: {
     username: req.body.username,

@@ -27,6 +27,35 @@ async function getGroup(id) {
     return null;
 }
 
+async function getGroupProfiles(members) {
+    
+    const response = await fetch("http://localhost:5000/profile/");
+    if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+      
+    const profiles = await response.json();
+    var groupMembers = [];
+    var membersList = [];
+
+    for (var member of members) {
+        membersList.push(member["DBF_username"]);
+    }
+    console.log(membersList);
+
+    for(var profile of profiles) {
+        if(membersList.includes(profile.username)) {
+            groupMembers.push(profile);
+        }
+    }
+    
+    console.log(groupMembers);
+}
+
+
+
 class Group extends React.Component {
     
     constructor(props) {
@@ -37,7 +66,6 @@ class Group extends React.Component {
             groupName:"Loading..",
         }
         this.init();
-
     }
 
     async init() {
@@ -46,6 +74,8 @@ class Group extends React.Component {
         if(record == null) {
             // TODO: send to this group does not exist.
         }
+        
+        getGroupProfiles(record.members);
         this.setState({
             groupID: newGroupID,
             numOfMembers: record.members.length,

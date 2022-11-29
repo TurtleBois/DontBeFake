@@ -53,7 +53,7 @@ recordRoutes.route("/group/add").post(function (req, response) {
 });
  
 // This section will help you update a group by id.
-recordRoutes.route("/group/:id").post(function (req, response) {
+recordRoutes.route("/group/update/:id").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myquery = { _id: ObjectId(req.params.id) };
  let newvalues = {
