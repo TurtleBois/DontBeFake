@@ -156,6 +156,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
             <Route exact path="/error" element={<Error/>}/>
             <Route exact path="/voting" element={<VotingScreen/>}/>
+            <Route exact path="/" element={<LoginScreen/>}/>
           </Routes>
         </div>  
       </Router>
