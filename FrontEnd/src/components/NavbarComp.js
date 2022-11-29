@@ -20,6 +20,9 @@ import SearchGroupScreen from '../screens/SearchGroups';
 import Group from '../screens/Group';
 import JoinGroup from '../screens/JoinGroup';
 import { useNavigate } from "react-router";
+import YouShouldLogInScreen from '../screens/YouShouldLogin';
+import Error from '../screens/Error';
+import VotingScreen from '../screens/Voting';
 
 function logout() {
   localStorage.removeItem("DBF_username");
@@ -150,6 +153,9 @@ export default class NavbarComp extends Component {
             <Route path="/group=:groupID" element={<Group/>}/>
             <Route exact path="/joingroup" element={<JoinGroup/>}/>
             <Route exact path="/searchgroups" element={<SearchGroupScreen/>}/>
+            <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
+            <Route exact path="/error" element={<Error/>}/>
+            <Route exact path="/voting" element={<VotingScreen/>}/>
           </Routes>
         </div>  
       </Router>

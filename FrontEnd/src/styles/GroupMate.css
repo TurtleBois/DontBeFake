@@ -1,0 +1,58 @@
+.groupmate {
+    height: 125px;
+    width: 400px;
+    /* border: 1px solid red;  */
+    display: flex;
+    overflow: hidden;
+}
+
+.groupmate img {
+    height: 125px;
+    width: 125px;
+    border-radius: 30px;
+    margin-right: 20px;
+}
+
+.groupmate-text {
+    font-family: sans-serif;
+    font-size: 20px;
+    max-width: 255px;
+    color: white;
+    text-align: left;
+    /* border: 1px solid red;  */
+}
+
+#groupmate-name {
+    /* margin-top: 25px; */
+    margin-bottom: 0px;
+}
+#groupmate-username {
+    color: #A6A6A6;
+    font-size: 15px;
+    margin-top: -5px;
+    margin-bottom: 30px;
+}
+
+#real-button {
+    width: auto;
+    text-align: center;
+    background-color: #212529;
+    font-size: 20px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    border-color: #212529;
+    padding: 7px 7px 7px 10px;
+}
+
+#fake-button {
+    width: auto;
+    text-align: center;
+    background-color: #212529;
+    font-size: 20px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: #C50000;
+    border-color: #212529;
+    padding: 7px 7px 7px 10px;
+}
