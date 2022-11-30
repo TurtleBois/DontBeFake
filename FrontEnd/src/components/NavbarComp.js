@@ -23,6 +23,8 @@ import { useNavigate } from "react-router";
 import YouShouldLogInScreen from '../screens/YouShouldLogin';
 import Error from '../screens/Error';
 import VotingScreen from '../screens/Voting';
+import EventsScreen from '../screens/Events';
+import PastEventsScreen from '../screens/PastEvents';
 
 function logout() {
   localStorage.removeItem("DBF_username");
@@ -123,6 +125,7 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
+                  <Nav.Link as={Link} to={"/events"}>Events</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">
@@ -157,6 +160,8 @@ export default class NavbarComp extends Component {
             <Route exact path="/error" element={<Error/>}/>
             <Route exact path="/voting" element={<VotingScreen/>}/>
             <Route exact path="/" element={<LoginScreen/>}/>
+            <Route exact path="/events" element={<EventsScreen/>}/>
+            <Route exact path="/pastevents" element={<PastEventsScreen/>}/>
           </Routes>
         </div>  
       </Router>
