@@ -1,6 +1,5 @@
 import React from "react";
-import Friend from "../components/GroupDisplay";
-import FindMoreFriends from "../components/FindMoreFriends";
+import GroupDisplay from "../components/GroupDisplay";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
@@ -25,14 +24,31 @@ async function getGroup() {
             return;
         }
         const records = await response.json();
+        var joinedGroups = [];
         for(var record of records) {
             if(record.username === DBF_username) {
-                return record.joinedGroups;
+                joinedGroups = record.joinedGroups;
+                break;
             }
         }
-        return null;
-
-
+        const groupResponse = await fetch(`http://localhost:5000/group/`);
+        if (!groupResponse.ok) {
+            const message = `An error occurred: ${groupResponse.statusText}`;
+            window.alert(message);
+            return;
+        }
+        const groups = await groupResponse.json();
+        var groupNamesAndIDs = [];
+        for(var group of groups) {
+            for(var joinedGroup of joinedGroups) {
+                if(group["groupID"] == joinedGroup) {
+                    var bundle = {id: joinedGroup, name: group["groupName"]};
+                    groupNamesAndIDs.push(bundle);
+                    break;
+                }
+            }
+        }
+        return groupNamesAndIDs;
 }
 
 
@@ -51,7 +67,6 @@ class viewGroup extends React.Component {
         var record = await getGroup();
         if(record == null) {
         }
-        console.log(record)
         this.setState({
             numOfMembers: record.length,
             groups: record
@@ -62,22 +77,16 @@ class viewGroup extends React.Component {
     }
     
     
-    render() {
-        
+    render() {      
         return (
-            
-            
-
             <div>
-
-
                 <Box mt={6} mb={6} ml={3} mr={3}   > 
                     <Grid container columns={24} rowSpacing={3} columnSpacing = {3} >
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
                             return (
                                 <Grid item sm={6} key={index} style={{ maxWidth: '100%'}}>
-                                    <Friend 
-                                    name = {this.state.groups[index]}
+                                    <GroupDisplay 
+                                    info = {this.state.groups[index]}
      
                                     />
                                 </Grid> 

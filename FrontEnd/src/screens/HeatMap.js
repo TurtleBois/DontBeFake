@@ -1,60 +1,7 @@
-
-import * as React from 'react';
+import React, {useState, useEffect} from "react";
 import Grid from '@mui/material/Unstable_Grid2';
 import Slot from "../components/timeSlot";
 import ClosedSlot from "../components/closedTimeSlot";
-
-async function getGroup(id) {
-    const response = await fetch("http://localhost:5000/group/");
-    if (!response.ok) {
-      const message = `An error occurred: ${response.statusText}`;
-      window.alert(message);
-      return;
-    }
-    const records = await response.json();
-    for (var record of records) {
-        if(record.groupID == id) {
-            return record;
-        }
-    }
-    return null;
-}
-
-
-async function getGroupProfiles(members) {
-    
-    const response = await fetch("http://localhost:5000/profile/");
-    if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-      }
-      
-    const profiles = await response.json();
-
-    console.log(profiles)
-    console.log(members)
-    var groupMembers = [];
-
-
-
-    var membersList = []; 
-
-
-
-
-    for (var member of members) {
-        membersList.push(member["DBF_username"]);
-    }
-
-    for(var profile of profiles) {
-        if(membersList.includes(profile.username)) {
-            groupMembers.push(profile);
-        }
-    }
-    return groupMembers;
-    
-}
 
 function timeSide(index)
 {   
@@ -116,77 +63,58 @@ function dayTimes()
     </Grid>)
 }
 
-// gets a specific person's calendar, which is current "chang"
-async function getInformation() {
-    var DBF_username = localStorage.getItem("DBF_username");
-    if(DBF_username == null) {
-        // this should NEVER happen
-        DBF_username = "chang";
-    }
-    const response = await fetch(`http://localhost:5000/schedule/`);
-
-    if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-    }
-    
-    const records = await response.json();
-    for(var record of records) {
-        if(record.profileID === DBF_username) {
-            return record;
-        }
-    }
-    return null;
-}
-
-
-async function getGroupSchedules()
-{
-    var collection = [];
-    var newGroupID = window.location.href.split('=')[1];
-    var record = getGroup(newGroupID);
-    if(record == null) {
-         // TODO: send to this group does not exist.
-    }
-    console.log(record)
-
-
-
-
-    var memberProfiles = await getGroupProfiles(record.members);
-    const response = fetch(`http://localhost:5000/schedule/`);
-    if (!response.ok) {
-        const message = `An error occurred: ${response.statusText}`;
-        window.alert(message);
-        return;
-    }
-    const records = response.json();
-
-    for(var record of records) {
-        {
-            for(var member in memberProfiles)
-            {
-                if(record.profileID === member.username)
-                {
-                    collection.push(record['setEvents'])
-                }
-            }
-        }
-    }
-    return collection;
-
-}
-
-
-function createHeat(schedules)
-{
-
-}
-
-
 const HeatMap = () => {
+    const currentGroupID = window.location.href.split('=')[1];
+    const [allGroups, setAllGroups] = useState(null);
+    //effectively an init
+    useEffect(() => {
+        async function getAllGroups() {
+            const response = await fetch("http://localhost:5000/group/");
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+              }
+              const records = await response.json();
+              
+              var targetRecord = null;
+              for(var record of records) {
+                  if(record.groupID == currentGroupID) {
+                    targetRecord = record;
+                    break;
+                  }
+              }
+              var members = [];
+              for(var member of record["members"]) {
+                members.push(member["DBF_username"]);
+              }
+            const response2 = await fetch("http://localhost:5000/schedule/");
+            if (!response2.ok) {
+                const message = `An error occurred: ${response2.statusText}`;
+                window.alert(message);
+                return;
+              }
+              const schedules = await response2.json(); 
+
+              var HeatMap = Array(189).fill(0);
+              for(var schedule of schedules) {
+                if(members.includes(schedule.profileID)) {
+                    for(var index = 0; index < 189; index++) {
+                        if(schedule.state["setEvents"][index] != null) {
+                            HeatMap[index]++;
+                        }
+                    }
+                }
+              }
+              setAllGroups(HeatMap);
+        }
+        getAllGroups();
+     }, [])
     
+     if(allGroups == null) {
+        return;
+     }
+     console.log(allGroups);
     return (
         <Grid
         container
@@ -226,83 +154,5 @@ const HeatMap = () => {
     );
 }
 
-class Calender extends React.Component 
-{
-    constructor(props) {
-        super(props);
-        this.state = {
-            setEvents: Array(189).fill(null),
-            eventNames: new Array(),
-            startTimes: new Array(),
-            endTimes: new Array(),
-            numEvents: 0,
-        }
-        this.firstTime = false;
-        this.initCalendar();
-        
-    }
-
-    // wait for the initilization of the calendar from server
-    async initCalendar() {
-        var newState = await getInformation();
-        if(newState == null) {
-            this.firstTime = true;
-            return;
-        }
-        newState = newState.state;
-        this.setState({
-            eventNames: newState.eventNames,
-            //coloring: newState.coloring,
-            setEvents: newState.setEvents,
-            startTimes: newState.startTimes,
-            endTimes: newState.endTimes,
-            numEvents: newState.numEvents,
-            },
-            () => {
-                // console.log(this.state);
-            });
-    }
-
-        render() {
-
-            return (
-                <Grid
-                container
-                direction="row">
-                    {dayTimes()}
-                    <Grid 
-                    item xs={10.8}
-                    container
-                    direction="column"
-                    spacing = {0}>
-            
-                        {weekdays()}
-                        <Grid
-                        container
-                        spacing={1}
-                        direction="column"
-
-                        maxHeight={1400}
-                        sx={{
-                        '--Grid-borderWidth': '1px',
-                        borderTop: 'var(--Grid-borderWidth) solid',
-                        borderLeft: 'var(--Grid-borderWidth) solid',
-                        borderColor: 'rgba(133, 133, 133, 1)',
-                        '& > div': {
-                            borderRight: 'var(--Grid-borderWidth) solid',
-                            borderBottom: 'var(--Grid-borderWidth) solid',
-                            borderColor: 'rgba(133, 133, 133, 1)',
-                        },
-                            }}> 
-                            
-                            {Array.from(Array(189)).map((_, index) => (        
-                                <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.setEvents[index] === null? 'rgba(90, 52, 52, 0)': "hsl(" + this.state.setEvents[index] *15+ ", 90%, 50%)"} } />
-                            ))}
-                        </Grid>
-                    </Grid>   
-                </Grid>
-            );
-    }
-}
 
 export default HeatMap;
