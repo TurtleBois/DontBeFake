@@ -13,6 +13,7 @@ import MyFriendsScreen from "../screens/MyFriends";
 import Profile from "../screens/Profile";
 import Schedules from "../screens/Schedules";
 import Calender from "../screens/Calender";
+import InvitesScreen from "../screens/InvitesScreen";
 import CreateProfileTest from "./CreateProfileTest";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
@@ -150,6 +151,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
+            <Route exact path="/editprofile" element={<CreateProfileTest/>}/>
             {/* Place MiniNav bar in wanted screens like this: */}
             <Route exact path="/calendar" element={<><MiniNav/><Calender/></>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
@@ -161,6 +163,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
             <Route exact path="/error" element={<Error/>}/>
             <Route exact path="/voting" element={<><MiniNav/><VotingScreen/></>}/>
+            <Route exact path="/invites" element={<><MiniNav/><InvitesScreen/></>}/>
             <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
           </Routes>
         </div>

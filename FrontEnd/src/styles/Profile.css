@@ -30,10 +30,13 @@
     border: 1px solid #ccc;
     color:white;
     padding: 10px 20px 10px 20px;
+    margin-top: 50px;
     margin-bottom: 20px;
 }
 
-a:link {text-decoration: none;}
+.edit-profile-link:link, .edit-profile-link:visited, .edit-profile-link:hover, .edit-profile-link:active {
+    text-decoration: none;
+}
 
 body{
     background-color: #121212
