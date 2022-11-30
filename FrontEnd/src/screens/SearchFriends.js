@@ -15,7 +15,8 @@ const SearchFriendsScreen = () => {
                 type="search" 
                 id="search" 
                 name="search" 
-                placeholder="SearchForFriends.">
+                placeholder="SearchForGroups.">
+                value={form.value}
                 </input>
                 <button 
                 type="submit"

@@ -16,6 +16,10 @@
 .user-text {
     font-family: sans-serif;
     font-size: 18px;
+    width: 250px;
+    text-overflow: ellipsis;
+    overflow:hidden; 
+    white-space:nowrap; 
     color: white;
     text-align: left;
     /* border: 1px solid red;  */

@@ -43,15 +43,14 @@ async function getGroupProfiles(members) {
     for (var member of members) {
         membersList.push(member["DBF_username"]);
     }
-    console.log(membersList);
 
     for(var profile of profiles) {
         if(membersList.includes(profile.username)) {
             groupMembers.push(profile);
         }
     }
+    return groupMembers;
     
-    console.log(groupMembers);
 }
 
 
@@ -64,6 +63,8 @@ class Group extends React.Component {
             groupID: "",
             numOfMembers: 0,
             groupName:"Loading..",
+            memberProfiles:[],
+            memberRoles:[],
         }
         this.init();
     }
@@ -75,11 +76,14 @@ class Group extends React.Component {
             // TODO: send to this group does not exist.
         }
         
-        getGroupProfiles(record.members);
+        var memberProfiles = await getGroupProfiles(record.members);
+
         this.setState({
             groupID: newGroupID,
             numOfMembers: record.members.length,
             groupName: record.groupName,
+            memberProfiles: memberProfiles,
+            memberRoles: record.members,
             },
             () => {
                 this.render();
@@ -88,12 +92,13 @@ class Group extends React.Component {
     
     
     render() {
+        var link = "/heatmap="  + this.state.groupID;
+        var editLink = "/editgroup=" + this.state.groupID;
         return (
             <div>
-            <div className="title">{this.state.groupName}. </div>
+            <a className="title" href={link}  >{this.state.groupName}. </a>
+                <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button> 
                 <div className="group-id">GroupID:{this.state.groupID} </div>
-
-
                 <Box mt={6} mb={6} ml={10} mr={2}> 
                     <Grid container columns={12} rowSpacing={6}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
@@ -112,7 +117,11 @@ class Group extends React.Component {
                             {/* Makes Grid item for Friend at index. */}
                             return (
                                 <Grid item sm={6} key={index} align={friendAlign} style={{ maxWidth: '100%'}}>
-                                    <Friend/>
+                                    <Friend 
+                                    name={this.state.memberProfiles[index]["name"]}
+                                    username={"@"+  this.state.memberProfiles[index]["username"]}
+                                    role = {this.state.memberRoles[index]["role"]}
+                                    />
                                 </Grid> 
                             )  
                         })}
