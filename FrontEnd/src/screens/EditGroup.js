@@ -3,6 +3,7 @@ import EditMember from "../components/EditMember";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
+import e from "cors";
 
 
 
@@ -64,6 +65,7 @@ class EditGroupScreen extends React.Component {
             groupName:"Loading..",
             memberProfiles:[],
             memberRoles:[],
+            kickedMembers: [],
         }
         this.init();
     }
@@ -89,18 +91,54 @@ class EditGroupScreen extends React.Component {
             });
     }
 
+
+    callbackFunctionKick = (userID) => {
+        const kickedMembers = this.state.kickedMembers.slice();
+        kickedMembers.push(userID.substring(1));
+        this.setState({kickedMembers: kickedMembers})
+
+        console.log(this.state.kickedMembers);
+    }
+
+    callbackFunctionRevive = (userID) => {
+        
+
+        const kickedMembers = this.state.kickedMembers.slice();
+        
+        for(let i = 0; i < kickedMembers.length; i++)
+        {
+            if(kickedMembers[i] === userID.substring(1))
+            {
+                kickedMembers.splice(i, 1);
+                break;
+            }
+        }
+        this.setState({kickedMembers: kickedMembers})
+
+        console.log(this.state.kickedMembers);
+    }
+
+    inKicked = (username) => {
+        for(var user of this.state.kickedMembers)
+        {
+            if(user === username)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
+
    //TODO: MAKE CALLBACK FUNCTION THAT CREATES A LIST OF PEOPLE THAT WILL BE KICKED
     
     render() {
-    
-
 
         return (
             <div>
             <div className="title">{this.state.groupName}. </div>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
-
-
                 <Box mt={6} mb={6} ml={10} mr={2}> 
                     <Grid container columns={12} rowSpacing={6}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
@@ -125,11 +163,16 @@ class EditGroupScreen extends React.Component {
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
                                     onclick = {(event) => console.log(index)}
+                                    parentCallbackKick = {this.callbackFunctionKick}
+                                    parentCallbackRevive = {this.callbackFunctionRevive}
+                                    kicked = {this.inKicked(this.state.memberProfiles[index]["username"])}
+
                                     />
                                 </Grid> 
                             )  
                         })}
                     </Grid>
+                    <button id="save-button" ><b>Save.</b></button>
                 </Box>
             </div>
         )   
