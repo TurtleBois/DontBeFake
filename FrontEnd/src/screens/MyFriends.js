@@ -10,8 +10,8 @@ const MyFriendsScreen = () => {
     var fmfAlign = "center";
     return (
         <div>
-            <Box mt={6} mb={6} ml={10} mr={2}> 
-                <Grid container columns={12} rowSpacing={6}>
+            <Box pt={3.5} pb={3.5} ml={10} mr={2}> 
+                <Grid container columns={12} rowSpacing={5}>
                     {Array.from(Array(numOfFriends)).map((_, index) => {
                         {/* Sets alignment for FindMoreFriends component. */}
                         if (numOfFriends % 2 === 0) {

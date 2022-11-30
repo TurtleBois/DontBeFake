@@ -1,0 +1,12 @@
+.mini-nav button {
+    background-color: #121212;
+    color: white;
+    font-family: sans-serif;
+    padding: 15px 5px 15px 5px;
+    margin: 0px 5px 0px 5px;
+    border: none;
+}
+
+.mini-nav button:hover {
+    color: gray;
+}

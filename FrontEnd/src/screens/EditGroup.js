@@ -1,6 +1,5 @@
 import React from "react";
-import Friend from "../components/Friends";
-import FindMoreFriends from "../components/FindMoreFriends";
+import EditMember from "../components/EditMember";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
@@ -55,7 +54,7 @@ async function getGroupProfiles(members) {
 
 
 
-class Group extends React.Component {
+class EditGroupScreen extends React.Component {
     
     constructor(props) {
         super(props);
@@ -89,16 +88,19 @@ class Group extends React.Component {
                 this.render();
             });
     }
-    
+
+   //TODO: MAKE CALLBACK FUNCTION THAT CREATES A LIST OF PEOPLE THAT WILL BE KICKED
     
     render() {
-        var link = "/heatmap="  + this.state.groupID;
-        var editLink = "/editgroup=" + this.state.groupID;
+    
+
+
         return (
             <div>
-            <a className="title" href={link}  >{this.state.groupName}. </a>
-                <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button> 
+            <div className="title">{this.state.groupName}. </div>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
+
+
                 <Box mt={6} mb={6} ml={10} mr={2}> 
                     <Grid container columns={12} rowSpacing={6}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
@@ -115,12 +117,14 @@ class Group extends React.Component {
                                 friendAlign = "center" 
                             } 
                             {/* Makes Grid item for Friend at index. */}
+                            var colors = "white";
                             return (
                                 <Grid item sm={6} key={index} align={friendAlign} style={{ maxWidth: '100%'}}>
-                                    <Friend 
+                                    <EditMember 
                                     name={this.state.memberProfiles[index]["name"]}
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
+                                    onclick = {(event) => console.log(index)}
                                     />
                                 </Grid> 
                             )  
@@ -133,4 +137,4 @@ class Group extends React.Component {
 
 
 }
-export default Group;
+export default EditGroupScreen;
