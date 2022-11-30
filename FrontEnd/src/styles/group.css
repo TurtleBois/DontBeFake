@@ -8,3 +8,18 @@
     background: '#121212';
     margin-bottom: 0;
 }
+
+
+.title{
+    background-color: transparent;
+    text-align: center;
+    border-width:0px;
+    border:none;
+    outline-width: 0;
+}
+
+.title:hover{
+    color: rgb(247, 52, 52);
+
+}
+
