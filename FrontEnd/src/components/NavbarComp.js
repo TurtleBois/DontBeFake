@@ -124,7 +124,6 @@ export default class NavbarComp extends Component {
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
                   <Nav.Link as={Link} to={"/searchgroups"}>Search Group</Nav.Link>
-                  <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
                   <Nav.Link as={Link} to={"/viewgroup"}>view Group</Nav.Link>
                 </Nav>
@@ -153,7 +152,6 @@ export default class NavbarComp extends Component {
             <Route exact path="/schedules" element={<Schedules/>}/>
             {/* Place MiniNav bar in wanted screens like this: */}
             <Route exact path="/calendar" element={<><MiniNav/><Calender/></>}/>
-            <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
             <Route path="/group=:groupID" element={<Group/>}/>
