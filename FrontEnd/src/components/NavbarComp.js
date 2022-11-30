@@ -25,6 +25,7 @@ import YouShouldLogInScreen from '../screens/YouShouldLogin';
 import Error from '../screens/Error';
 import VotingScreen from '../screens/Voting';
 import HeatMap from '../screens/HeatMap';
+import MiniNav from '../components/MiniNav';
 import EditGroupScreen from '../screens/EditGroup'
 
 function logout() {
@@ -120,7 +121,6 @@ export default class NavbarComp extends Component {
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
                   {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
-                  
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
                   <Nav.Link as={Link} to={"/searchgroups"}>Search Group</Nav.Link>
@@ -151,7 +151,8 @@ export default class NavbarComp extends Component {
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/schedules" element={<Schedules/>}/>
-            <Route exact path="/calendar" element={<Calender/>}/>
+            {/* Place MiniNav bar in wanted screens like this: */}
+            <Route exact path="/calendar" element={<><MiniNav/><Calender/></>}/>
             <Route exact path="/CreateProfileTest" element={<CreateProfileTest/>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
@@ -161,11 +162,10 @@ export default class NavbarComp extends Component {
             <Route exact path="/editgroup=:groupID" element={<EditGroupScreen/>}/>
             <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
             <Route exact path="/error" element={<Error/>}/>
-            <Route exact path="/voting" element={<VotingScreen/>}/>
+            <Route exact path="/voting" element={<><MiniNav/><VotingScreen/></>}/>
             <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
-            
           </Routes>
-        </div>  
+        </div>
       </Router>
         )
     }
