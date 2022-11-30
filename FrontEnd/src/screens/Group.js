@@ -92,10 +92,12 @@ class Group extends React.Component {
     
     
     render() {
-        var link = "/heatmap="  + this.state.groupID
+        var link = "/heatmap="  + this.state.groupID;
+        var editLink = "/editgroup=" + this.state.groupID;
         return (
             <div>
-            <div className="title">{this.state.groupName}. </div>
+            <a className="title" href={link}  >{this.state.groupName}. </a>
+                <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button> 
                 <div className="group-id">GroupID:{this.state.groupID} </div>
                 <Box mt={6} mb={6} ml={10} mr={2}> 
                     <Grid container columns={12} rowSpacing={6}>

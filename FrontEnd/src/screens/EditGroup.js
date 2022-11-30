@@ -1,6 +1,5 @@
 import React from "react";
-import Friend from "../components/Friends";
-import FindMoreFriends from "../components/FindMoreFriends";
+import EditMember from "../components/EditMember";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
@@ -89,9 +88,13 @@ class EditGroupScreen extends React.Component {
                 this.render();
             });
     }
-    
+
+   //TODO: MAKE CALLBACK FUNCTION THAT CREATES A LIST OF PEOPLE THAT WILL BE KICKED
     
     render() {
+    
+
+
         return (
             <div>
             <div className="title">{this.state.groupName}. </div>
@@ -117,10 +120,11 @@ class EditGroupScreen extends React.Component {
                             var colors = "white";
                             return (
                                 <Grid item sm={6} key={index} align={friendAlign} style={{ maxWidth: '100%'}}>
-                                    <Friend 
+                                    <EditMember 
                                     name={this.state.memberProfiles[index]["name"]}
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
+                                    onclick = {(event) => console.log(index)}
                                     />
                                 </Grid> 
                             )  
