@@ -28,6 +28,15 @@ import HeatMap from '../screens/HeatMap';
 import MiniNav from '../components/MiniNav';
 import EditGroupScreen from '../screens/EditGroup'
 
+//forgive me:
+import face_default from "../assets/face_default.png";
+import face_happy from "../assets/face_happy.png";
+import face_ditto from "../assets/face_ditto.png";
+import face_angry from "../assets/face_angry.png";
+import face_winky from "../assets/face_winky.png";
+import face_XD from "../assets/face_XD.png";
+const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
+
 function logout() {
   localStorage.removeItem("DBF_username");
 }
@@ -63,7 +72,7 @@ export default class NavbarComp extends Component {
       username: "",
       name:  "",
       loginOrLogout: "Login.",
-      pfp: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png", // default skin
+      pfp: pfps[0], // default skin
     }
     this.init();
   }
@@ -92,7 +101,7 @@ export default class NavbarComp extends Component {
 
       }
       else {
-      this.setState({name: profileInfo.name,username: "@"+DBF_username, loginOrLogout: status, pfp: profileInfo.profilePicture},
+      this.setState({name: profileInfo.name,username: "@"+DBF_username, loginOrLogout: status, pfp: pfps[profileInfo.profilePicture]},
         () => {
            this.render(); // re-renders after initalization is done.
        });

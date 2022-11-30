@@ -48,7 +48,7 @@ const SignUpScreen = () => {
       {
         username: form.username, 
         name: "",
-        profilePicture: "",
+        profilePicture: 0,
         userDescription: "",
         joinedGroups: new Array(),
       }
@@ -82,7 +82,7 @@ const SignUpScreen = () => {
 
       localStorage.setItem("DBF_username", form.username);
       localStorage.setItem("name","");
-      localStorage.setItem("profilePicture", "");
+      localStorage.setItem("profilePicture", 0);
       localStorage.setItem("userDescription", "");
       localStorage.setItem("_id", dataBase_id);
       
