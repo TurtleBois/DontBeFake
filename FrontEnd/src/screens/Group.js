@@ -5,8 +5,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
 
-
-
 // these do something i think
 var friendAlign = "right";
 var fmfAlign = "center";
@@ -56,7 +54,6 @@ async function getGroupProfiles(members) {
 
 
 class Group extends React.Component {
-    
     constructor(props) {
         super(props);
         this.state = {
@@ -90,7 +87,7 @@ class Group extends React.Component {
             });
     }
     
-    
+
     render() {
         var link = "/heatmap="  + this.state.groupID;
         var editLink = "/editgroup=" + this.state.groupID;
@@ -121,6 +118,7 @@ class Group extends React.Component {
                                     name={this.state.memberProfiles[index]["name"]}
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
+                                    profilePicture = {this.state.memberProfiles[index]["profilePicture"]}
                                     />
                                 </Grid> 
                             )  
