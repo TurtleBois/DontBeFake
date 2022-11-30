@@ -95,14 +95,12 @@ class EditGroupScreen extends React.Component {
     callbackFunctionKick = (userID) => {
         const kickedMembers = this.state.kickedMembers.slice();
         kickedMembers.push(userID.substring(1));
-        this.setState({kickedMembers: kickedMembers})
-
-        console.log(this.state.kickedMembers);
+        this.setState({kickedMembers: kickedMembers}, 
+            //() => console.log(this.state.kickedMembers)
+            );
     }
 
     callbackFunctionRevive = (userID) => {
-        
-
         const kickedMembers = this.state.kickedMembers.slice();
         
         for(let i = 0; i < kickedMembers.length; i++)
@@ -114,8 +112,6 @@ class EditGroupScreen extends React.Component {
             }
         }
         this.setState({kickedMembers: kickedMembers})
-
-        console.log(this.state.kickedMembers);
     }
 
     inKicked = (username) => {
@@ -129,10 +125,72 @@ class EditGroupScreen extends React.Component {
         return false;
     }
 
-    
-
-   //TODO: MAKE CALLBACK FUNCTION THAT CREATES A LIST OF PEOPLE THAT WILL BE KICKED
-    
+    async kickMembers() {
+        var tokick = this.state.kickedMembers;
+        // remove the group from each person
+        const response = await fetch("http://localhost:5000/profile/");
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+          }
+        const profiles = await response.json();
+        
+        var profilesToEdit = [];
+        for(var profile of profiles) {
+            if(tokick.includes(profile.username)) {
+                profilesToEdit.push(profile);
+            }
+        }
+        for(var profile of profilesToEdit) {
+            var value = profile["joinedGroups"];
+            var index = value.indexOf(this.state.groupID);
+            if(index <-1 ) {
+                // THIS SHOULD NEVER HAPPEN
+                return;
+            }
+            value.splice(index,1);
+            value = {"joinedGroups" : value};
+            var newProfile = {...profile, ...value};
+            
+            await fetch(`http://localhost:5000/profile/update/${profile._id}`, {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newProfile),
+            })
+            .catch(error => {
+                window.alert(error);
+                return;
+            });
+            
+        }
+        var currGroup = await getGroup(this.state.groupID);
+        var allMembers = currGroup["members"];
+        var updatedMemberList = [];
+        for(var member of allMembers) {
+            if(!tokick.includes(member.DBF_username)) {
+                updatedMemberList.push(member);
+            }
+        }
+        var value = {members: updatedMemberList};
+        var updatedGroup = {...currGroup, ...value};
+        
+        
+        await fetch(`http://localhost:5000/group/update/${currGroup._id}`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(updatedGroup),
+        })
+        .catch(error => {
+            window.alert(error);
+            return;
+        }).then( () => window.location.href="/group="+this.state.groupID);
+        
+    }
     render() {
 
         return (
@@ -162,7 +220,6 @@ class EditGroupScreen extends React.Component {
                                     name={this.state.memberProfiles[index]["name"]}
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
-                                    onclick = {(event) => console.log(index)}
                                     parentCallbackKick = {this.callbackFunctionKick}
                                     parentCallbackRevive = {this.callbackFunctionRevive}
                                     kicked = {this.inKicked(this.state.memberProfiles[index]["username"])}
@@ -172,7 +229,11 @@ class EditGroupScreen extends React.Component {
                             )  
                         })}
                     </Grid>
-                    <button id="save-button" ><b>Save.</b></button>
+                        <button 
+                        type="submit" 
+                        id="save-button"
+                        onClick={(event) => this.kickMembers()}
+                        ><b>Save.</b></button>
                 </Box>
             </div>
         )   
