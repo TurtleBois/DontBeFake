@@ -1,14 +1,22 @@
 import React, { useState, useEffect, Component } from "react";
 import { useNavigate } from "react-router";
 
-import '../styles/CreateProfileTest.css';
+import '../styles/EditProfile.css';
 import default_pfp from "../assets/default_pfp.png"     
 
+import face_default from "../assets/face_default.png";
+import face_happy from "../assets/face_happy.png";
+import face_ditto from "../assets/face_ditto.png";
+import face_angry from "../assets/face_angry.png";
+import face_winky from "../assets/face_winky.png";
+import face_XD from "../assets/face_XD.png";
+const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
 
-const CreateProfileTest = () => {
+
+const EditProfile = () => {
     var current_pfp = default_pfp;
     if(localStorage.getItem("profilePicture") != "") { // why the fuck is it an empty string here but not anywhere else???
-        current_pfp = localStorage.getItem("profilePicture");
+        current_pfp = pfps[localStorage.getItem("profilePicture")];
     }
     var temp = ""
     function set_pfp(event) {
@@ -27,7 +35,7 @@ const CreateProfileTest = () => {
     const [form, setForm] = useState({  
         username: localStorage.getItem("DBF_username"), 
         name: localStorage.getItem("name") == "undefined" ? "" : localStorage.getItem("name"),
-        profilePicture: localStorage.getItem("profilePicture") == "undefined" ? "" : localStorage.getItem("profilePicture"),
+        profilePicture: localStorage.getItem("profilePicture") == "" ? "" : localStorage.getItem("profilePicture"),
         userDescription: localStorage.getItem("userDescription") == "undefined" ? "" : localStorage.getItem("userDescription"),
     });
 
@@ -160,4 +168,4 @@ const CreateProfileTest = () => {
     )
 }
 
-export default CreateProfileTest;
+export default EditProfile;

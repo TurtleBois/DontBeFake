@@ -132,7 +132,7 @@ class EditGroupScreen extends React.Component {
         return false;
     }
 
-    async kickMembers() {
+    async updateMemberList() {
         var tokick = this.state.kickedMembers;
         // remove the group from each person
         const response = await fetch("http://localhost:5000/profile/");
@@ -183,6 +183,9 @@ class EditGroupScreen extends React.Component {
         }
         var value = {members: updatedMemberList};
         var updatedGroup = {...currGroup, ...value};
+        var updateGroupName = {groupName : this.state.groupName};
+        updatedGroup = {...updatedGroup, ...updateGroupName};
+
         
         
         await fetch(`http://localhost:5000/group/update/${currGroup._id}`, {
@@ -230,6 +233,7 @@ class EditGroupScreen extends React.Component {
                                     name={this.state.memberProfiles[index]["name"]}
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
+                                    profilePicture = {this.state.memberProfiles[index]["profilePicture"]}
                                     parentCallbackKick = {this.callbackFunctionKick}
                                     parentCallbackRevive = {this.callbackFunctionRevive}
                                     kicked = {this.inKicked(this.state.memberProfiles[index]["username"])}
@@ -242,7 +246,7 @@ class EditGroupScreen extends React.Component {
                         <button 
                         type="submit" 
                         id="save-button"
-                        onClick={(event) => this.kickMembers()}
+                        onClick={(event) => this.updateMemberList()}
                         ><b>Save.</b></button>
                 </Box>
             </div>

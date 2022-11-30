@@ -40,7 +40,7 @@ const ProfileScreen = () => {
             <div className="bio">
                 Bio: {form.userDescription}
             </div>
-            <a href='./CreateProfileTest'>
+            <a href='./editprofile'>
                 <button className="edit-link">Edit Profile</button>
             </a>
             

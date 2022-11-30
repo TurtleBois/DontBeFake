@@ -13,7 +13,7 @@ import MyFriendsScreen from "../screens/MyFriends";
 import Profile from "../screens/Profile";
 import Schedules from "../screens/Schedules";
 import Calender from "../screens/Calender";
-import CreateProfileTest from "./CreateProfileTest";
+import EditProfile from "./EditProfile";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
 import SearchGroupScreen from '../screens/SearchGroups';
@@ -158,6 +158,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/" element={<LoginScreen/>}/> 
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
+            <Route exact path="/editprofile" element={<EditProfile/>}/>
             <Route exact path="/schedules" element={<><MiniNav/><Calender/></>}/>
             {/* Place MiniNav bar in wanted screens like this: */}
             <Route exact path="/calendar" element={<><MiniNav/><Calender/></>}/>
