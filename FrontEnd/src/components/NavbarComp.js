@@ -149,7 +149,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/" element={<LoginScreen/>}/> 
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
-            <Route exact path="/schedules" element={<Schedules/>}/>
+            <Route exact path="/schedules" element={<><MiniNav/><Calender/></>}/>
             {/* Place MiniNav bar in wanted screens like this: */}
             <Route exact path="/calendar" element={<><MiniNav/><Calender/></>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>

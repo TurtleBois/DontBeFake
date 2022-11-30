@@ -70,6 +70,11 @@ class EditGroupScreen extends React.Component {
         this.init();
     }
 
+    handleChangeName = (event) => 
+    {
+        this.setState({groupName: event.target.value})
+    }
+
     async init() {
         var newGroupID = window.location.href.split('=')[1];
         var record = await getGroup(newGroupID);
@@ -85,10 +90,12 @@ class EditGroupScreen extends React.Component {
             groupName: record.groupName,
             memberProfiles: memberProfiles,
             memberRoles: record.members,
+            
             },
             () => {
                 this.render();
             });
+
     }
 
 
@@ -189,13 +196,16 @@ class EditGroupScreen extends React.Component {
             window.alert(error);
             return;
         }).then( () => window.location.href="/group="+this.state.groupID);
+
+
         
     }
     render() {
-
+        
         return (
             <div>
-            <div className="title">{this.state.groupName}. </div>
+            <input className="title"  placeholder = "GroupTitle." value = {this.state.groupName} onChange = {this.handleChangeName}/>
+            {/* <div className="title">{this.state.groupName}. </div> */}
                 <div className="group-id">GroupID:{this.state.groupID} </div>
                 <Box mt={6} mb={6} ml={10} mr={2}> 
                     <Grid container columns={12} rowSpacing={6}>
