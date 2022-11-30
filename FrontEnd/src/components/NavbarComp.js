@@ -23,6 +23,7 @@ import { useNavigate } from "react-router";
 import YouShouldLogInScreen from '../screens/YouShouldLogin';
 import Error from '../screens/Error';
 import VotingScreen from '../screens/Voting';
+import EditGroupScreen from '../screens/EditGroup'
 
 function logout() {
   localStorage.removeItem("DBF_username");
@@ -120,7 +121,7 @@ export default class NavbarComp extends Component {
                   
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
-                  <Nav.Link as={Link} to={"/myfriends"}>MyFriends</Nav.Link>
+                  <Nav.Link as={Link} to={"/searchgroups"}>Search Group</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
                 </Nav>
@@ -153,6 +154,7 @@ export default class NavbarComp extends Component {
             <Route path="/group=:groupID" element={<Group/>}/>
             <Route exact path="/joingroup" element={<JoinGroup/>}/>
             <Route exact path="/searchgroups" element={<SearchGroupScreen/>}/>
+            <Route exact path="/editgroup=:groupID" element={<EditGroupScreen/>}/>
             <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
             <Route exact path="/error" element={<Error/>}/>
             <Route exact path="/voting" element={<VotingScreen/>}/>

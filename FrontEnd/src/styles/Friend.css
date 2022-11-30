@@ -33,6 +33,19 @@
     margin-bottom: 0px;
 }
 
+#leader-name {
+    color: yellow;
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
+#leader-username {
+    color: #E0CD67;
+    font-size: 15px;
+    margin-top: -5px;
+    margin-bottom: 0px;
+}
+
 #friend-status {
     font-size: 15px;
 }

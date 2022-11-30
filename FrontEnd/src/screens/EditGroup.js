@@ -55,7 +55,7 @@ async function getGroupProfiles(members) {
 
 
 
-class Group extends React.Component {
+class EditGroupScreen extends React.Component {
     
     constructor(props) {
         super(props);
@@ -92,12 +92,12 @@ class Group extends React.Component {
     
     
     render() {
-        var dynamicEditLink = "/editgroup=" + this.state.groupID;
         return (
             <div>
-            <div className="title">{this.state.groupName}. 
-                </div>
+            <div className="title">{this.state.groupName}. </div>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
+
+
                 <Box mt={6} mb={6} ml={10} mr={2}> 
                     <Grid container columns={12} rowSpacing={6}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
@@ -133,4 +133,4 @@ class Group extends React.Component {
 
 
 }
-export default Group;
+export default EditGroupScreen;
