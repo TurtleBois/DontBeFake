@@ -204,7 +204,7 @@ class EditGroupScreen extends React.Component {
         
         return (
             <div>
-            <input className="title"  placeholder = "GroupTitle." value = {this.state.groupName} onChange = {this.handleChangeName}/>
+            <input className="title"  placeholder = "GroupTitle." value = {this.state.groupName} onChange = {this.handleChangeName} />
             {/* <div className="title">{this.state.groupName}. </div> */}
                 <div className="group-id">GroupID:{this.state.groupID} </div>
                 <Box mt={6} mb={6} ml={10} mr={2}> 
