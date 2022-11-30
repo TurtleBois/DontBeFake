@@ -109,12 +109,19 @@ const HeatMap = () => {
               setAllGroups(HeatMap);
         }
         getAllGroups();
+
+        
+
      }, [])
     
      if(allGroups == null) {
         return;
      }
-     console.log(allGroups);
+     
+     const max = allGroups.reduce((a, b) => Math.max(a, b), -Infinity);
+     console.log(Math.max(max));
+     
+     
     return (
         <Grid
         container
@@ -146,7 +153,7 @@ const HeatMap = () => {
                     }}> 
                     
                     {Array.from(Array(189)).map((_, index) => (        
-                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: 'red'}} />
+                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ allGroups[index] * (100/max) +"%)"}} />
                     ))}
                 </Grid>
             </Grid>   
