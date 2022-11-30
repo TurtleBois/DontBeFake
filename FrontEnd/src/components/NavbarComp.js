@@ -8,7 +8,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
-import Home from "../screens/Home";
+//import Home from "../screens/Home";
 import MyFriendsScreen from "../screens/MyFriends";
 import Profile from "../screens/Profile";
 import Schedules from "../screens/Schedules";
@@ -19,10 +19,12 @@ import SignUpScreen from '../screens/SignUp';
 import SearchGroupScreen from '../screens/SearchGroups';
 import Group from '../screens/Group';
 import JoinGroup from '../screens/JoinGroup';
+import ViewGroups from '../screens/ViewGroups';
 import { useNavigate } from "react-router";
 import YouShouldLogInScreen from '../screens/YouShouldLogin';
 import Error from '../screens/Error';
 import VotingScreen from '../screens/Voting';
+import HeatMap from '../screens/HeatMap';
 import EditGroupScreen from '../screens/EditGroup'
 
 function logout() {
@@ -124,6 +126,7 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/searchgroups"}>Search Group</Nav.Link>
                   <Nav.Link as={Link} to={"/CreateProfileTest"}>Edit Profile (plz decorate)</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
+                  <Nav.Link as={Link} to={"/viewgroup"}>view Group</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">
@@ -143,6 +146,7 @@ export default class NavbarComp extends Component {
         </div>
         <div>
           <Routes>
+            <Route exact path="/viewgroup" element={<ViewGroups/>}/>
             <Route exact path="/" element={<LoginScreen/>}/> 
             <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
             <Route exact path="/profile" element={<Profile/>}/>
@@ -158,6 +162,8 @@ export default class NavbarComp extends Component {
             <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
             <Route exact path="/error" element={<Error/>}/>
             <Route exact path="/voting" element={<VotingScreen/>}/>
+            <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
+            
           </Routes>
         </div>  
       </Router>

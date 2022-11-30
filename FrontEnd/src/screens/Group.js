@@ -92,11 +92,10 @@ class Group extends React.Component {
     
     
     render() {
-        var dynamicEditLink = "/editgroup=" + this.state.groupID;
+        var link = "/heatmap="  + this.state.groupID
         return (
             <div>
-            <div className="title">{this.state.groupName}. 
-                </div>
+            <div className="title">{this.state.groupName}. </div>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
                 <Box mt={6} mb={6} ml={10} mr={2}> 
                     <Grid container columns={12} rowSpacing={6}>
@@ -114,7 +113,6 @@ class Group extends React.Component {
                                 friendAlign = "center" 
                             } 
                             {/* Makes Grid item for Friend at index. */}
-                            var colors = "white";
                             return (
                                 <Grid item sm={6} key={index} align={friendAlign} style={{ maxWidth: '100%'}}>
                                     <Friend 

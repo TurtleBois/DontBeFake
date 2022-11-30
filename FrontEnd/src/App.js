@@ -1,14 +1,26 @@
-import React from 'react';
 import './styles/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NavbarComp from './components/NavbarComp.js';
 
+import React, { Component, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+
+import './styles/LogIn.css';
+
+
+
+
 function App() {
-   return (
-      <div className="App">
-         <h1>DontBeFake.</h1>
-         <NavbarComp/>
-      </div>
-   );
+   
+
+    return (
+        <div className="App">
+            <h1>DontBeFake.</h1>
+            <NavbarComp/>
+        </div>
+        );
+    
 }
+
+
 export default App;

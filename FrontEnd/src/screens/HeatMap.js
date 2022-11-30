@@ -4,7 +4,48 @@ import Grid from '@mui/material/Unstable_Grid2';
 import Slot from "../components/timeSlot";
 import ClosedSlot from "../components/closedTimeSlot";
 
+async function getGroup(id) {
+    const response = await fetch("http://localhost:5000/group/");
+    if (!response.ok) {
+      const message = `An error occurred: ${response.statusText}`;
+      window.alert(message);
+      return;
+    }
+    const records = await response.json();
+    for (var record of records) {
+        if(record.groupID == id) {
+            return record;
+        }
+    }
+    return null;
+}
 
+
+async function getGroupProfiles(members) {
+    
+    const response = await fetch("http://localhost:5000/profile/");
+    if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+      
+    const profiles = await response.json();
+    var groupMembers = [];
+    var membersList = [];
+
+    for (var member of members) {
+        membersList.push(member["DBF_username"]);
+    }
+
+    for(var profile of profiles) {
+        if(membersList.includes(profile.username)) {
+            groupMembers.push(profile);
+        }
+    }
+    return groupMembers;
+    
+}
 
 function timeSide(index)
 {   
@@ -90,52 +131,85 @@ async function getInformation() {
     return null;
 }
 
-// saves current "calender" into the database
-async function saveInformation(state,newSchedule) {
-    var DBF_username = localStorage.getItem("DBF_username");
-    if(DBF_username == null) {
-        // this should NEVER happen
-        DBF_username = "chang";
+
+
+
+
+const HeatMap = () => {
+    var collection = [];
+    var newGroupID = window.location.href.split('=')[1];
+    var record = getGroup(newGroupID);
+    if(record == null) {
+         // TODO: send to this group does not exist.
     }
-    var toReturn = {"profileID": DBF_username,"state" : state}
-    // if the schedule has never existed... somethow
-    if(newSchedule) {
-        await fetch("http://localhost:5000/schedule/add", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(toReturn),
-        })
-        .catch(error => {
-            window.alert(error);
-            return;
-        });
-    }
-    else {
-        // if the schedule has existed before
-        var prevState = await getInformation();
-        var id =  prevState._id;
-        toReturn = {"returnID" : id,"profileID": DBF_username,"state" : state}
-            await fetch(`http://localhost:5000/schedule/update/${id}`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(toReturn),
-            
-   });
-    }
+    
+    //var memberProfiles = getGroupProfiles(record.members);
+
+    //const response = fetch(`http://localhost:5000/schedule/`);
+    //if (!response.ok) {
+    //     const message = `An error occurred: ${response.statusText}`;
+    //     window.alert(message);
+    //     return;
+    // }
+
+    // const records = response.json();
+    // for(var record of records) {
+    // {
+    //     for(var member in memberProfiles)
+    //     {
+    //         if(record.profileID === member.username)
+    //         {
+    //             collection.push(record['setEvents'])
+    //         }
+    //     }
+    // }
+
+    // }
+
+    return (
+        <Grid
+        container
+        direction="row">
+            {dayTimes()}
+            <Grid 
+            item xs={10.8}
+            container
+            direction="column"
+            spacing = {0}>
+    
+                {weekdays()}
+                <Grid
+                container
+                spacing={1}
+                direction="column"
+
+                maxHeight={1400}
+                sx={{
+                '--Grid-borderWidth': '1px',
+                borderTop: 'var(--Grid-borderWidth) solid',
+                borderLeft: 'var(--Grid-borderWidth) solid',
+                borderColor: 'rgba(133, 133, 133, 1)',
+                '& > div': {
+                    borderRight: 'var(--Grid-borderWidth) solid',
+                    borderBottom: 'var(--Grid-borderWidth) solid',
+                    borderColor: 'rgba(133, 133, 133, 1)',
+                },
+                    }}> 
+                    
+                    {Array.from(Array(189)).map((_, index) => (        
+                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: 'red'}} />
+                    ))}
+                </Grid>
+            </Grid>   
+        </Grid>
+    );
 }
-
-
 
 class Calender extends React.Component 
 {
     constructor(props) {
         super(props);
         this.state = {
-            //coloring: Array(189).fill('rgba(90, 52, 52, 0)'),
             setEvents: Array(189).fill(null),
             eventNames: new Array(),
             startTimes: new Array(),
@@ -167,102 +241,6 @@ class Calender extends React.Component
                 // console.log(this.state);
             });
     }
-
-
-    callbackFunction = (i,name, start, end) => {
-        console.log(this.state)
-        const weekday = Math.floor(i/27);
-
-
-        if(name === null || name === "")
-        {
-            alert("Please enter a name");
-            return
-        }
-        if(end == null)
-        {
-            alert("Please enter a end time");
-            return
-        }
-        for(let j = start ; j < end; j++) {
-            if(this.state.setEvents[(27*weekday)+j] !== null)
-            {
-                alert("You have a overlapping event — DontBeFake");
-                return
-            }
-        }  
-        const eventNames = this.state.eventNames.slice();
-        const startTimes = this.state.startTimes.slice();
-        const endTimes = this.state.endTimes.slice();
-
-        eventNames.push(name)
-        startTimes.push(start)
-        endTimes.push(end)
-
-        
-        
-        for(let j = start ; j < end; j++) {
-            //this.state.coloring[(27*weekday)+j] = "hsl(" + this.state.numEvents*15+ ", 90%, 50%)"
-            this.state.setEvents[(27*weekday)+j] = this.state.numEvents
-        }  
-
-        console.log(this.state)
-        // sets  the states and then saves information into the database
-        this.setState({
-            eventNames: eventNames, 
-            startTimes: startTimes, 
-            endTimes: endTimes, 
-            numEvents : this.state.numEvents +1,
-            },
-            () => {
-                saveInformation(this.state,this.firstTime);
-                this.firstTime = false
-            });
-
-        }
-
-      
-
-        deleteEvent = (i) => {
-             
-            const setEvents = this.state.setEvents.slice();
-            for(let j = 0 ; j < 189; j++)
-            {
-                console.log(setEvents[j]);  
-                console.log(i);  
-                if(setEvents[j] === i)
-                {
-                    setEvents[j] = null
-                }
-            }
-
-            this.setState({
-                setEvents: setEvents
-                },
-                () => {
-                    saveInformation(this.state,this.firstTime);
-                    this.firstTime = false
-            });
-        }
-      
-
-        renderSlot(i) {
-        
-            if(this.state.setEvents[i] === null)
-            {
-                return(
-                <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.setEvents[i] === null? 'rgba(90, 52, 52, 0)': "hsl(" + this.state.setEvents[i] *15+ ", 90%, 50%)"} } >
-                    <Slot  parentCallback = {this.callbackFunction} value = {i} />
-                </Grid>);
-            }
-            else
-            {
-                return(
-                <Grid key={i} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.setEvents[i] === null? 'rgba(90, 52, 52, 0)': "hsl(" + this.state.setEvents[i] *15+ ", 90%, 50%)"} } >
-                <ClosedSlot delete = {this.deleteEvent} value = {this.state.setEvents[i]} name={this.state.eventNames[this.state.setEvents[i]]}/>
-                </Grid>);
-            }
-        }
 
         render() {
 
@@ -297,7 +275,7 @@ class Calender extends React.Component
                             }}> 
                             
                             {Array.from(Array(189)).map((_, index) => (        
-                                this.renderSlot(index)
+                                <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: this.state.setEvents[index] === null? 'rgba(90, 52, 52, 0)': "hsl(" + this.state.setEvents[index] *15+ ", 90%, 50%)"} } />
                             ))}
                         </Grid>
                     </Grid>   
@@ -306,4 +284,4 @@ class Calender extends React.Component
     }
 }
 
-export default Calender;
+export default HeatMap;
