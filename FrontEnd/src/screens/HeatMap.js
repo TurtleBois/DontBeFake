@@ -31,8 +31,17 @@ async function getGroupProfiles(members) {
       }
       
     const profiles = await response.json();
+
+    console.log(profiles)
+    console.log(members)
     var groupMembers = [];
-    var membersList = [];
+
+
+
+    var membersList = []; 
+
+
+
 
     for (var member of members) {
         membersList.push(member["DBF_username"]);
@@ -132,40 +141,52 @@ async function getInformation() {
 }
 
 
-
-
-
-const HeatMap = () => {
+async function getGroupSchedules()
+{
     var collection = [];
     var newGroupID = window.location.href.split('=')[1];
     var record = getGroup(newGroupID);
     if(record == null) {
          // TODO: send to this group does not exist.
     }
+    console.log(record)
+
+
+
+
+    var memberProfiles = await getGroupProfiles(record.members);
+    const response = fetch(`http://localhost:5000/schedule/`);
+    if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+    }
+    const records = response.json();
+
+    for(var record of records) {
+        {
+            for(var member in memberProfiles)
+            {
+                if(record.profileID === member.username)
+                {
+                    collection.push(record['setEvents'])
+                }
+            }
+        }
+    }
+    return collection;
+
+}
+
+
+function createHeat(schedules)
+{
+
+}
+
+
+const HeatMap = () => {
     
-    //var memberProfiles = getGroupProfiles(record.members);
-
-    //const response = fetch(`http://localhost:5000/schedule/`);
-    //if (!response.ok) {
-    //     const message = `An error occurred: ${response.statusText}`;
-    //     window.alert(message);
-    //     return;
-    // }
-
-    // const records = response.json();
-    // for(var record of records) {
-    // {
-    //     for(var member in memberProfiles)
-    //     {
-    //         if(record.profileID === member.username)
-    //         {
-    //             collection.push(record['setEvents'])
-    //         }
-    //     }
-    // }
-
-    // }
-
     return (
         <Grid
         container
