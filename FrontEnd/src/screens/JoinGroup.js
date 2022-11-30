@@ -161,6 +161,7 @@ const JoinGroup = () => {
             groupID: groupID,
             members: [{DBF_username: DBF_username,role: "leader", fakeStatus: false}], 
             events: [],
+            requests: [],
         }; 
         await fetch("http://localhost:5000/group/add", {
             method: "POST",

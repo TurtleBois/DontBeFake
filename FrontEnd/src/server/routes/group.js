@@ -44,6 +44,7 @@ recordRoutes.route("/group/add").post(function (req, response) {
     groupID: req.body.groupID,
     members: req.body.members, 
     events: req.body.events,
+    requests: req.body.requests,
  };
  
  db_connect.collection("groups").insertOne(myobj, function (err, res) {
@@ -62,6 +63,7 @@ recordRoutes.route("/group/update/:id").post(function (req, response) {
     groupID: req.body.groupID,
     members: req.body.members, 
     events: req.body.events,
+    requests: req.body.requests,
    },
  };
  db_connect
