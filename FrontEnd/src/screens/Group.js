@@ -90,9 +90,10 @@ class Group extends React.Component {
     
     
     render() {
+        var link = "/heatmap="  + this.state.groupID
         return (
             <div>
-            <div className="title">{this.state.groupName}. </div>
+            <a className="title" href={link}  >{this.state.groupName}. </a>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
 
 
@@ -112,6 +113,7 @@ class Group extends React.Component {
                                 friendAlign = "center" 
                             } 
                             {/* Makes Grid item for Friend at index. */}
+                            console.log(this.state.memberProfiles)
                             return (
                                 <Grid item sm={6} key={index} align={friendAlign} style={{ maxWidth: '100%'}}>
                                     <Friend 
