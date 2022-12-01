@@ -113,7 +113,11 @@ const GroupReq = (props) => {
             requestList = [];
         }
         
-        var newRequest = {username: localStorage.getItem("DBF_username"), profileID: localStorage.getItem("DBF_username")};
+        var newRequest = {
+            name: localStorage.getItem("name"),
+            username: localStorage.getItem("DBF_username"), 
+            profileID: localStorage.getItem("_id"),
+        };
         requestList.push(newRequest);
         var value = {requests : requestList};
         var newGroup = {...group, ...value};
