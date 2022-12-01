@@ -1,6 +1,6 @@
 import React from "react";
 import GroupDisplay from "../components/GroupDisplay";
-import addGroup from "../components/findMoreGroups";
+import FindMoreGroups from "../components/findMoreGroups";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
@@ -81,25 +81,23 @@ class viewGroup extends React.Component {
     render() {      
         return (
             <div>
-                <Box mt={6} mb={6} ml={3} mr={3}   > 
-                    <Grid container columns={24} rowSpacing={3} columnSpacing = {3} >
+                <b><h3>MyGroups.</h3></b>
+                <Box mt={1} mb={2} ml={18} mr={18}> 
+                    <Grid container columns={24} rowSpacing={3} columnSpacing={3}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
                             return (
                                 <Grid item sm={6} key={index} style={{ maxWidth: '100%'}}>
                                     <GroupDisplay 
                                     info = {this.state.groups[index]}
-     
                                     />
                                 </Grid> 
                             )  
                         })}
-
-                        {/* <Grid item sm={6} style={{maxWidth: '100%', backgroundColor: 'red'}} >
-                            <addGroups/>
-                        </Grid> */}
-                        
+                    {/* Makes Grid item for Add Group*/}
+                    <Grid item sm={6} style={{maxWidth: '100%'}}>
+                        <FindMoreGroups/>
                     </Grid>
-
+                    </Grid>
                 </Box>
             </div>
         )   

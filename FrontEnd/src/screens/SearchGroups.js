@@ -103,8 +103,7 @@ const SearchGroupScreen = () => {
                 </input>
             </form>
             
-            <Box mt={2} mb={6} ml={14} mr={2}> 
-                
+            <Box mt={2} mb={6} ml={10} mr={10}> 
                 <Grid container columns={12} rowSpacing={6}>
                     {Array.from(Array(filteredGroups.length)).map((_, index) => {
                         {/* Sets alignment for friend at index. */}

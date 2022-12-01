@@ -4,6 +4,8 @@ import User from "../components/Users";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+// Code for former SearchFriends screen. Repurposed
+// for other screens (i.e SearchGroups)
 const SearchFriendsScreen = () => {
     var numOfUsers = 12;
     var userAlign = "right";
