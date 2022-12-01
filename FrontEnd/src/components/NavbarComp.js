@@ -129,7 +129,7 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/searchgroups"}>Search Group</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
                   <Nav.Link as={Link} to={"/events"}>Events</Nav.Link>
-                  <Nav.Link as={Link} to={"/viewgroup"}>view Group</Nav.Link>
+                  <Nav.Link as={Link} to={"/viewgroup"}>View Group</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">
