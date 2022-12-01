@@ -105,16 +105,32 @@ const SearchGroupScreen = () => {
             <Box mt={2} mb={6} ml={10} mr={10}> 
                 <Grid container columns={12} rowSpacing={6}>
                     {Array.from(Array(filteredGroups.length)).map((_, index) => {
-                        userAlign = "center" 
-                        return (
-                        <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
-                            <GroupReq 
-                            name={filteredGroups[index]["groupName"]}
-                            numMembers={filteredGroups[index]["members"].length}
-                            id={filteredGroups[index]["groupID"]}
-                            />  
-                        </Grid> 
-                        ) 
+                        {/* Sets alignment for friend at index. */}
+                        if (index % 2 === 0) {
+                            userAlign = "right" 
+                            return (
+                            <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
+                                <GroupReq 
+                                name={filteredGroups[index]["groupName"]}
+                                numMembers={filteredGroups[index]["members"].length}
+                                id={filteredGroups[index]["groupID"]}
+                                _id={filteredGroups[index]["_id"]}
+                                />
+                            </Grid> 
+                            ) 
+                        } else {
+                            userAlign = "center" 
+                            return (
+                            <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
+                                <GroupReq 
+                                name={filteredGroups[index]["groupName"]}
+                                numMembers={filteredGroups[index]["members"].length}
+                                id={filteredGroups[index]["groupID"]}
+                                _id={filteredGroups[index]["_id"]}
+                                />  
+                            </Grid> 
+                            ) 
+                        } 
                     })}
                 </Grid>
             </Box>

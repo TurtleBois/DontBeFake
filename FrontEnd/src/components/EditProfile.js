@@ -69,6 +69,7 @@ const EditProfile = () => {
         name: form.name, 
         userDescription: form.userDescription, 
         profilePicture: form.profilePicture,
+        joinedGroups: form.joinedGroups,
     };
         var data_id = localStorage.getItem("mongoDB_ID");
 
