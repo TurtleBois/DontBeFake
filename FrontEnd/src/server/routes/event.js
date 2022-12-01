@@ -41,6 +41,7 @@ recordRoutes.route("/event/add").post(function (req, response) {
  let db_connect = dbo.getDb();
  let myobj = {
   name: req.body.name,
+  eventID: req.body.eventID,
   attending: req.body.attending,
   time: req.body.time,
   location: req.body.location,
@@ -59,6 +60,7 @@ recordRoutes.route("/event/update/:id").post(function (req, response) {
  let newvalues = {
    $set: {
     name: req.body.name,
+    eventID: req.body.eventID,
     attending: req.body.attending,
     time: req.body.time,
     location: req.body.location,

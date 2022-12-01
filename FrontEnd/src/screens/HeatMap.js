@@ -189,6 +189,82 @@ class Calender extends React.Component
                 console.log(this.state);
             });
     }
+
+     generateGroupID(length) {
+        var result = "";
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        var charLength = chars.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += chars.charAt(Math.floor(Math.random() * charLength));
+        }
+        return result;
+    }
+
+
+    async uploadToDatabase(newEvent) {
+
+        // upload event
+        await fetch("http://localhost:5000/event/add", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newEvent),
+        },
+        )
+        .catch(error => {
+            window.alert(error);
+            return;
+        });
+        
+        const response2 = await fetch("http://localhost:5000/event/");
+        if (!response2.ok) {
+            const message = `An error occurred: ${response2.statusText}`;
+            window.alert(message);
+            return;
+          }
+        const events = await response2.json();
+
+        var currEvent = null;
+        for(var event of events) {
+            console.log(event.eventID, newEvent.eventID);
+            if(event.eventID == newEvent.eventID) {
+                currEvent = event;
+                break;
+            }
+        }
+
+        const currentGroupID = window.location.href.split('=')[1].split("/")[0];
+        const response = await fetch("http://localhost:5000/group/");
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+          }
+        const records = await response.json();
+        var currentGroup = null;
+        for(var record of records) {
+            if(record.groupID == currentGroupID) {
+                currentGroup = record;
+            }
+        }
+        var currentEvents = currentGroup.events;
+        currentEvents.push(currEvent._id);
+        var value = {events : currentEvents};
+        const toReturn = {...currentGroup,...value};
+        
+        console.log(toReturn);
+
+        await fetch(`http://localhost:5000/group/update/${toReturn._id}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(toReturn),         
+            
+        });
+    }
+
     callbackFunction = (i,eventName,eventLocation, eventDescription, start, end, weekday) => {
         //TODO make event in BD with thse info and send to DB
         // console.log(i)
@@ -232,9 +308,9 @@ class Calender extends React.Component
             time:eventDate,
             location: eventLocation,
             description: eventDescription,
+            eventID: this.generateGroupID(12),
         };
-        console.log(toReturn);
-
+        this.uploadToDatabase(toReturn);
     }
 
     render()
