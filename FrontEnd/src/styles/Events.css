@@ -1,0 +1,68 @@
+.content-container{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 15px;
+}
+.content-box{
+    align-items: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 8px 4%;
+    text-align: left;
+    width: 70%;
+}
+.event-content{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    padding-top: 15px;
+}
+ .box-date{
+    background-color: #8a8a8a;
+    font: Arial;
+    color: white;
+    font-weight: bolder;
+    position: relative;
+    border-radius: 13;
+    font-size: 32px;
+    width: 150px;
+    border-radius: 20px;
+ }
+
+ .title-font{
+    font: Arial;
+    color: white;
+    font-size: 60px;
+    font-weight: bolder;
+    position: relative;
+ }
+
+.text{
+    font: Arial;
+    color: white;
+    font-size: 15px;
+    font-weight: normal;
+    position: relative;
+}
+
+.button-text{
+    background-color: #181414;
+    color: white;
+    font-size: 16px;
+    font: Arial;
+    font-weight: bold;
+}
+
+#content{
+    font: Arial;
+    color: white;
+    position: relative;
+}
+
+#box{
+    position: relative;
+}
