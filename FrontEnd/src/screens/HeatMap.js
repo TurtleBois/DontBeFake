@@ -118,7 +118,7 @@ const HeatMap = () => {
      }
      
      const max = allGroups.reduce((a, b) => Math.max(a, b), -Infinity);
-     console.log(Math.max(max));
+    //  console.log(Math.max(max));
      
     
      
@@ -158,8 +158,10 @@ const HeatMap = () => {
                              
                                 <EventTimeSlot
                                 numEvents = {allGroups[index]}
-                                
-                                
+                                value = {index}
+                                heatMap = {allGroups}
+
+
                                 />
                      
                             }
