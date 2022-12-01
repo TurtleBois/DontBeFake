@@ -4,6 +4,8 @@ import FindMoreFriends from "../components/FindMoreFriends";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
+// Code for former MyFriends screen. Repurposed for
+// other screens (i.e. Voting, Members, Invites).
 const MyFriendsScreen = () => {
     var numOfFriends = 5;
     var friendAlign = "right";
