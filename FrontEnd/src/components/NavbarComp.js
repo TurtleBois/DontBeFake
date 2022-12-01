@@ -24,9 +24,11 @@ import { useNavigate } from "react-router";
 import YouShouldLogInScreen from '../screens/YouShouldLogin';
 import Error from '../screens/Error';
 import VotingScreen from '../screens/Voting';
+import EventsScreen from '../screens/Events';
+import PastEventsScreen from '../screens/PastEvents';
 import HeatMap from '../screens/HeatMap';
 import MiniNav from '../components/MiniNav';
-import EditGroupScreen from '../screens/EditGroup'
+import EditGroupScreen from '../screens/EditGroup';
 
 //forgive me:
 import face_default from "../assets/face_default.png";
@@ -134,6 +136,7 @@ export default class NavbarComp extends Component {
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
                   <Nav.Link as={Link} to={"/searchgroups"}>Search Group</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
+                  <Nav.Link as={Link} to={"/events"}>Events</Nav.Link>
                   <Nav.Link as={Link} to={"/viewgroup"}>view Group</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
@@ -170,6 +173,10 @@ export default class NavbarComp extends Component {
             <Route exact path="/editgroup=:groupID" element={<EditGroupScreen/>}/>
             <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
             <Route exact path="/error" element={<Error/>}/>
+            <Route exact path="/voting" element={<VotingScreen/>}/>
+            <Route exact path="/" element={<LoginScreen/>}/>
+            <Route exact path="/events" element={<EventsScreen/>}/>
+            <Route exact path="/pastevents" element={<PastEventsScreen/>}/>
             <Route exact path="/voting" element={<><MiniNav/><VotingScreen/></>}/>
             <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
           </Routes>
