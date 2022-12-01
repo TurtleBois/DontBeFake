@@ -89,6 +89,7 @@ const GroupReq = (props) => {
 
      
      async function sendRequest() {
+        
         const groupResponse = await fetch(`http://localhost:5000/group/${props._id}`);
         if (!groupResponse.ok) {
             const message = `An error occurred: ${groupResponse.statusText}`;

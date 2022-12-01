@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Grid from '@mui/material/Unstable_Grid2';
-import Slot from "../components/timeSlot";
-import ClosedSlot from "../components/closedTimeSlot";
+import EventTimeSlot from "../components/EventTimeSlot.js";
 
 function timeSide(index)
 {   
@@ -121,6 +120,7 @@ const HeatMap = () => {
      const max = allGroups.reduce((a, b) => Math.max(a, b), -Infinity);
      console.log(Math.max(max));
      
+    
      
     return (
         <Grid
@@ -153,8 +153,18 @@ const HeatMap = () => {
                     }}> 
                     
                     {Array.from(Array(189)).map((_, index) => (        
-                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ allGroups[index] * (100/max) +"%)"}} onClick = {() => console.log(index)}>
+                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ allGroups[index] * (100/max) +"%)"}} >
+                            {
+                             
+                                <EventTimeSlot
+                                numEvents = {allGroups[index]}
+                                
+                                
+                                />
+                     
+                            }
                             
+
                         </Grid>
                     
                     ))}

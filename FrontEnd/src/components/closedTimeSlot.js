@@ -47,7 +47,7 @@ class Slot extends React.Component {
               height: 40,
               
               }}
-                
+              disableRipple
                 >
               
           </CardActionArea>

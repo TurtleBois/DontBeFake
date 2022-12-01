@@ -88,7 +88,7 @@ class Slot extends React.Component {
           <CardActionArea
               variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
                 height: 40}}
-                
+                disableRipple
                 >
               
           </CardActionArea>
@@ -159,7 +159,7 @@ class Slot extends React.Component {
 
 
 
-export default Slot 
+export default Slot;
 
 
 
