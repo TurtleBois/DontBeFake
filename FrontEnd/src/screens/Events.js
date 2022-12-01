@@ -16,7 +16,7 @@ const EventsScreen = () => {
                 <a className="button-text" href= "../events"> UpcomingEvents. </a>
             </div>
             <div>
-            <Box pt={1} pb={2} ml={70} mr={50}> 
+            <Box pt={1} pb={2} ml={7} mr={7}> 
                 <Grid container columns={10} rowSpacing={3}>
                     {Array.from(Array(numOfEvents)).map((_, index) => {
                         return (
