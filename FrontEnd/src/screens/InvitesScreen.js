@@ -21,6 +21,7 @@ const InvitesScreen = () => {
             </Box>
         </div>
     )
+
 }
 
 export default InvitesScreen;

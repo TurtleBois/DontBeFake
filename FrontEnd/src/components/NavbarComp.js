@@ -16,6 +16,7 @@ import Calender from "../screens/Calender";
 import InvitesScreen from "../screens/InvitesScreen";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
+import EditProfile from "../components/EditProfile"
 import SearchGroupScreen from '../screens/SearchGroups';
 import Group from '../screens/Group';
 import JoinGroup from '../screens/JoinGroup';
