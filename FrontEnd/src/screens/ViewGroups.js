@@ -82,7 +82,7 @@ class viewGroup extends React.Component {
         return (
             <div>
                 <b><h3>MyGroups.</h3></b>
-                <Box mt={1} mb={2} ml={8} mr={8}> 
+                <Box mt={1} mb={2} ml={18} mr={18}> 
                     <Grid container columns={24} rowSpacing={3} columnSpacing={3}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
                             return (
