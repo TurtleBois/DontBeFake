@@ -48,7 +48,6 @@ const SignUpScreen = () => {
         }
       }
       
-      return;
       var sha1 = require('sha1');
       var p1 = sha1(form.password);
       var p2 = sha1(form.password2);
