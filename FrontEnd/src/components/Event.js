@@ -1,5 +1,6 @@
 import '../styles/Events.css';
 import React from "react";
+import EventDetails from './EventDetails.js';
 
 
 const Event = (props) => {
@@ -65,19 +66,30 @@ const Event = (props) => {
     }
 
 
-    console.log(props.attending);
+    // console.log(props.attending);
     if(props.attending.includes(user_ID)) {
         const deterents = ["BeFake.","TheyNeedYou.","Drop.","Quit.","Abandon.","Flake.","Desert."];
         var index = Math.floor(Math.random() * deterents.length);
         return (
             <div className="content-container">
                 <div className="event-content">
-                    <div id="box" className="box-date">
+                    {/* <div id="box" className="box-date">
                     <p>
                         {props.day} <br />{props.month}
                     </p>
-                    </div>
-                    <div className="content-box">
+                    </div> */}
+                    <EventDetails
+                    day = {props.day}
+                    month = {props.month}
+                    name = {props.eventName}
+                    beginTime = {props.time[0]}
+                    endTime = {props.time[1]}
+                    location = {props.location}
+                    description = {props.description}
+                    id = {props.eventID}
+
+                    />
+                        <div className="content-box">
                         <p>
                             <div id="content" className="title-font">
                                 {props.eventName}
@@ -93,14 +105,21 @@ const Event = (props) => {
         )
 
     }
+
+    
     return (
         <div className="content-container">
             <div className="event-content">
-                <div id="box" className="box-date">
-                <p>
-                    {props.day} <br />{props.month}
-                </p>
-                </div>
+                    <EventDetails
+                    day = {props.day}
+                    month = {props.month}
+                    name = {props.eventName}
+                    beginTime = {props.time[0]}
+                    endTime = {props.time[1]}
+                    location = {props.location}
+                    description = {props.description}
+                    id = {props.eventID}
+                    />
                 <div className="content-box">
                     <p>
                         <div id="content" className="title-font">
