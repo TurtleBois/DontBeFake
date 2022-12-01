@@ -1,11 +1,14 @@
 import React from "react";
-import "../styles/Friend.css"
+import "../styles/GridDisplay.css"
 
 const FindMoreGroups = () => {
     return(
-        <div class="find-more-friends">
-            <a class="fmf-link" href="/search"><img alt="fmf-img" src={require('../assets/plus-sign.png')}/></a>
-        </div>
+        <body class="groupDisplay">
+            <div class="groupDisplay-text">
+                <a href={"/searchgroups"} class="groupDisplay-link"><b><p id="groupDisplay-name">AddGroup.</p></b></a>
+                <a class="groupDisplay-link" href="/searchgroups"><img alt="group-img" src={require('../assets/plus-sign.png')}/></a>
+            </div>
+        </body>
     )
 }
 
