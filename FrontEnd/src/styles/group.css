@@ -23,6 +23,13 @@
     text-decoration: none;
 }
 
+#edit-group {
+    height: 50px;
+    width: 50px;
+    margin-bottom: 40px;
+    display: inline-flex;
+}
+
 h3 {
     font-size: 30px;
     color: white;

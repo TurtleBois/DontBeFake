@@ -39,6 +39,7 @@
     font-size: 60px;
     font-weight: bolder;
     position: relative;
+    overflow: hidden;
  }
 
 .text{
@@ -52,9 +53,11 @@
 .button-text{
     background-color: #181414;
     color: white;
-    font-size: 16px;
+    font-size: 24px;
     font: Arial;
     font-weight: bold;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 .button-text:link, .button-text:active, .button-text:visited {

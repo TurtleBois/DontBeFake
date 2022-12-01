@@ -134,10 +134,10 @@ export default class NavbarComp extends Component {
                 <Nav className="me-auto">
                   {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
-                  <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
-                  <Nav.Link as={Link} to={"/viewgroup"}>My Groups</Nav.Link>
-                  <Nav.Link as={Link} to={"/searchgroups"}>Search Groups</Nav.Link>
-                  <Nav.Link as={Link} to={"/joingroup"}>Join Groups</Nav.Link>
+                  <Nav.Link as={Link} to={"/schedules"}>Schedules.</Nav.Link>
+                  <Nav.Link as={Link} to={"/viewgroup"}>MyGroups.</Nav.Link>
+                  <Nav.Link as={Link} to={"/searchgroups"}>SearchGroups.</Nav.Link>
+                  <Nav.Link as={Link} to={"/joingroup"}>JoinGroups.</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">
