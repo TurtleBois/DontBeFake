@@ -3,6 +3,7 @@ import "../styles/SearchFriends.css";
 import User from "../components/Users";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import GroupReq from "../components/GroupReq";
 
 async function initGroups() {
     const response = await fetch("http://localhost:5000/group/");
@@ -111,9 +112,10 @@ const SearchGroupScreen = () => {
                             userAlign = "right" 
                             return (
                             <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
-                                <User 
+                                <GroupReq 
                                 name={filteredGroups[index]["groupName"]}
                                 numMembers={filteredGroups[index]["members"].length}
+                                id={filteredGroups[index]["groupID"]}
                                 />
                             </Grid> 
                             ) 
@@ -121,9 +123,10 @@ const SearchGroupScreen = () => {
                             userAlign = "center" 
                             return (
                             <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
-                                <User 
+                                <GroupReq 
                                 name={filteredGroups[index]["groupName"]}
                                 numMembers={filteredGroups[index]["members"].length}
+                                id={filteredGroups[index]["groupID"]}
                                 />  
                             </Grid> 
                             ) 

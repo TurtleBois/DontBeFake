@@ -23,10 +23,6 @@ const EditMember = (props) => {
         props.parentCallbackRevive(props.username);
     }
     
-    
-
-    console.log( props.kicked)
-
     if(props.role == "leader") {
         return(
             <body class="friend" >
@@ -47,7 +43,7 @@ const EditMember = (props) => {
                 <div class="kicked-text">
                     <text class="friend-link"><b><p id={nameID}>{name}</p></b></text>
                     <text class="friend-link"><b><p id="friend-username">{props.username}</p></b></text>
-                    <button id="kick-button" onClick={(event) => {console.log(props); callBackRevive();}}><b>Cancel.</b></button>
+                    <button id="kick-button" onClick={(event) => {callBackRevive();}}><b>Cancel.</b></button>
                 </div>
             </body>
         )
@@ -59,7 +55,7 @@ const EditMember = (props) => {
             <div class="friend-text">
                 <text class="friend-link"><b><p id={nameID}>{name}</p></b></text>
                 <text class="friend-link"><b><p id="friend-username">{props.username}</p></b></text>
-                <button id="kick-button" onClick={(event) => {console.log(props); callBackKick();}}><b>Kick.</b></button>
+                <button id="kick-button" onClick={(event) => {callBackKick();}}><b>Kick.</b></button>
             </div>
         </body>
     )

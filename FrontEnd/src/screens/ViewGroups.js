@@ -1,5 +1,6 @@
 import React from "react";
 import GroupDisplay from "../components/GroupDisplay";
+import addGroup from "../components/findMoreGroups";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
@@ -92,7 +93,13 @@ class viewGroup extends React.Component {
                                 </Grid> 
                             )  
                         })}
+
+                        {/* <Grid item sm={6} style={{maxWidth: '100%', backgroundColor: 'red'}} >
+                            <addGroups/>
+                        </Grid> */}
+                        
                     </Grid>
+
                 </Box>
             </div>
         )   

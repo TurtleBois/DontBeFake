@@ -13,6 +13,8 @@
     margin-right: 20px;
 }
 
+
+
 .user-text {
     font-family: sans-serif;
     font-size: 18px;
@@ -22,16 +24,27 @@
     white-space:nowrap; 
     color: white;
     text-align: left;
+    
+
     /* border: 1px solid red;  */
 }
 
 #user-name {
     margin-top: 16px;
     margin-bottom: 0px;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
 }
 #user-username {
     color: #A6A6A6;
     font-size: 16px;
     margin-top: -5px;
     margin-bottom: 0px;
+}
+
+#icon{
+    margin-top: 15px;
+    height: 30px;
+    width: 30px;
 }
