@@ -5,6 +5,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 const VotingScreen = () => {
+
+
     var numOfGroupMates = 5;
     var groupMatesAlign = "right";
     return (

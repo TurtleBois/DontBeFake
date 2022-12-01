@@ -1,10 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Invite from "../components/Invite";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 const InvitesScreen = () => {
-    var numOfInvites = 6;
+    var groupID = window.location.href.split("=")[1].split("/")[0];
+    const [allRequests, setRequests] = useState(null);
+    const [group_id, setgGroup_id] = useState(null);
+    
+    //effectively an init
+    useEffect(() => {
+        async function getJoinRequests() {
+            const response = await fetch("http://localhost:5000/group/");
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+              }
+              const groups = await response.json();
+              
+              var requests = [];
+              for(var group of groups) {
+                  if(group.groupID == groupID) {
+                    requests = group.requests;
+                    setgGroup_id(group._id);
+                    break;
+                  }
+              }
+              setRequests(requests);
+        }
+        getJoinRequests();
+     }, [])
+
+     if(allRequests == null || group_id == null) {
+        return;
+     }
+    var numOfInvites = allRequests.length;
     return (
         <div>
             <Box pt={3.5} pb={3.5} ml={7} mr={7}> 
@@ -13,8 +44,11 @@ const InvitesScreen = () => {
                         return (
                             <Grid item sm={12} key={index} align={"center"} style={{ maxWidth: '100%'}}>
                                 <Invite
-                                name="GroupName"
-                                num="#"
+                                name={allRequests[index].name}
+                                username={allRequests[index].username}
+                                requesterID={allRequests[index].profileID}
+                                groupID ={groupID}
+                                group_id = {group_id}
                                 />
                             </Grid> 
                         )  

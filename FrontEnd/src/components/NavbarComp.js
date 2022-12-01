@@ -134,7 +134,7 @@ export default class NavbarComp extends Component {
                 <Nav className="me-auto">
                   {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
-                  <Nav.Link as={Link} to={"/schedules"}>Schedules.</Nav.Link>
+                  <Nav.Link as={Link} to={"/calendar"}>MyCalendar.</Nav.Link>
                   <Nav.Link as={Link} to={"/viewgroup"}>MyGroups.</Nav.Link>
                   <Nav.Link as={Link} to={"/searchgroups"}>SearchGroups.</Nav.Link>
                   <Nav.Link as={Link} to={"/joingroup"}>JoinGroups.</Nav.Link>
@@ -162,15 +162,11 @@ export default class NavbarComp extends Component {
             {/* <Route exact path="/myfriends" element={<MyFriendsScreen/>}/> */}
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/editprofile" element={<EditProfile/>}/>
-            <Route exact path="/schedules" element={<><MiniNav/><Calender/></>}/>
             {/* Place MiniNav bar in wanted screens like this: */}
-            <Route exact path="/calendar" element={<><MiniNav/><Calender/></>}/>
-            <Route exact path="/voting" element={<><MiniNav/><VotingScreen/></>}/>
-            <Route exact path="/invites" element={<><MiniNav/><InvitesScreen/></>}/>
-            <Route exact path="/events" element={<><MiniNav/><EventsScreen/></>}/>
+            <Route exact path="/calendar" element={<Calender/>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
-            <Route path="/group=:groupID" element={<Group/>}/>
+            <Route path="/group=:groupID" element={<><MiniNav/><Group/></>}/>
             <Route exact path="/joingroup" element={<JoinGroup/>}/>
             <Route exact path="/searchgroups" element={<SearchGroupScreen/>}/>
             <Route exact path="/editgroup=:groupID" element={<EditGroupScreen/>}/>
@@ -179,6 +175,10 @@ export default class NavbarComp extends Component {
             <Route exact path="/events" element={<EventsScreen/>}/>
             <Route exact path="/pastevents" element={<PastEventsScreen/>}/>
             <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
+            <Route exact path="/group=:groupID/invites" element={<><MiniNav/><InvitesScreen/></>}/>
+            <Route exact path="/group=:groupID/heatmap" element={<><MiniNav/><HeatMap/></>}/>            
+            <Route exact path="/group=:groupID/voting" element={<><MiniNav/><VotingScreen/></>}/>   
+            <Route exact path="/group=:groupID/events" element={<><MiniNav/><EventsScreen/></>}/>
           </Routes>
         </div>
       </Router>
