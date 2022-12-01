@@ -135,10 +135,9 @@ export default class NavbarComp extends Component {
                   {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/schedules"}>Schedules</Nav.Link>
-                  <Nav.Link as={Link} to={"/searchgroups"}>Search Group</Nav.Link>
-                  <Nav.Link as={Link} to={"/joingroup"}>Join Group</Nav.Link>
-                  <Nav.Link as={Link} to={"/events"}>Events</Nav.Link>
-                  <Nav.Link as={Link} to={"/viewgroup"}>View Group</Nav.Link>
+                  <Nav.Link as={Link} to={"/viewgroup"}>My Groups</Nav.Link>
+                  <Nav.Link as={Link} to={"/searchgroups"}>Search Groups</Nav.Link>
+                  <Nav.Link as={Link} to={"/joingroup"}>Join Groups</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">
@@ -166,6 +165,9 @@ export default class NavbarComp extends Component {
             <Route exact path="/schedules" element={<><MiniNav/><Calender/></>}/>
             {/* Place MiniNav bar in wanted screens like this: */}
             <Route exact path="/calendar" element={<><MiniNav/><Calender/></>}/>
+            <Route exact path="/voting" element={<><MiniNav/><VotingScreen/></>}/>
+            <Route exact path="/invites" element={<><MiniNav/><InvitesScreen/></>}/>
+            <Route exact path="/events" element={<><MiniNav/><EventsScreen/></>}/>
             <Route exact path="/login" element={<LoginScreen/>}/>
             <Route exact path="/signup" element={<SignUpScreen/>}/>
             <Route path="/group=:groupID" element={<Group/>}/>
@@ -178,8 +180,6 @@ export default class NavbarComp extends Component {
             <Route exact path="/" element={<LoginScreen/>}/>
             <Route exact path="/events" element={<EventsScreen/>}/>
             <Route exact path="/pastevents" element={<PastEventsScreen/>}/>
-            <Route exact path="/voting" element={<><MiniNav/><VotingScreen/></>}/>
-            <Route exact path="/invites" element={<><MiniNav/><InvitesScreen/></>}/>
             <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
           </Routes>
         </div>

@@ -57,6 +57,15 @@
     font-weight: bold;
 }
 
+.button-text:link, .button-text:active, .button-text:visited {
+    text-decoration: none;
+}
+
+.button-text:hover {
+    color: #8a8a8a;
+    text-decoration: none;
+}
+
 #content{
     font: Arial;
     color: white;

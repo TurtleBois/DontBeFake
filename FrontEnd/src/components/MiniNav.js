@@ -10,7 +10,7 @@ const MiniNav = () => {
             <Link to={"/voting"}><button><b>Members</b></button></Link>
             <Link to={"/invites"}><button><b>Invites</b></button></Link>
             <Link to={"/voting"}><button><b>Voting</b></button></Link>
-            <Link to={"/calendar"}><button><b>Events</b></button></Link>
+            <Link to={"/events"}><button><b>Events</b></button></Link>
         </div>
     )
 }

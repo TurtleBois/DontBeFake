@@ -6,8 +6,8 @@ const Invite = (props) => {
         <body className="invite">
             <a href="/friendprofile"><img class="rounded-circle" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"/></a>
             <div className="invite-text">
-                <p id="group-name"><b>{props.GroupName}</b></p>
-                <p id="group-count"><b>MemberCount: {props.numMembers}</b></p>
+                <p id="group-name"><b>{props.name}</b></p>
+                <p id="group-count"><b>MemberCount: {props.num}</b></p>
             </div>
             <div className="invite-buttons">
                 <button id="accept"><b>Accept.</b></button>

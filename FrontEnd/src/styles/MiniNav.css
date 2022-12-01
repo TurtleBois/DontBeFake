@@ -10,3 +10,7 @@
 .mini-nav button:hover {
     color: gray;
 }
+
+.mini-nav button:active {
+    color: gray;
+}
