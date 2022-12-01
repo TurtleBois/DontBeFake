@@ -4,6 +4,7 @@ import FindMoreFriends from "../components/FindMoreFriends";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
+import pencil from '../assets/pencil.png';
 
 // these do something i think
 var friendAlign = "right";
@@ -94,9 +95,10 @@ class Group extends React.Component {
         return (
             <div>
             <a className="title" href={link}  >{this.state.groupName}. </a>
-                <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button> 
+                {/* <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button>  */}
+                <a href={editLink} className="edit-button"><img id="edit-group" src={pencil}></img></a>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
-                <Box mt={6} mb={6} ml={10} mr={2}> 
+                <Box mt={6} mb={6} ml={10} mr={10}> 
                     <Grid container columns={12} rowSpacing={6}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
                             {/* Sets alignment for FindMoreFriends component. */}
