@@ -1,5 +1,6 @@
 
 import "../styles/GridDisplay.css"
+import "../styles/FindMoreGroups.css"
 
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
@@ -33,11 +34,14 @@ const [anchorEl, setAnchorEl] = React.useState(null);
                 anchorEl={anchorEl}
                 onClose={handleClose}
                 anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
+                vertical: 27,
+                horizontal: 30,
                 }}
             >
-                <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                <Typography>
+                    <button className="button-out"><a className="button-style" href="/searchgroups">SearchGroups.</a></button>
+                    <br /><button className="button-out"><a className="button-style" href="/joingroup">JoinAGroup.</a></button>
+                </Typography>
             </Popover>
         </body>
     )

@@ -1,0 +1,25 @@
+.button-style{
+    width: 100%;
+    border-color: none;
+    font: Arial;
+    background-color: #302c2c;
+    color: white;
+    outline: 0;
+    box-shadow: none;
+}
+
+.button-style:link, .button-style:active, .button-style:visited {
+    text-decoration: none;
+}
+
+.button-style:hover {
+    color: #8a8a8a;
+    text-decoration: none;
+}
+
+.button-out{
+    width: 100%;
+    background-color: #302c2c;
+    outline: 0;
+    box-shadow: none;
+}
