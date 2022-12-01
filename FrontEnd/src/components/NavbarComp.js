@@ -159,7 +159,7 @@ export default class NavbarComp extends Component {
           <Routes>
             <Route exact path="/viewgroup" element={<ViewGroups/>}/>
             <Route exact path="/" element={<LoginScreen/>}/> 
-            <Route exact path="/myfriends" element={<MyFriendsScreen/>}/>
+            {/* <Route exact path="/myfriends" element={<MyFriendsScreen/>}/> */}
             <Route exact path="/profile" element={<Profile/>}/>
             <Route exact path="/editprofile" element={<EditProfile/>}/>
             <Route exact path="/schedules" element={<><MiniNav/><Calender/></>}/>
@@ -176,8 +176,6 @@ export default class NavbarComp extends Component {
             <Route exact path="/editgroup=:groupID" element={<EditGroupScreen/>}/>
             <Route exact path="/youshouldlogin" element={<YouShouldLogInScreen/>}/>
             <Route exact path="/error" element={<Error/>}/>
-            <Route exact path="/voting" element={<VotingScreen/>}/>
-            <Route exact path="/" element={<LoginScreen/>}/>
             <Route exact path="/events" element={<EventsScreen/>}/>
             <Route exact path="/pastevents" element={<PastEventsScreen/>}/>
             <Route path="/heatmap=:groupID" element={<HeatMap/>}/>

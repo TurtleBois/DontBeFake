@@ -102,34 +102,19 @@ const SearchGroupScreen = () => {
                 </input>
             </form>
             
-            <Box mt={2} mb={6} ml={14} mr={2}> 
-                
+            <Box mt={2} mb={6} ml={10} mr={10}> 
                 <Grid container columns={12} rowSpacing={6}>
                     {Array.from(Array(filteredGroups.length)).map((_, index) => {
-                        {/* Sets alignment for friend at index. */}
-                        if (index % 2 === 0) {
-                            userAlign = "right" 
-                            return (
-                            <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
-                                <GroupReq 
-                                name={filteredGroups[index]["groupName"]}
-                                numMembers={filteredGroups[index]["members"].length}
-                                id={filteredGroups[index]["groupID"]}
-                                />
-                            </Grid> 
-                            ) 
-                        } else {
-                            userAlign = "center" 
-                            return (
-                            <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
-                                <GroupReq 
-                                name={filteredGroups[index]["groupName"]}
-                                numMembers={filteredGroups[index]["members"].length}
-                                id={filteredGroups[index]["groupID"]}
-                                />  
-                            </Grid> 
-                            ) 
-                        } 
+                        userAlign = "center" 
+                        return (
+                        <Grid item sm={6} key={index} align={userAlign} style={{ maxWidth: '100%'}}>
+                            <GroupReq 
+                            name={filteredGroups[index]["groupName"]}
+                            numMembers={filteredGroups[index]["members"].length}
+                            id={filteredGroups[index]["groupID"]}
+                            />  
+                        </Grid> 
+                        ) 
                     })}
                 </Grid>
             </Box>
