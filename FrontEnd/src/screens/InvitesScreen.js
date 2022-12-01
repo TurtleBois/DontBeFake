@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 
 const InvitesScreen = () => {
-    var numOfInvites = 6;
+    var numOfInvites = 5;
     return (
         <div>
             <Box pt={3.5} pb={3.5} ml={7} mr={7}> 

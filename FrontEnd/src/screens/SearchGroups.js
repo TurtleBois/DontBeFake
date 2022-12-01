@@ -28,7 +28,6 @@ const allGroups = initGroups().then( () => {initDone = true;});
 
 
 const SearchGroupScreen = () => {
-    var numOfUsers = 12;
     var userAlign = "right";
 
 
@@ -79,7 +78,7 @@ const SearchGroupScreen = () => {
                 filtered.push(group);
             }
         }
-        console.log(filtered); 
+        // console.log(filtered); 
         return filtered;
     }
 
@@ -138,5 +137,8 @@ const SearchGroupScreen = () => {
         </body>
     )
 }
+
+
+
 
 export default SearchGroupScreen;

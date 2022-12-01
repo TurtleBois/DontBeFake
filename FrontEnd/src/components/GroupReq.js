@@ -1,8 +1,5 @@
 import "../styles/Users.css"
 import "../styles/Requests.css"
-import add from "../assets/add_thumbnail.png"
-import accept from '../assets/accepted_thumbnail.png'
-import pending from '../assets/pending_thumbnail.png'
 import React, {useState, useEffect} from "react";
 import e from "cors"
 
@@ -82,12 +79,15 @@ const GroupReq = (props) => {
      for(const [index,element] of requests.entries()) {
          requested.push(element.username);
      }
+
+     
      if(requested.includes(localStorage.getItem("DBF_username"))) {
         icon = 2;
      }
 
      
      async function sendRequest() {
+        
         const groupResponse = await fetch(`http://localhost:5000/group/${props._id}`);
         if (!groupResponse.ok) {
             const message = `An error occurred: ${groupResponse.statusText}`;
@@ -95,7 +95,7 @@ const GroupReq = (props) => {
             return;
         }
         const group = await groupResponse.json();
-        
+        console.log(group);
         var requestList = group.requests;
 
         //check for duplicate request sends
@@ -118,7 +118,7 @@ const GroupReq = (props) => {
         var value = {requests : requestList};
         var newGroup = {...group, ...value};
 
-        
+        console.log(newGroup);
         await fetch(`http://localhost:5000/group/update/${newGroup._id}`, {
             method: "POST",
             headers: {
