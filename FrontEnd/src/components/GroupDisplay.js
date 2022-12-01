@@ -4,7 +4,7 @@ import "../styles/GridDisplay.css"
 const GroupDisplay = (props) => {
     console.log(props);
     var link = "/group="  + props.info["id"];
-    return(
+    return (
         <body class="groupDisplay">   
             <div class="groupDisplay-text">
                 <a href={link} class="groupDisplay-link"><b><p id="groupDisplay-name">{props.info["name"]}</p></b></a>
