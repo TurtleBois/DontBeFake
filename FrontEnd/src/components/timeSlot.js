@@ -83,11 +83,12 @@ class Slot extends React.Component {
     const id = open ? 'simple-popover' : undefined;
       return(
         <Card variant="outlined"
-        style={{backgroundColor: 'rgba(90, 52, 52, 0)'} }>
+        style={{backgroundColor: 'rgba(90, 52, 52, 0)', border: "none", boxShadow: "none"} }>
 
           <CardActionArea
               variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
                 height: 40}}
+                
                 >
               
           </CardActionArea>

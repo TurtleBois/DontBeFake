@@ -1,8 +1,5 @@
 import "../styles/Users.css"
 import "../styles/Requests.css"
-import add from "../assets/add_thumbnail.png"
-import accept from '../assets/accepted_thumbnail.png'
-import pending from '../assets/pending_thumbnail.png'
 import React, {useState, useEffect} from "react";
 
 
@@ -65,7 +62,7 @@ const GroupReq = (props) => {
      }
      
      var icon = 0
-     console.log(userGroups);
+    //  console.log(userGroups);
 
 
      
@@ -73,8 +70,8 @@ const GroupReq = (props) => {
      for (let i = 0; i < userGroups.length; i++)
      {
         
-        console.log(props.id);
-        console.log(userGroups[i].id);
+        // console.log(props.id);
+        // console.log(userGroups[i].id);
         if(userGroups[i].id === props.id)
         {
             icon = 1

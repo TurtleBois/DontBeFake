@@ -53,10 +53,10 @@ function dayTimes()
     return (<Grid item xs={1}  style={{color: "white"} } container
          direction="column">
             <Grid sx={{
-              height: 12}}>
+              height: 9}}>
             </Grid>
             {Array.from(Array(28)).map((_, index) => (
-                    <Grid key={index} {...{}} minHeight={50.8}>
+                    <Grid key={index} {...{}} minHeight={50}>
                         {timeSide(index)}
                     </Grid>
             ))}
@@ -153,8 +153,13 @@ const HeatMap = () => {
                     }}> 
                     
                     {Array.from(Array(189)).map((_, index) => (        
-                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ allGroups[index] * (100/max) +"%)"}} />
+                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ allGroups[index] * (100/max) +"%)"}} onClick = {() => console.log(index)}>
+                            
+                        </Grid>
+                    
                     ))}
+
+
                 </Grid>
             </Grid>   
         </Grid>
