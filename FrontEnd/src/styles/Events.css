@@ -12,7 +12,6 @@
     justify-content: center;
     margin: 8px 4%;
     text-align: left;
-    width: 70%;
 }
 .event-content{
     align-items: center;
@@ -36,7 +35,7 @@
  .title-font{
     font: Arial;
     color: white;
-    font-size: 60px;
+    font-size: 55px;
     font-weight: bolder;
     position: relative;
     overflow: hidden;

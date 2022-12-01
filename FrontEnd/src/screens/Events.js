@@ -22,7 +22,7 @@ const EventsScreen = () => {
                         return (
                             <Grid item sm={5} key={index} align={"center"} style={{ maxWidth: '100%'}}>
                                 <Event
-                                eventName="Some Event"
+                                eventName="SomeEvent."
                                 day="25"
                                 month="DEC"
                                 />
