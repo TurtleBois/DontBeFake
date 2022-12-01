@@ -19,8 +19,36 @@ const SignUpScreen = () => {
   
       async function onSubmit(e) {
       e.preventDefault();
-      
+
+      // username blank string prevention
+      if(form.username == "") {
+        alert("Please input a username. — DontBeFake");
+        return;
+      }
+
+      //password blank string prevention
+      if(form.password == "") {
+        alert("Please input a password. — DontBeFake");
+        return;
+      }
+      const check = await fetch(`http://localhost:5000/login`);
     
+      if (!check.ok) {
+          const message = `An error occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+      }
+      const usernamechecker = await check.json();
+
+      // no duplicate login
+      for(var login of usernamechecker) {
+        if(login.username == form.username) {
+            alert("This username has been taken. — DontBeFake");
+            return;
+        }
+      }
+      
+      return;
       var sha1 = require('sha1');
       var p1 = sha1(form.password);
       var p2 = sha1(form.password2);

@@ -86,9 +86,9 @@ class Group extends React.Component {
                 this.render();
             });
     }
-    
 
     render() {
+        console.log(this.state.memberProfiles);
         var link = "/heatmap="  + this.state.groupID;
         var editLink = "/editgroup=" + this.state.groupID;
         return (
