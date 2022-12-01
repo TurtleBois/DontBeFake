@@ -62,7 +62,6 @@ const GroupReq = (props) => {
         setRequests(currGroup.requests);
         }
         getUserGroups();
-
      }, [])
 
      if(userGroups == null || requests == null) {
@@ -131,7 +130,8 @@ const GroupReq = (props) => {
         .catch(error => {
             window.alert(error);
             return;
-        });
+        })
+        .then( () => {window.location.reload(false);});
         
      }
 
