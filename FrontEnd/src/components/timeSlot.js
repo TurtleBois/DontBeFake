@@ -61,6 +61,9 @@ class Slot extends React.Component {
   }
 
   sendData = () => {
+
+   
+
     this.props.parentCallback(this.props.value,this.state.name,Math.floor(this.props.value%27),this.state.end);
   }
 
@@ -85,14 +88,15 @@ class Slot extends React.Component {
     this.setState({name: event.target.value})
   }
 
-
+  
   render()
   {
+  
     const open = Boolean(this.state.anchorEl);
     const id = open ? 'simple-popover' : undefined;
       return(
         <Card variant="outlined"
-        style={{backgroundColor: 'rgba(90, 52, 52, 0)', border: "none", boxShadow: "none"} }>
+        style={{backgroundColor: this.state.anchorEl === null ? 'rgba(90, 52, 52, 0)': 'white' , border: "none", boxShadow: "none"} }>
 
           <CardActionArea
               variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
@@ -108,16 +112,16 @@ class Slot extends React.Component {
           anchorEl={this.state.anchorEl}
           onClose={this.handleClose}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
+            vertical: 'top',
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'center',
+            horizontal: 'right',
           }}
           >
 
-          <Typography sx={{ p: 4 }} >
+          <Typography sx={{ p: 2 }} >
             
             
           <TextField

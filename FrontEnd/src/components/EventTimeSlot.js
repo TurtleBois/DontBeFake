@@ -40,7 +40,7 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
+      width: 220,
     },
   },
 };
@@ -52,10 +52,18 @@ class Slot extends React.Component {
     super(props);
     this.state = {
       name: null,
+      location: null,
+      description: null,
       end: null,
       anchorEl: null,
     };
   }
+
+  sendData = () => {
+
+
+  }
+
   handleClick = (event) => 
   {
     this.setState({anchorEl: event.currentTarget})
@@ -73,6 +81,14 @@ class Slot extends React.Component {
   {
     this.setState({end: event.target.value})
   }
+  handleChangeLocation = (event) => 
+  {
+    this.setState({location: event.target.value})
+  }
+  handleChangeDescription = (event) => 
+  {
+    this.setState({description: event.target.value})
+  }
 
   createGroupEvent = () => 
   {
@@ -81,18 +97,20 @@ class Slot extends React.Component {
 
 
       const start = this.props.value%27;
-      console.log(weekday);
-      console.log(start);
-      console.log(this.state.end);
+      // console.log(weekday);
+      // console.log(start);
+      // console.log(this.state.end);
 
-      for(let j = start ; j < this.state.end; j++) {
-        if(this.props.heatMap[(27*weekday)+j] !== 0){
-            alert("You have a overlapping event — DontBeFake");
-            return
-        }
-      }  
+      // for(let j = start ; j < this.state.end; j++) {
+      //   if(this.props.heatMap[(27*weekday)+j] !== 0){
+      //       alert("You have a overlapping event — DontBeFake");
+      //       return
+      //   }
+      // }  
 
-      
+      this.props.createEvent(this.props.value,this.state.name,this.state.location, this.state.description, start, this.state.end, weekday);
+
+
 
   }
 
@@ -101,13 +119,9 @@ class Slot extends React.Component {
   {
     const open = Boolean(this.state.anchorEl);
     const id = open ? 'simple-popover' : undefined;
-      if(this.props.numEvents !== 0)
-      {
-        return;
-      }
       return(
         <Card variant="outlined"
-        style={{backgroundColor: 'rgba(90, 52, 52, 0)', border: "none", boxShadow: "none"} }>
+        style={{backgroundColor: this.state.anchorEl === null ? 'rgba(90, 52, 52, 0)': 'white' , border: "none", boxShadow: "none"} }>
 
           <CardActionArea
               variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
@@ -123,12 +137,12 @@ class Slot extends React.Component {
           anchorEl={this.state.anchorEl}
           onClose={this.handleClose}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
+            vertical: 'top',
+            horizontal: 'left',
           }}
           transformOrigin={{
             vertical: 'top',
-            horizontal: 'center',
+            horizontal: 'right',
           }}
           >
 
@@ -141,6 +155,30 @@ class Slot extends React.Component {
               value={this.state.name}
               onChange={this.handleChangeName}
             />
+
+            <TextField
+              required
+              id="outlined-required"
+              label="Location"
+              value={this.state.location}
+              onChange={this.handleChangeLocation}
+            />
+
+
+          <Box sx={{ 
+            maxWidth: '100%',
+            }}>
+            <TextField
+                required
+                label="Description"
+                value={this.state.description}
+                onChange={this.handleChangeDescription}
+                fullWidth 
+                multiline
+                id="fullWidth"
+              />
+          </Box>
+            
           
           <Box sx={{ minWidth: 120}}>
             Start: {timeScale(Math.floor(this.props.value%27)) }
@@ -162,6 +200,10 @@ class Slot extends React.Component {
                   ))}
                 </Select>
               </FormControl>
+            </Box>
+
+            <Box sx={{ minWidth: 120}}>
+            {this.props.numEvents}/{this.props.maxPeople} are not avaliable
             </Box>
             
             <Button variant="outlined"  onClick = {() => {this.handleClose(); this.createGroupEvent()}} >confirm</Button>

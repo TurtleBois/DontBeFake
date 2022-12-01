@@ -20,32 +20,82 @@ function timeSide(index)
     return (Math.floor(index/2) + 9) + ":" + thirty +"am"
 }
 
+function getDates()
+{
+    const d = new Date();
+    let day = d.getDay();
+    let date = d.getDate(); 
+    let month = d.getMonth() + 1;
+    let year = d.getFullYear();
+    
+    let dates = Array(7).fill(null);
+
+    for (let i = day; i < 7; i++)
+    {
+        dates[i] = month +  "/" + date + "/" + year
+        d.setDate(d.getDate() + 1)
+        date = d.getDate(); 
+        month = d.getMonth() + 1;
+        year = d.getFullYear();
+    }
+  
+
+    for (let i = 0; i < day; i++)
+    {
+        dates[i] = month +  "/" + date + "/" + year
+        d.setDate(d.getDate() + 1)
+        date = d.getDate(); 
+        month = d.getMonth() + 1;
+        year = d.getFullYear();
+    }
+    return dates;
+}
+
 function weekdays()
 {   
+    var dates = getDates();
+    
+
     return(
     <Grid  minWidth = {100}  container
     direction="row" style={{color: "white"}}>
         <Grid  minHeight={1} xs = {12/7}>
+            sunday.
+            <br></br>
+            <strong> {dates[0]}</strong>
+        </Grid>
+        <Grid  minHeight={1} xs = {12/7}>
             monday.
+            <br></br>
+            <strong>{dates[1]}</strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
             tuesday.
+            <br></br>
+            <strong>{dates[2]}</strong>
+            
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
             wednesday.
+            <br></br>
+            <strong>{dates[3]}</strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
             thursday.
+            <br></br>
+            <strong>{dates[4]} </strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
             friday.
+            <br></br>
+            <strong>{dates[5]}</strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
             saturday.
+            <br></br>
+            <strong>{dates[6]} </strong>
         </Grid>
-        <Grid  minHeight={1} xs = {12/7}>
-            sunday.
-        </Grid>
+        
 
     </Grid>
     )
@@ -56,7 +106,7 @@ function dayTimes()
     return (<Grid item xs={1}  style={{color: "white"} } container
          direction="column">
             <Grid sx={{
-              height: 9}}>
+              height: 32}}>
             </Grid>
             {Array.from(Array(28)).map((_, index) => (
                     <Grid key={index} {...{}} minHeight={50}>
