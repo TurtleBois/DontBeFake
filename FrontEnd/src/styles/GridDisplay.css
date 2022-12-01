@@ -69,10 +69,7 @@
     /* border: 1px solid red;  */
 }
 
-.groups-link:link, .groups-link:visited, .groups-link:hover, .groups-link:active { 
+.groupDisplay-link:link, .groupDisplay-link:visited, .groupDisplay-link:hover, .groupDisplay-link:active {
     color: inherit;
-    text-decoration: none; }
-
-.groups-link:link, .groups-link:visited, .groups-link:hover, .groups-link:active { 
-    color: inherit;
-    text-decoration: none; }
+    text-decoration: none;
+}
