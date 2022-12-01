@@ -13,7 +13,7 @@ import MyFriendsScreen from "../screens/MyFriends";
 import Profile from "../screens/Profile";
 import Schedules from "../screens/Schedules";
 import Calender from "../screens/Calender";
-import EditProfile from "./EditProfile";
+import InvitesScreen from "../screens/InvitesScreen";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
 import SearchGroupScreen from '../screens/SearchGroups';
@@ -178,6 +178,7 @@ export default class NavbarComp extends Component {
             <Route exact path="/events" element={<EventsScreen/>}/>
             <Route exact path="/pastevents" element={<PastEventsScreen/>}/>
             <Route exact path="/voting" element={<><MiniNav/><VotingScreen/></>}/>
+            <Route exact path="/invites" element={<><MiniNav/><InvitesScreen/></>}/>
             <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
           </Routes>
         </div>

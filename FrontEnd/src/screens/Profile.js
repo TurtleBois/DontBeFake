@@ -35,7 +35,7 @@ const ProfileScreen = () => {
                 Name: {form.name}
             </div>
             <div className="info">
-                Username: {form.username}
+                @{form.username}
             </div>
             <div className="bio">
                 Bio: {form.userDescription}
@@ -43,7 +43,6 @@ const ProfileScreen = () => {
             <a href='./editprofile'>
                 <button className="edit-link">Edit Profile</button>
             </a>
-            
 
         </div>
         </body>
