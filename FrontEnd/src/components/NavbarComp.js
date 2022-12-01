@@ -174,9 +174,8 @@ export default class NavbarComp extends Component {
             <Route exact path="/error" element={<Error/>}/>
             <Route exact path="/events" element={<EventsScreen/>}/>
             <Route exact path="/pastevents" element={<PastEventsScreen/>}/>
-            <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
             <Route exact path="/group=:groupID/invites" element={<><MiniNav/><InvitesScreen/></>}/>
-            <Route exact path="/group=:groupID/heatmap" element={<><MiniNav/><HeatMap/></>}/>            
+            <Route exact path="/group=:groupID/groupcalendar" element={<><MiniNav/><HeatMap/></>}/>            
             <Route exact path="/group=:groupID/voting" element={<><MiniNav/><VotingScreen/></>}/>   
             <Route exact path="/group=:groupID/events" element={<><MiniNav/><EventsScreen/></>}/>
           </Routes>

@@ -63,7 +63,7 @@ function dayTimes()
 }
 
 const HeatMap = () => {
-    const currentGroupID = window.location.href.split('=')[1];
+    const currentGroupID = window.location.href.split('=')[1].split("/")[0];
     const [allGroups, setAllGroups] = useState(null);
     //effectively an init
     useEffect(() => {

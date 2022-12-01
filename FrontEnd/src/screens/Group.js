@@ -90,11 +90,10 @@ class Group extends React.Component {
 
     render() {
         console.log(this.state.memberProfiles);
-        var link = "/heatmap="  + this.state.groupID;
         var editLink = "/editgroup=" + this.state.groupID;
         return (
             <div>
-            <a className="title" href={link}  >{this.state.groupName}. </a>
+            <a className="title" >{this.state.groupName}. </a>
                 {/* <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button>  */}
                 <a href={editLink} className="edit-button"><img id="edit-group" src={pencil}></img></a>
                 <div className="group-id">GroupID:{this.state.groupID} </div>
