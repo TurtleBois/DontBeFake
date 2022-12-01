@@ -1,5 +1,5 @@
 import "../styles/Users.css"
- 
+import "../styles/Requests.css"
 import add from "../assets/add_thumbnail.png"
 import accept from '../assets/accepted_thumbnail.png'
 import pending from '../assets/pending_thumbnail.png'
@@ -64,7 +64,7 @@ const GroupReq = (props) => {
         return;
      }
      
-     var icon = add
+     var icon = 0
      console.log(userGroups);
 
 
@@ -77,26 +77,56 @@ const GroupReq = (props) => {
         console.log(userGroups[i].id);
         if(userGroups[i].id === props.id)
         {
-            icon = accept
+            icon = 1
             break;
         }
 
      }
      
 
-    return(
-        <body class="user">
-            {/* /friendprofile is temporary link */}
-            <a href="/friendprofile" class="friend-link"><img alt="pfp" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"/></a>
-            <div class="user-text">
-                <a href="/friendprofile" class="friend-link"><b><p id="user-name">{props.name} </p></b></a>
-                <a href="/friendprofile" class="friend-link"><b><p id="user-username">MemberCount: {props.numMembers}</p></b></a>
-            </div>
-            <a> <img id="icon" src={icon}/></a>
-          
 
-        </body>
-    )
+    if(icon === 0)
+    {
+        return(
+            <body class="user">
+                {/* /friendprofile is temporary link */}
+                <a href="/friendprofile" class="friend-link"><img alt="pfp" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"/></a>
+                <div class="user-text">
+                    <a href="/friendprofile" class="friend-link"><b><p id="user-name">{props.name} </p></b></a>
+                    <a href="/friendprofile" class="friend-link"><b><p id="user-username">MemberCount: {props.numMembers}</p></b></a>
+                </div>
+                <button id="join-button" ><b>Join.</b></button>
+            </body>
+        )
+    }
+    else if(icon === 1)
+    {
+        return(
+            <body class="user">
+                {/* /friendprofile is temporary link */}
+                <a href="/friendprofile" class="friend-link"><img alt="pfp" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"/></a>
+                <div class="user-text">
+                    <a href="/friendprofile" class="friend-link"><b><p id="user-name">{props.name} </p></b></a>
+                    <a href="/friendprofile" class="friend-link"><b><p id="user-username">MemberCount: {props.numMembers}</p></b></a>
+                </div>
+                <button id="joined-button" disabled><b>Joined.</b></button>
+            </body>
+        )
+    }
+    else if(icon === 2)
+    {
+        return(
+            <body class="user">
+                {/* /friendprofile is temporary link */}
+                <a href="/friendprofile" class="friend-link"><img alt="pfp" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"/></a>
+                <div class="user-text">
+                    <a href="/friendprofile" class="friend-link"><b><p id="user-name">{props.name} </p></b></a>
+                    <a href="/friendprofile" class="friend-link"><b><p id="user-username">MemberCount: {props.numMembers}</p></b></a>
+                </div>
+                <button id="pending-button" ><b>Pending.</b></button>
+            </body>
+        )
+    }
 }
 
 export default GroupReq;
