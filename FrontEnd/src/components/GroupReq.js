@@ -80,6 +80,9 @@ const GroupReq = (props) => {
      for(const [index,element] of requests.entries()) {
          requested.push(element.username);
      }
+     console.log(props.name)
+     console.log(requested);
+
      if(requested.includes(localStorage.getItem("DBF_username"))) {
         icon = 2;
      }
