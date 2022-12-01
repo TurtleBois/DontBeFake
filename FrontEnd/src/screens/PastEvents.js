@@ -11,8 +11,8 @@ const PastEventsScreen = () => {
     return (
         <body>
             <div>
-                <a className="button-text" href= "../events"> UpcomingEvents. </a>
                 <a className="button-text" href= "../pastevents"> PastEvents. </a>
+                <a className="button-text" href= "../events"> UpcomingEvents. </a>
             </div>
             <div>
             <Box pt={1} pb={2} ml={7} mr={7}> 
