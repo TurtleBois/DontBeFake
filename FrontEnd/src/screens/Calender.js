@@ -56,10 +56,10 @@ function dayTimes()
     return (<Grid item xs={1}  style={{color: "white"} } container
          direction="column">
             <Grid sx={{
-              height: 12}}>
+              height: 9}}>
             </Grid>
             {Array.from(Array(28)).map((_, index) => (
-                    <Grid key={index} {...{}} minHeight={50.8}>
+                    <Grid key={index} {...{}} minHeight={50}>
                         {timeSide(index)}
                     </Grid>
             ))}
@@ -284,6 +284,7 @@ class Calender extends React.Component
                         direction="column"
 
                         maxHeight={1400}
+                        
                         sx={{
                         '--Grid-borderWidth': '1px',
                         borderTop: 'var(--Grid-borderWidth) solid',

@@ -35,6 +35,7 @@
     overflow:hidden; 
     white-space:nowrap; 
     text-overflow: ellipsis;
+    max-width: 230px;
 }
 #user-username {
     color: #A6A6A6;

@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Grid from '@mui/material/Unstable_Grid2';
-import Slot from "../components/timeSlot";
-import ClosedSlot from "../components/closedTimeSlot";
+import EventTimeSlot from "../components/EventTimeSlot.js";
 
 function timeSide(index)
 {   
@@ -53,10 +52,10 @@ function dayTimes()
     return (<Grid item xs={1}  style={{color: "white"} } container
          direction="column">
             <Grid sx={{
-              height: 12}}>
+              height: 9}}>
             </Grid>
             {Array.from(Array(28)).map((_, index) => (
-                    <Grid key={index} {...{}} minHeight={50.8}>
+                    <Grid key={index} {...{}} minHeight={50}>
                         {timeSide(index)}
                     </Grid>
             ))}
@@ -119,8 +118,9 @@ const HeatMap = () => {
      }
      
      const max = allGroups.reduce((a, b) => Math.max(a, b), -Infinity);
-     console.log(Math.max(max));
+    //  console.log(Math.max(max));
      
+    
      
     return (
         <Grid
@@ -153,8 +153,25 @@ const HeatMap = () => {
                     }}> 
                     
                     {Array.from(Array(189)).map((_, index) => (        
-                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ allGroups[index] * (100/max) +"%)"}} />
+                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ allGroups[index] * (100/max) +"%)"}} >
+                            {
+                             
+                                <EventTimeSlot
+                                numEvents = {allGroups[index]}
+                                value = {index}
+                                heatMap = {allGroups}
+
+
+                                />
+                     
+                            }
+                            
+
+                        </Grid>
+                    
                     ))}
+
+
                 </Grid>
             </Grid>   
         </Grid>
