@@ -38,20 +38,26 @@
     font-size: 55px;
     font-weight: bolder;
     position: relative;
+    text-overflow: ellipsis;
     overflow: hidden;
+    white-space: nowrap;
  }
 
 .text{
     font: Arial;
     color: white;
     font-size: 15px;
-    font-weight: normal;
+    font-weight: bold;
+    width: 275px;
     position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .button-text{
     background-color: #181414;
-    color: white;
+    color: #8a8a8a;
     font-size: 24px;
     font: Arial;
     font-weight: bold;
@@ -64,7 +70,7 @@
 }
 
 .button-text:hover {
-    color: #8a8a8a;
+    color: white;
     text-decoration: none;
 }
 
@@ -76,4 +82,37 @@
 
 #box{
     position: relative;
+}
+
+#bereal-button {
+    width: auto;
+    text-align: center;
+    background-color: #212529;
+    font-size: 15px;
+    height: 43px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color:#ffffff !important;
+    border-color: #212529;
+    margin-top: 10px;
+    padding: 4px 4px 4px 7px;
+}
+
+#befake-button {
+    width: auto;
+    text-align: center;
+    background-color: #212529;
+    font-size: 15px;
+    height: 43px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color:red !important;
+    border-color: #212529;
+    margin-top: 10px;
+    padding: 4px 4px 4px 7px;
+    
 }

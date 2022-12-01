@@ -6,13 +6,14 @@ import Box from '@mui/material/Box';
 import greyBox from '../assets/greyBox.png';
 
 const PastEventsScreen = () => {
-
+    var groupID = window.location.href.split("=")[1].split("/")[0];
+    var prefix = "/group=" + groupID;
     var numOfEvents = 4;
     return (
         <body>
             <div>
-                <a className="button-text" href= "../pastevents"> PastEvents. </a>
-                <a className="button-text" href= "../events"> UpcomingEvents. </a>
+                <a className="button-text" href= {prefix+"/events/past"}> PastEvents. </a>
+                <a className="button-text" href= {prefix+"/events/future"}> UpcomingEvents. </a>
             </div>
             <div>
             <Box pt={1} pb={2} ml={7} mr={7}> 
