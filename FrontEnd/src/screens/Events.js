@@ -1,5 +1,5 @@
 import '../styles/Events.css';
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Event from "../components/Event.js";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -7,13 +7,40 @@ import Box from '@mui/material/Box';
 // import { padding } from '@mui/system';
 
 const EventsScreen = () => {
-    var numOfEvents = 4;
+    const eventIDs = ["6388945bea9ee291e8fef87f","6388945bea9ee291e8fef87f","6388945bea9ee291e8fef87f","6388945bea9ee291e8fef87f"];
+    const [allEvents, setCurrentEvent] = useState(null);
 
+
+    useEffect(() => {
+        async function getUserGroups() {
+            var events = [];
+            for(var eventID of eventIDs) {
+                const response = await fetch(`http://localhost:5000/event/${eventID}`);
+                if (!response.ok) {
+                    const message = `An error occurred: ${response.statusText}`;
+                    window.alert(message);
+                    return;
+                }
+                const event = await response.json();
+                events.push(event);
+            }
+            setCurrentEvent(events);
+        }
+        getUserGroups();
+     }, [])
+
+     if(allEvents == null) {
+        return;
+     }
+
+    var numOfEvents = allEvents.length;
+    var groupID = window.location.href.split("=")[1].split("/")[0];
+    var prefix = "/group=" + groupID;
     return (
         <body>
             <div>
-                <a className="button-text" href= "../pastevents"> PastEvents. </a>
-                <a className="button-text" href= "../events"> UpcomingEvents. </a>
+                <a className="button-text" href= {prefix+"/events/past"}> PastEvents. </a>
+                <a className="button-text" href= {prefix+"/events/future"}> UpcomingEvents. </a>
             </div>
             <div>
             <Box pt={1} pb={2} ml={7} mr={7}> 
@@ -22,7 +49,12 @@ const EventsScreen = () => {
                         return (
                             <Grid item sm={5} key={index} align={"center"} style={{ maxWidth: '100%'}}>
                                 <Event
-                                eventName="SomeEvent."
+                                eventID = {allEvents[index]._id}
+                                eventName={allEvents[index].name}
+                                attending={allEvents[index].attending}
+                                time={allEvents[index].time}
+                                location={allEvents[index].location}
+                                description={allEvents[index].description}
                                 day="25"
                                 month="DEC"
                                 />

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const MiniNav = () => {
     var groupID = window.location.href.split("=")[1].split("/")[0];
     var prefix = "/group=" + groupID;
-
+    
     return (
         // Temporary links. Change later.
         <div class="mini-nav">
