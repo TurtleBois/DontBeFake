@@ -24,7 +24,7 @@ const [anchorEl, setAnchorEl] = React.useState(null);
     return(
         <body class="groupDisplay">
             <div class="groupDisplay-text">
-                <a onClick={handleClick} class="groupDisplay-link"><b><p id="groupDisplay-name">AddGroup.</p></b></a>
+                <a ><b><p id="groupDisplay-name">AddGroup.</p></b></a>
                 <a class="groupDisplay-link" onClick={handleClick}><img alt="group-img" src={require('../assets/plus-sign.png')}/></a>
             </div>
             <Popover
