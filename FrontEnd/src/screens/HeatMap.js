@@ -62,6 +62,142 @@ function dayTimes()
     </Grid>)
 }
 
+
+
+// async function getAllGroups() {
+//     const response = await fetch("http://localhost:5000/group/");
+//     if (!response.ok) {
+//         const message = `An error occurred: ${response.statusText}`;
+//         window.alert(message);
+//         return;
+//       }
+//       const records = await response.json();
+      
+//       var targetRecord = null;
+//       for(var record of records) {
+//           if(record.groupID == currentGroupID) {
+//             targetRecord = record;
+//             break;
+//           }
+//       }
+//       var members = [];
+//       for(var member of record["members"]) {
+//         members.push(member["DBF_username"]);
+//       }
+//     const response2 = await fetch("http://localhost:5000/schedule/");
+//     if (!response2.ok) {
+//         const message = `An error occurred: ${response2.statusText}`;
+//         window.alert(message);
+//         return;
+//       }
+//       const schedules = await response2.json(); 
+
+//       var HeatMap = Array(189).fill(0);
+//       for(var schedule of schedules) {
+//         if(members.includes(schedule.profileID)) {
+//             for(var index = 0; index < 189; index++) {
+//                 if(schedule.state["setEvents"][index] != null) {
+//                     HeatMap[index]++;
+//                 }
+//             }
+//         }
+//       }
+//       setAllGroups(HeatMap);
+// }
+
+
+class Calender extends React.Component 
+{
+    constructor(props) {
+        super(props);
+        this.state = {
+            allGroups: Array(189).fill(null),
+            groupEvents: Array(189).fill(null),
+            numEvents: 0,
+        }
+        this.firstTime = false;
+        this.initCalendar();
+        
+    }
+    async initCalendar() {
+        // var newState = await getInformation();
+        // if(newState == null) {
+        //     this.firstTime = true;
+        //     return;
+        // }
+        // newState = newState.state;
+        // this.setState({
+        //     eventNames: newState.eventNames,
+        //     //coloring: newState.coloring,
+        //     setEvents: newState.setEvents,
+        //     startTimes: newState.startTimes,
+        //     endTimes: newState.endTimes,
+        //     numEvents: newState.numEvents,
+        //     },
+        //     () => {
+        //         // console.log(this.state);
+        //     });
+    }
+
+
+    render()
+    {
+        return(
+            <Grid
+        container
+        direction="row">
+            {dayTimes()}
+            <Grid 
+            item xs={10.8}
+            container
+            direction="column"
+            spacing = {0}>
+    
+                {weekdays()}
+                <Grid
+                container
+                spacing={1}
+                direction="column"
+
+                maxHeight={1400}
+                sx={{
+                '--Grid-borderWidth': '1px',
+                borderTop: 'var(--Grid-borderWidth) solid',
+                borderLeft: 'var(--Grid-borderWidth) solid',
+                borderColor: 'rgba(133, 133, 133, 1)',
+                '& > div': {
+                    borderRight: 'var(--Grid-borderWidth) solid',
+                    borderBottom: 'var(--Grid-borderWidth) solid',
+                    borderColor: 'rgba(133, 133, 133, 1)',
+                },
+                    }}> 
+                    
+                    {Array.from(Array(189)).map((_, index) => (        
+                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "black"}} >
+                            {
+                             
+                     
+                            }
+                            
+
+                        </Grid>
+                    
+                    ))}
+
+
+                </Grid>
+            </Grid>   
+        </Grid>
+        )
+    }
+
+}
+
+
+
+
+
+
 const HeatMap = () => {
     const currentGroupID = window.location.href.split('=')[1].split("/")[0];
     const [allGroups, setAllGroups] = useState(null);
@@ -179,4 +315,4 @@ const HeatMap = () => {
 }
 
 
-export default HeatMap;
+export default Calender;
