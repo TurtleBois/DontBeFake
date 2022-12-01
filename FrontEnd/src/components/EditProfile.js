@@ -32,13 +32,47 @@ const EditProfile = () => {
     const navigate = useNavigate();
     // creates form
 
-    const [form, setForm] = useState({  
-        username: localStorage.getItem("DBF_username"), 
-        name: localStorage.getItem("name") == "undefined" ? "" : localStorage.getItem("name"),
-        profilePicture: localStorage.getItem("profilePicture") == "" ? "" : localStorage.getItem("profilePicture"),
-        userDescription: localStorage.getItem("userDescription") == "undefined" ? "" : localStorage.getItem("userDescription"),
-    });
+    const [form, setForm] = useState(null);
 
+    useEffect(() => {
+        async function getUserGroups() {
+        var DBF_username = localStorage.getItem("DBF_username");
+        if(DBF_username == null) {
+            // this should NEVER happen
+            DBF_username = "chang";
+        }
+        const response = await fetch(`http://localhost:5000/profile`);
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+        }
+        const record = await response.json();
+        var toReturnForm = [];
+        for(var profile of record) {
+            if(profile.username == DBF_username) {
+                toReturnForm = 
+                {
+                    username: DBF_username,
+                    name: profile.name,
+                    profilePicture: profile.profilePicture,
+                    userDescription: profile.userDescription,
+                    joinedGroups: profile.joinedGroups,
+                }
+                break;
+            } 
+        }
+        console.log(toReturnForm);
+        
+        setForm(toReturnForm);
+        }
+        getUserGroups();
+
+     }, [])
+
+
+
+    
     // updates form 
     function updateForm(value) {
         return setForm((prev) => {
@@ -111,6 +145,11 @@ const EditProfile = () => {
         navigate("/profile");
         window.location.reload(); // this is so navbar fixes itself
       } 
+
+
+    if(form == null) {
+        return;
+    }
 
 
     return (
