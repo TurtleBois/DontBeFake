@@ -116,6 +116,7 @@ const SearchGroupScreen = () => {
                                 name={filteredGroups[index]["groupName"]}
                                 numMembers={filteredGroups[index]["members"].length}
                                 id={filteredGroups[index]["groupID"]}
+                                _id={filteredGroups[index]["_id"]}
                                 />
                             </Grid> 
                             ) 
@@ -127,6 +128,7 @@ const SearchGroupScreen = () => {
                                 name={filteredGroups[index]["groupName"]}
                                 numMembers={filteredGroups[index]["members"].length}
                                 id={filteredGroups[index]["groupID"]}
+                                _id={filteredGroups[index]["_id"]}
                                 />  
                             </Grid> 
                             ) 
