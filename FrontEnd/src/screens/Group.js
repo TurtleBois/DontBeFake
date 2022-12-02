@@ -53,12 +53,6 @@ async function getGroupProfiles(members) {
     
 }
 
-function copyID(id) {
-    navigator.clipboard.writeText(id);
-    var tooltip = document.getElementById("myTooltip");
-    tooltip.innerHTML = "GroupID copied";
-}
-
 class Group extends React.Component {
     constructor(props) {
         super(props);
@@ -102,9 +96,9 @@ class Group extends React.Component {
                 {/* <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button>  */}
                 <a href={editLink} className="edit-button"><img id="edit-group" src={pencil}></img></a>
                 <div className="group-id">GroupID:{this.state.groupID}
-                    <button class="copy-button" onClick={event => {{
-                        navigator.clipboard.writeText(this.state.groupID);
-                    }}}>
+                    <button class="copy-button" onClick={event => {
+                        navigator.clipboard.writeText(this.state.groupID)
+                    }}>
                         <img id="copy-id" src={copy}></img></button>
                 </div>
                 <Box mt={6} mb={6} ml={10} mr={10}> 
@@ -130,6 +124,8 @@ class Group extends React.Component {
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
                                     profilePicture = {this.state.memberProfiles[index]["profilePicture"]}
+                                    bio = {this.state.memberProfiles[index]["userDescription"]}
+                                    status={this.state.memberRoles[index]["fakeStatus"]}
                                     />
                                 </Grid> 
                             )  
