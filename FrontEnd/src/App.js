@@ -5,8 +5,7 @@ import React from "react";
 import './styles/LogIn.css';
 
 function App() {
-    if (window.location.href === "http://localhost:3000/login" ||
-        window.location.href === "http://localhost:3000/SignUp" ) {
+    if (localStorage.getItem("DBF_username") === null) {
         return (
             <div className="App">
                 <NavbarComp/>
@@ -22,4 +21,5 @@ function App() {
     }
 }
 
+// window.location.href === "http://localhost:3000/login" || window.location.href === "http://localhost:3000/SignUp"
 export default App;

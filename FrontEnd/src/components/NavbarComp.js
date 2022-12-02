@@ -133,7 +133,8 @@ export default class NavbarComp extends Component {
             </Router>
           )
         } else if (localStorage.getItem("DBF_username") === null && 
-                  window.location.href === "http://localhost:3000/login") {
+                  (window.location.href === "http://localhost:3000/" ||
+                  window.location.href === "http://localhost:3000/login")) {
           return (
             <Router>
               <LoginScreen/>
@@ -175,14 +176,14 @@ export default class NavbarComp extends Component {
             <div>
               <Routes>
                 <Route exact path="/viewgroup" element={<ViewGroups/>}/>
-                <Route exact path="/" element={<LoginScreen/>}/> 
+                {/* <Route exact path="/" element={<LoginScreen/>}/>  */}
                 {/* <Route exact path="/myfriends" element={<MyFriendsScreen/>}/> */}
                 <Route exact path="/profile" element={<Profile/>}/>
                 <Route exact path="/editprofile" element={<EditProfile/>}/>
                 {/* Place MiniNav bar in wanted screens like this: */}
                 <Route exact path="/calendar" element={<Calender/>}/>
-                <Route exact path="/login" element={<LoginScreen/>}/>
-                <Route exact path="/signup" element={<SignUpScreen/>}/>
+                {/* <Route exact path="/login" element={<LoginScreen/>}/> */}
+                {/* <Route exact path="/signup" element={<SignUpScreen/>}/> */}
                 <Route path="/group=:groupID" element={<><MiniNav/><Group/></>}/>
                 <Route exact path="/joingroup" element={<JoinGroup/>}/>
                 <Route exact path="/searchgroups" element={<SearchGroupScreen/>}/>
