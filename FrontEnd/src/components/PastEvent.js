@@ -154,6 +154,7 @@ const Event = (props) => {
 
 
     }
+    console.log(props);
     if(props.attending.includes(user_ID)) {
         return (
             <div className="content-container">

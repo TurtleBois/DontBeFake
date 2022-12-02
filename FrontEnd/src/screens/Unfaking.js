@@ -12,6 +12,7 @@ import face_winky from "../assets/face_winky.png";
 import face_XD from "../assets/face_XD.png";
 const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
 
+const minimumFakeRatio = 0.5;
 
 const Unfaking = () => {
     const defendent = window.location.href.split('/')[4];
@@ -88,7 +89,7 @@ async function vote() {
 
 
       // remove fake tag
-      if(trialData["unfakeVotes"] /numMembers > 0.5) {
+      if(trialData["unfakeVotes"] /numMembers > minimumFakeRatio) {
         for(var i = 0; i < numMembers; i++) {
             if(currentGroup.members[i]["DBF_username"] == trialData.defendent) {
                 currentGroup.members[i]["fakeStatus"] = false;
