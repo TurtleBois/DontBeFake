@@ -42,7 +42,6 @@ recordRoutes.route("/schedule/add").post(function (req, response) {
  let myobj = {
   profileID: req.body.profileID,
   state: req.body.state,
-  groupCalendar: req.body.groupCalendar,
  };
  db_connect.collection("schedules").insertOne(myobj, function (err, res) {
    if (err) throw err;
@@ -58,7 +57,6 @@ recordRoutes.route("/schedule/update/:id").post(function (req, response) {
    $set: {
     profileID: req.body.profileID,
     state: req.body.state,
-    groupCalendar: req.body.groupCalendar,
    },
  };
  db_connect
