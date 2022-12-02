@@ -106,7 +106,7 @@ function dayTimes()
     return (<Grid item xs={1}  style={{color: "white"} } container
          direction="column">
             <Grid sx={{
-              height: 32}}>
+              height: 50}}>
             </Grid>
             {Array.from(Array(28)).map((_, index) => (
                     <Grid key={index} {...{}} minHeight={50}>
