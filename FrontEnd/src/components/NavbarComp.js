@@ -145,18 +145,19 @@ export default class NavbarComp extends Component {
           return (
             <Router>
             <div>
-              <Navbar bg="dark" variant="dark" expand="md">
+              <Navbar bg="#181414" variant="dark" expand="md">
                 <Container>
-                  <Navbar.Brand as={Link} to={"/schedules"}>DontBeFake.</Navbar.Brand>
                   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
                   <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                       {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
                       {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
-                      <Nav.Link as={Link} to={"/calendar"}>MyCalendar.</Nav.Link>
-                      <Nav.Link as={Link} to={"/viewgroup"}>MyGroups.</Nav.Link>
-                      <Nav.Link as={Link} to={"/searchgroups"}>SearchGroups.</Nav.Link>
-                      <Nav.Link as={Link} to={"/joingroup"}>JoinGroups.</Nav.Link>
+                      <div style={{display:"flex", position:'relative', left: '41vw', justifyContent: 'center'}} >
+                        <Nav.Link as={Link} to={"/calendar"}>MyCalendar.</Nav.Link>
+                        <Nav.Link as={Link} to={"/viewgroup"}>MyGroups.</Nav.Link>
+                      </div>
+                      {/* <Nav.Link as={Link} to={"/searchgroups"}>SearchGroups.</Nav.Link>
+                      <Nav.Link as={Link} to={"/joingroup"}>JoinGroups.</Nav.Link> */}
                     </Nav>
                   </Navbar.Collapse>
                   <Nav className="ms-auto">
