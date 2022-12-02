@@ -161,12 +161,33 @@ async function getAllGroups() {
       return HeatMap; 
 }
 
+async function getEventIDs() {
+    const currentGroupID = window.location.href.split('=')[1].split("/")[0];
+    const response = await fetch("http://localhost:5000/group/");
+    if (!response.ok) {
+        const message = `An error occurred: ${response.statusText}`;
+        window.alert(message);
+        return;
+      }
+      const records = await response.json();
+      
+      var targetRecord = null;
+      for(var record of records) {
+          if(record.groupID == currentGroupID) {
+            targetRecord = record;
+            break;
+          }
+      }
+      return targetRecord.events;
+}
+
 
 class Calender extends React.Component 
 {
     constructor(props) {
         super(props);
         this.state = {
+            eventIDList: [],
             allGroups: Array(189).fill(null),
             groupEvents: Array(189).fill(null),
             numEvents: 0,
@@ -177,6 +198,7 @@ class Calender extends React.Component
     }
     async initCalendar() {
         var allGroupsReq = await getAllGroups();
+        var allEventsList = await getEventIDs();
         if(allGroupsReq == null) {
             this.firstTime = true;
             return;
@@ -184,6 +206,7 @@ class Calender extends React.Component
         // newState = newState.state;
         this.setState({
             allGroups: allGroupsReq,
+            eventIDList: allEventsList,
             },
             () => {
                 console.log(this.state);
