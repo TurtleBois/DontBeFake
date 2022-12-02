@@ -207,7 +207,7 @@ async function getEventsTimes(allEvents) {
             groupEvents[i] = count; 
         }
         eventNames.push(event.name)
-
+        count++;
     }
 
     
@@ -286,7 +286,7 @@ class Calender extends React.Component
 
 
     async uploadToDatabase(newEvent) {
-
+        // console.log(newEvent);
         // upload event
         await fetch("http://localhost:5000/event/add", {
             method: "POST",
@@ -376,6 +376,15 @@ class Calender extends React.Component
           alert("Please eneter a end time")
         }
 
+        for(let j = start ; j < end; j++) {
+            if(this.state.groupEvents[(27*weekday)+j] !== null)
+            {
+                alert("You have a overlapping event — DontBeFake");
+                return
+            }
+        }  
+        
+
         var dates = getDates();
 
         var eventDate = dates[weekday].split('/');
@@ -394,7 +403,10 @@ class Calender extends React.Component
             description: eventDescription,
             eventID: this.generateGroupID(12),
         };
-        this.uploadToDatabase(toReturn);
+        this.uploadToDatabase(toReturn).then( () => {window.location.reload(false);});
+        
+        
+        
     }
 
     render()
@@ -429,9 +441,9 @@ class Calender extends React.Component
                     borderColor: 'rgba(133, 133, 133, 1)',
                 },
                     }}> 
-                    
+                   
                     {Array.from(Array(189)).map((_, index) => (        
-                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor: "rgba(255, 0, 0, "+ this.state.allGroups[index] * (100/max) +"%)"}} >
+                        <Grid key={index} {...{ xs: 12/7}} minHeight={50} style={{backgroundColor:  this.state.groupEvents[index] !== null? "rgba(0, 160," + this.state.groupEvents[index] * 40 +", 80%)": "rgba(255, 0, 0, "+ this.state.allGroups[index] * (100/max) +"%)"}} >
                             {
                              <EventTimeSlot
                              numEvents = {this.state.allGroups[index]}
@@ -439,6 +451,8 @@ class Calender extends React.Component
                              heatMap = {this.state.allGroups}
                              createEvent = {this.callbackFunction}
                              maxPeople = {max}
+                             isEvent = {this.state.groupEvents[index]}
+                             eventNames = {this.state.eventNames}
                              />
                              
                             }
