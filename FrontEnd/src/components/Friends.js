@@ -9,25 +9,34 @@ import face_XD from "../assets/face_XD.png";
 const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
 
 const Friend = (props) => {
-    var pfpID = (props.profilePicture == "") ? 0 : props.profilePicture;
-    var nameID = "friend-name";
+    console.log(props);
+    var pfpID = (props.profilePicture === "") ? 0 : props.profilePicture;
     var name = props.name;
+    var styleID = "friend-name";
+    var userStyleID = "friend-username";
+    var bioStyleID = "friend-bio";
+
     if(props.role == "leader") {
-        nameID = "leader-name";
+        styleID = "leader-name";
         name+="👑";
     }
-    if(props.role == "fake") {
-        nameID = "fake-name";
-        name = "[FAKE]" + name;
+
+    /* check if leader first, then if leader is fake, overwrites css style to red */
+
+    if(props.status == true) {
+        styleID = "red-name";
+        name = "[Fake.] " + name;
+        userStyleID = "red-username";
+        bioStyleID = "red-bio";
     }
 
     return(
         <body class="friend" >
-            {/* /friendprofile is temporary link */}
-            <img class="friend-link" alt="pfp" src={pfps[pfpID]}/>
+            <img alt="pfp" src={pfps[pfpID]}/>
             <div class="friend-text">
-                <b><p class="friend-link" id={nameID}>{name}</p></b>
-                <b><p class="friend-link" id="friend-username">{props.username}</p></b>
+                <b><p id={styleID}>{name}</p></b>
+                <b><p id={userStyleID}>{props.username}</p></b>
+                <p id={bioStyleID}>{props.bio}</p>
                 
             </div>
         </body>

@@ -33,7 +33,11 @@ const InvitesScreen = () => {
      }, [])
 
      if(allRequests == null || group_id == null) {
-        return;
+        return (
+            <div>
+                NoRequests.
+            </div>
+        );
      }
     var numOfInvites = allRequests.length;
     return (
