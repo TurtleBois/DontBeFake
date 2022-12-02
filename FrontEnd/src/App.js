@@ -5,7 +5,6 @@ import React from "react";
 import './styles/LogIn.css';
 
 function App() {
-    console.log(window.location.href);
     if (window.location.href === "http://localhost:3000/login") {
         return (
             <div className="App">
