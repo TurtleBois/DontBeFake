@@ -195,8 +195,10 @@ async function getEventsTimes(allEvents) {
             return;
         }
         const event = await response.json();
-        
-        
+        // protects against dangling eventID pointers
+        if(event == null) {
+            continue;
+        }
         const eventTime = event.time
         
         const range = eventTime[4] - eventTime[3];
