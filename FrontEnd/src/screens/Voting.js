@@ -16,8 +16,44 @@ class VotingScreen extends React.Component {
             hasVoted: [],
             ballot: null,
             profiles: [],
+            numVotes: 0,
+            
         }
         this.init();
+    }
+
+    registerVote= (targetId, isFake, first) => {
+        console.log("voted:" + targetId + " as " + isFake)
+        const candidates = this.state.candidates.slice();
+
+        if(first)
+        {
+            this.setState({numVotes: this.state.numVotes+ 1});
+        }
+        // console.log(candidates[0])
+        for(let i = 0; i < candidates.length; i++)
+        {
+            // console.log(candidates[i])
+            if(targetId == candidates[i][0])
+            {
+                candidates[i][1]= isFake;
+            }
+        }
+        this.setState({candidates: candidates}, ()=> {console.log(this.state.candidates)});
+
+    }
+
+    handleSubmit = () =>
+    {
+        console.log(this.state)
+        if(this.state.numVotes < this.state.candidates.length)
+        {
+            alert("you have not finished voting");
+        }
+        //SUBMIT PROCESS VOTES
+        
+
+
     }
 
     async init() {
@@ -52,12 +88,16 @@ class VotingScreen extends React.Component {
             },
             () => {
                 this.render();
-                console.log(this.state);
+                // console.log(this.state);
             });
 
     }
+
+    
+    
     render()
     {
+        // console.log(this.state.profiles[0].)
         var numOfAttendees = this.state.candidates.length;
         var groupMatesAlign = "right";
         return (
@@ -73,16 +113,20 @@ class VotingScreen extends React.Component {
                         } 
                         {/* Makes Grid item for groupmate at index. */}
                         return (
+                            
                             <Grid item sm={6} key={index} align={groupMatesAlign} style={{ maxWidth: '100%'}}>
                                 <GroupMate
+                                    userID = {this.state.profiles[index]._id}
                                     name = {this.state.profiles[index].name}
                                     username = {this.state.profiles[index].username}
+                                    registerVote = {this.registerVote}
+
                                 />
                             </Grid> 
                         )  
                     })}
                 </Grid>
-                <button id="vote-button"><b>Vote.</b></button>
+                <button id="vote-button" onClick={this.handleSubmit}><b>Vote.</b></button>
             </Box>
         </div>
         )

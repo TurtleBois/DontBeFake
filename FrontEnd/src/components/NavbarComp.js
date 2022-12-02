@@ -30,7 +30,7 @@ import PastEventsScreen from '../screens/PastEvents';
 import HeatMap from '../screens/HeatMap';
 import MiniNav from '../components/MiniNav';
 import EditGroupScreen from '../screens/EditGroup';
-
+import UnfakeScreen from '../screens/Unfaking'
 //forgive me:
 import face_default from "../assets/face_default.png";
 import face_happy from "../assets/face_happy.png";
@@ -199,6 +199,7 @@ export default class NavbarComp extends Component {
                 <Route exact path="/group=:groupID/groupcalendar" element={<><MiniNav/><HeatMap/></>}/>            
                 <Route exact path="/voting=:votingID" element={<VotingScreen/>}/>
                 <Route exact path="/group=:groupID/events" element={<><MiniNav/><EventsScreen/></>}/>
+                <Route exact path="/unfake/:username" element={<UnfakeScreen/>}/>
               </Routes>
             </div>
           </Router>

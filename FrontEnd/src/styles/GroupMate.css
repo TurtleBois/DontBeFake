@@ -42,6 +42,16 @@
     padding: 7px 7px 7px 10px;
 }
 
+
+.pressed-buttons {
+    width: auto;
+    text-align: center;
+    background-color: #0E1012;
+    font-size: 20px;
+    border-color: #0E1012;
+    padding: 7px 7px 7px 10px;
+}
+
 .voting-buttons:active {
     background-color: #0E1012;
     border-color: #0E1012;

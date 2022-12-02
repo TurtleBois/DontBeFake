@@ -29,18 +29,34 @@ const Friend = (props) => {
         userStyleID = "red-username";
         bioStyleID = "red-bio";
     }
-
-    return(
-        <body class="friend" >
-            <img alt="pfp" src={pfps[pfpID]}/>
-            <div class="friend-text">
-                <b><p id={styleID}>{name}</p></b>
-                <b><p id={userStyleID}>{props.username}</p></b>
-                <p id={bioStyleID}>{props.bio}</p>
-                
-            </div>
-        </body>
-    )
+    if(props.status) {
+        return(
+            <body class="friend" >
+                <a href={"/unfake/"+props.username.slice(1)}> 
+                    <img alt="pfp" href="/" src={pfps[pfpID]}/>
+                </a>
+                <div class="friend-text">
+                    <b><p id={styleID}>{name}</p></b>
+                    <b><p id={userStyleID}>{props.username}</p></b>
+                    <p id={bioStyleID}>{props.bio}</p>
+                    
+                </div>
+            </body>
+        )
+    }
+    else {
+        return(
+            <body class="friend" >
+                    <img alt="pfp" src={pfps[pfpID]}/>
+                <div class="friend-text">
+                    <b><p id={styleID}>{name}</p></b>
+                    <b><p id={userStyleID}>{props.username}</p></b>
+                    <p id={bioStyleID}>{props.bio}</p>
+                    
+                </div>
+            </body>
+        )
+    }
 }
 
 export default Friend;
