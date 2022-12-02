@@ -2,7 +2,8 @@ import React, { useState, useEffect, Component } from "react";
 import { useNavigate } from "react-router";
 
 import '../styles/EditProfile.css';
-import default_pfp from "../assets/default_pfp.png"     
+import default_pfp from "../assets/default_pfp.png";
+import ChooseAvatar from "../components/chooseAvatar.js";  
 
 import face_default from "../assets/face_default.png";
 import face_happy from "../assets/face_happy.png";
@@ -14,21 +15,30 @@ const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
 
 
 const EditProfile = () => {
+    
     var current_pfp = default_pfp;
     if(localStorage.getItem("profilePicture") != "") { // why the fuck is it an empty string here but not anywhere else???
         current_pfp = pfps[localStorage.getItem("profilePicture")];
     }
     var temp = ""
-    function set_pfp(event) {
-        var file = event.target.files[0];
-        if(file.length == 0) {
-            return
-        }
-        var new_url = URL.createObjectURL(file);
-        var preview = document.getElementById("display_pfp");
-        preview.src = new_url;
-        handlePhoto(event);
+    // function set_pfp(event) {
+    //     var file = event.target.files[0];
+    //     if(file.length == 0) {
+    //         return
+    //     }
+    //     var new_url = URL.createObjectURL(file);
+    //     var preview = document.getElementById("display_pfp");
+    //     preview.src = new_url;
+    //     // handlePhoto(event);
+    // }
+    const [pic, setPic] = useState(null);
+
+    var callbackFunction = (picId) =>{
+        console.log(picId);
+        updateForm({ profilePicture: picId });
+        setPic(picId);
     }
+
     const navigate = useNavigate();
     // creates form
 
@@ -81,20 +91,20 @@ const EditProfile = () => {
         
     }
     
-    const handlePhoto = (e) => {
-      function getBase64(file) {
-        var reader = new FileReader();
-        reader.readAsDataURL(file);
-        reader.onload = function () {
-            var value = {profilePicture : reader.result};
-            updateForm(value);
-        };
-        reader.onerror = function (error) {
-          console.log('Error: ', error);
-        };
-     }
-      getBase64(e.target.files[0]);
-    }
+    // const handlePhoto = (e) => {
+    //   function getBase64(file) {
+    //     var reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onload = function () {
+    //         var value = {profilePicture : reader.result};
+    //         updateForm(value);
+    //     };
+    //     reader.onerror = function (error) {
+    //       console.log('Error: ', error);
+    //     };
+    //  }
+    //   getBase64(e.target.files[0]);
+    // }
     
     async function onSubmit(e) {  
       e.preventDefault();
@@ -137,9 +147,13 @@ const EditProfile = () => {
             window.alert("ok error");
             return;
         });
-
+        console.log(toReturn);
         localStorage.setItem("name", toReturn.name);
-        localStorage.setItem("profilePicture", toReturn.profilePicture);
+        if(pic !== null)
+        {
+            localStorage.setItem("profilePicture", pic);
+        }
+        // localStorage.setItem("profilePicture", toReturn.profilePicture);
         localStorage.setItem("userDescription", toReturn.userDescription);
   
         navigate("/profile");
@@ -166,14 +180,16 @@ const EditProfile = () => {
             onSubmit={onSubmit} 
             enctype="multipart/form-data">
                 <label class="custom-file-upload">
-                    <input 
+                    {/* <input 
                     type="file"     
                     id="change_pfp"
                     name="avatar"
                     accept="image/*"
                     onChange={(event) =>set_pfp(event)} 
-                    /> 
-                    Change Profile Picture
+                    />  */}
+                    <ChooseAvatar 
+                    parentCallback = {callbackFunction}
+                    />
                 </label>
                 <div>
                     <input 

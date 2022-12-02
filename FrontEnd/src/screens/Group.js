@@ -5,6 +5,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
 import pencil from '../assets/pencil.png';
+import copy from '../assets/copy.png';
 
 // these do something i think
 var friendAlign = "right";
@@ -52,7 +53,11 @@ async function getGroupProfiles(members) {
     
 }
 
-
+function copyID(id) {
+    navigator.clipboard.writeText(id);
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "GroupID copied";
+}
 
 class Group extends React.Component {
     constructor(props) {
@@ -96,7 +101,12 @@ class Group extends React.Component {
             <a className="title" >{this.state.groupName}. </a>
                 {/* <button className="button" onClick={event =>  window.location.href=editLink}> pencil</button>  */}
                 <a href={editLink} className="edit-button"><img id="edit-group" src={pencil}></img></a>
-                <div className="group-id">GroupID:{this.state.groupID} </div>
+                <div className="group-id">GroupID:{this.state.groupID}
+                    <button class="copy-button" onClick={event => {{
+                        navigator.clipboard.writeText(this.state.groupID);
+                    }}}>
+                        <img id="copy-id" src={copy}></img></button>
+                </div>
                 <Box mt={6} mb={6} ml={10} mr={10}> 
                     <Grid container columns={12} rowSpacing={6}>
                         {Array.from(Array(this.state.numOfMembers)).map((_, index) => {
