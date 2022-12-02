@@ -40,7 +40,7 @@ const [anchorEl, setAnchorEl] = React.useState(null);
             >
                 <Typography>
                     <button className="button-out"><a className="button-style" href="/searchgroups">SearchGroups.</a></button>
-                    <br /><button className="button-out"><a className="button-style" href="/joingroup">JoinAGroup.</a></button>
+                    <br /><button className="button-out"><a className="button-style" href="/joingroup">JoinOrCreateGroup.</a></button>
                 </Typography>
             </Popover>
         </body>
