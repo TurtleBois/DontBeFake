@@ -3,16 +3,42 @@ import React, {useState, useEffect} from "react";
 import Event from "../components/Event.js";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import { useBootstrapBreakpoints } from 'react-bootstrap/esm/ThemeProvider';
+import { breakpoints } from '@mui/system';
 // import greyBox from '../assets/greyBox.png';
 // import { padding } from '@mui/system';
 
 const EventsScreen = () => {
-    const eventIDs = ["6388cf35e9d534a064721530","6389c60ada8a56d2bf2b63da"];
+
+
+
+    //const eventIDs = ["6388cf35e9d534a064721530","6389c60ada8a56d2bf2b63da"];
+
+    const [eventIDS, setEventIDs] = useState(null);
     const [allEvents, setCurrentEvent] = useState(null);
 
 
     useEffect(() => {
+
         async function getUserGroups() {
+
+            var groupID = window.location.href.split("=")[1].split("/")[0];
+            const response = await fetch(`http://localhost:5000/group`);
+            if (!response.ok) {
+                const message = `An error occurred: ${response.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const groups = await response.json();
+            var eventIDs = [];
+            for(var group of groups) {
+                console.log(group);
+                if(group.groupID == groupID) {
+                    eventIDs = group.events;
+                    setEventIDs(group.events);
+                    break;
+                }
+            }
             var events = [];
             for(var eventID of eventIDs) {
                 const response = await fetch(`http://localhost:5000/event/${eventID}`);
