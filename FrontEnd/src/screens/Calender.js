@@ -58,40 +58,40 @@ function weekdays()
 
     return(
     <Grid  minWidth = {100}  container
-    direction="row" style={{color: "white"}}>
+    direction="row" style={{color: "white", paddingBottom: '15px'}}>
         <Grid  minHeight={1} xs = {12/7}>
-            sunday.
+            Sunday.
             <br></br>
             <strong> {dates[0]}</strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
-            monday.
+            Monday.
             <br></br>
             <strong>{dates[1]}</strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
-            tuesday.
+            Tuesday.
             <br></br>
             <strong>{dates[2]}</strong>
             
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
-            wednesday.
+            Wednesday.
             <br></br>
             <strong>{dates[3]}</strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
-            thursday.
+            Thursday.
             <br></br>
             <strong>{dates[4]} </strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
-            friday.
+            Friday.
             <br></br>
             <strong>{dates[5]}</strong>
         </Grid>
         <Grid  minHeight={1} xs = {12/7}>
-            saturday.
+            Saturday.
             <br></br>
             <strong>{dates[6]} </strong>
         </Grid>
