@@ -159,8 +159,8 @@ const EditProfile = () => {
             id="display_pfp"
             src={current_pfp} 
             alt="My_Logo"
-            img width="300" 
-            height="300" 
+            img width="250" 
+            height="250" 
             />
             <form 
             onSubmit={onSubmit} 

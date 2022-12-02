@@ -21,8 +21,8 @@ const ProfileScreen = () => {
         ? 0 : localStorage.getItem("profilePicture"),
         userDescription: localStorage.getItem("userDescription") == "undefined" ? "" : localStorage.getItem("userDescription"),
     }, );   
-    return (
 
+    return (
         <body>
         <div>
             <div className="background">.</div>
@@ -31,14 +31,34 @@ const ProfileScreen = () => {
                     alt="pfp"
                     src={pfps[form.profilePicture]}/>
             </div>
-            <div className="info">
-                Name: {form.name}
+            <div>
+                {(() => {
+                    if (form.name == "") {
+                        return (
+                            <div className="info-name">↓ insert name ↓</div>
+                        )
+                    } else {
+                        return (
+                            <div className="info-name">{form.name}</div>
+                        )
+                    }
+                })()}
             </div>
-            <div className="info">
+            <div className="info-username">
                 @{form.username}
             </div>
-            <div className="bio">
-                Bio: {form.userDescription}
+            <div>
+                {(() => {
+                    if (form.userDescription == "") {
+                        return (
+                            <div className="bio">↓ insert bio ↓</div>
+                        )
+                    } else {
+                        return (
+                            <div className="bio">{form.userDescription}</div>
+                        )
+                    }
+                })()}
             </div>
             <a href='./editprofile' className="edit-profile-link">
                 <button className="edit-link">Edit Profile</button>
