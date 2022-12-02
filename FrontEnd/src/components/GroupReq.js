@@ -148,7 +148,7 @@ const GroupReq = (props) => {
                     <b><p id="user-name">{props.name} </p></b>
                     <b><p id="user-username">MemberCount: {props.numMembers}</p></b>
                 </div>
-                <button id="join-button" onClick={() => sendRequest() }><b>Join.</b></button>
+                <button class="to-join" id="join-button" onClick={() => sendRequest() }><b>Join.</b></button>
             </body>
         )
     }

@@ -25,11 +25,40 @@
     text-decoration: none;
 }
 
+.copy-button {
+    background-color: #121212;
+    height: 35px;
+    width: 35px;
+    display: inline-flex;
+}
+
+.copy-button:hover {
+    opacity: 0.6;
+}
+
+.copy-button:active {
+    opacity: 0.4;
+}
+
+.edit-button:hover {
+    opacity: 0.6;
+}
+
+.edit-button:active {
+    opacity: 0.4;
+}
 
 #edit-group {
     height: 50px;
     width: 50px;
     margin-bottom: 40px;
+    display: inline-flex;
+}
+
+#copy-id {
+    height: 30px;
+    width: 30px;
+    background-color: #121212;
     display: inline-flex;
 }
 

@@ -1,3 +1,11 @@
+.to-join:hover {
+    opacity: 0.6;
+}
+
+.to-join:active {
+    opacity: 0.4;
+}
+
 #join-button {
     width: auto;
     text-align: center;
@@ -11,7 +19,7 @@
     color:#ffffff !important;
     border-color: #212529;
     margin-top: 10px;
-    padding: 4px 4px 4px 7px;
+    padding: 4px 10px 4px 10px;
 }
 
 #joined-button {
@@ -27,7 +35,7 @@
     color:#00ff04 !important;
     border-color: #212529;
     margin-top: 10px;
-    padding: 4px 4px 4px 7px;
+    padding: 4px 10px 4px 10px;
     
 }
 
@@ -44,5 +52,5 @@
     color:#ff9900 !important;
     border-color: #212529;
     margin-top: 10px;
-    padding: 4px 4px 4px 7px;
+    padding: 4px 10px 4px 10px;
 }

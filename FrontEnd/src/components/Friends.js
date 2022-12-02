@@ -21,10 +21,10 @@ const Friend = (props) => {
     return(
         <body class="friend" >
             {/* /friendprofile is temporary link */}
-            <a href="/friendprofile" class="friend-link"><img alt="pfp" src={pfps[pfpID]}/></a>
+            <img class="friend-link" alt="pfp" src={pfps[pfpID]}/>
             <div class="friend-text">
-                <a href="/friendprofile" class="friend-link"><b><p id={nameID}>{name}</p></b></a>
-                <a href="/friendprofile" class="friend-link"><b><p id="friend-username">{props.username}</p></b></a>
+                <b><p class="friend-link" id={nameID}>{name}</p></b>
+                <b><p class="friend-link" id="friend-username">{props.username}</p></b>
                 
             </div>
         </body>
