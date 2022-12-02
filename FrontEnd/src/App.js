@@ -13,7 +13,7 @@ function App() {
         )
     } else {
         return (
-            <div className="App">
+            <div className="App"  style={{backgroundColor: '#181414'}}>
                 <h1>DontBeFake.</h1>
                 <NavbarComp/>
             </div>
