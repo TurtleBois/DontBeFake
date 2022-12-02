@@ -8,8 +8,8 @@ const GroupMate = () => {
             <div class="groupmate-text">
                 <b><p id="groupmate-name">Powell Cat</p></b>
                 <b><p id="groupmate-username">campuscat</p></b>
-                <button id="real-button"><b>Real.</b></button>
-                <button id="fake-button"><b>Fake.</b></button>
+                <button class="voting-buttons" id="real-button"><b>Real.</b></button>
+                <button class="voting-buttons" id="fake-button"><b>Fake.</b></button>
             </div>
         </body>
     )
