@@ -148,7 +148,7 @@ export default class NavbarComp extends Component {
                  </div>
                 </Navbar.Collapse>
                 <NavDropdown title={profilePicture} id="basic-nav-dropdown" align="end">
-                  <NavDropdown.Item href="/profile">My Profile</NavDropdown.Item>
+                  <NavDropdown.Item href="/profile">MyProfile.</NavDropdown.Item>
                   <NavDropdown.Item onClick={logout} href="/login">{this.state.loginOrLogout}</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
