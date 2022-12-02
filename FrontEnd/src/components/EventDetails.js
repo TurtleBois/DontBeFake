@@ -8,6 +8,9 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+
+
+
 const EventDetails = (props) => {
     const [open, setOpen] = React.useState(false);
   const [scroll, setScroll] = React.useState('paper');
@@ -65,6 +68,31 @@ const EventDetails = (props) => {
       return;
     }
     
+    
+    function toStandardTime(hours, min)
+    {
+        var stdHours = hours; 
+        var pm = false; 
+        if(hours > 12)
+        {
+            stdHours -=12;
+            pm = true;
+        }
+        if(stdHours === 0)
+        {
+            stdHours = 12
+        }
+
+        if(pm)
+        {
+            return(stdHours +  ":" + ("0" + min).slice(-2) + "pm") 
+        }
+        else{
+            return(stdHours +  ":" + ("0" + min).slice(-2) + "am") 
+        }
+        
+    }
+
     return(
         <div>
             <div id="box" className="box-date" onClick={handleClickOpen('paper')}>
@@ -91,7 +119,7 @@ const EventDetails = (props) => {
 
             Where: {props.location}
             <br></br>
-            When: {props.month} {props.day} | {("0" + start.getHours()).slice(-2) + ":" + ("0" + start.getMinutes()).slice(-2) + ":" + ("0" + start.getSeconds()).slice(-2)} - {("0" + end.getHours()).slice(-2) + ":" +("0" + end.getMinutes()).slice(-2) + ":" + ("0" + start.getSeconds()).slice(-2)   } 
+            When: {props.month} {props.day} | {toStandardTime(start.getHours(), start.getMinutes())} - {toStandardTime(end.getHours(), end.getMinutes())}
             <br></br>
             Who: {attending}
 

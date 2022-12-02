@@ -34,34 +34,6 @@ const Event = (props) => {
 
         return;
     }
-
-    async function BeFake() {
-        const eventRequest = await fetch(`http://localhost:5000/event/${props.eventID}`);
-        if (!eventRequest.ok) {
-            const message = `An error occurred: ${eventRequest.statusText}`;
-            window.alert(message);
-            return;
-        }
-        // add curr member to the array
-        const event = await eventRequest.json();
-
-        var attendingMembers = event.attending;
-        var index = attendingMembers.indexOf(user_ID);
-        attendingMembers.splice(index,1);
-
-        const value = {attending: attendingMembers};
-        var updatedEvent = {...event, ...value}; 
-
-        await fetch(`http://localhost:5000/event/update/${props.eventID}`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(updatedEvent),         
-              
-        })
-        .then( () => {window.location.reload(false);});
-    }
     
     function convertFromJackyTime(time) {
         function indexTo24Hour(index){   
@@ -94,10 +66,95 @@ const Event = (props) => {
     }
     var altTime = convertFromJackyTime(props.time);
 
-    console.log(props.attending);
+    async function generateGroupID(length) {
+        var result = "";
+        var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        var charLength = chars.length;
+        for ( var i = 0; i < length; i++ ) {
+            result += chars.charAt(Math.floor(Math.random() * charLength));
+        }
+        return result;
+    }
+
+    async function Vote() {
+        console.log(props);
+        var groupID = window.location.href.split("=")[1].split("/")[0];
+
+        const eventRequest = await fetch(`http://localhost:5000/event/${props.eventID}`);
+        if (!eventRequest.ok) {
+            const message = `An error occurred: ${eventRequest.statusText}`;
+            window.alert(message);
+            return;
+        }
+        // add curr member to the array
+        const event = await eventRequest.json();
+        const electionID = await generateGroupID(13);
+
+        var voters = [];
+        var candidates = [];
+        for(var person of props.attending) {
+            voters.push([person,false]);
+            candidates.push([person,0]);
+        }
+
+        console.log(event);
+        if(event.votingPointer == null) {
+            var newVotingPointer = {
+                groupID: groupID,
+                eventID: props.eventID,
+                electionID: electionID,
+                voters: voters,
+                beFakeCandidates: candidates,
+            }
+            
+            
+            await fetch("http://localhost:5000/vote/add", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(newVotingPointer),
+            })
+            .catch(error => {
+                window.alert(error);
+                return;
+            });
+
+            const request = await fetch(`http://localhost:5000/vote`);
+            if (!eventRequest.ok) {
+                const message = `An error occurred: ${eventRequest.statusText}`;
+                window.alert(message);
+                return;
+            }
+            const ballots = await request.json();
+            var freshlink = "";
+            for(var ballot of ballots) {
+                if(ballot.electionID == electionID) {
+                    freshlink = ballot._id;
+                    var value = {votingPointer: ballot._id};
+                    var updatedEvent =  {...event, ...value};
+                    console.log(updatedEvent);
+                    await fetch(`http://localhost:5000/event/update/${props.eventID}`, {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updatedEvent),         
+                        
+                    })
+                    .then( () => window.location.replace('/voting='+freshlink) )
+                    ;
+                    break;
+                }
+            }
+        }
+        else {
+            window.location.replace('/voting='+event.votingPointer);
+        }
+
+
+    }
     if(props.attending.includes(user_ID)) {
-        const deterents = ["BeFake.","TheyNeedYou.","Drop.","Quit.","Abandon.","Flake.","Desert."];
-        var index = Math.floor(Math.random() * deterents.length);
         return (
             <div className="content-container">
                 <div className="event-content">
@@ -126,7 +183,7 @@ const Event = (props) => {
                             <div id="content" className="text">
                                 About: {props.description}
                             </div>
-                            <button id="befake-button" onClick={() => BeFake() }><b>{deterents[index]}</b></button>
+                            <button id="befake-button" onClick={() => Vote() }><b>Vote.</b></button>
                         </p>
                     </div>
                 </div>
@@ -135,7 +192,7 @@ const Event = (props) => {
 
     }
 
-    console.log(props)
+    
     return (
         <div className="content-container">
             <div className="event-content">
@@ -158,7 +215,7 @@ const Event = (props) => {
                         <div id="content" className="text">
                             About: {props.description}
                         </div>
-                        <button class="b-button" id="bereal-button" onClick={() => BeReal() }><b>BeReal.</b></button>
+                        <button id="bereal-button"><b>Voting Expired.</b></button>
                     </p>
                 </div>
             </div>

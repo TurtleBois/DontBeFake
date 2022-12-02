@@ -39,11 +39,11 @@ const InvitesScreen = () => {
     var numOfInvites = allRequests.length;
     return (
         <div>
-            if (allRequests.length === 0){
-                   return(
-                    <div className = 'title' style={{fontSize: '50px'}}>NoRequests.</div> 
-                   )
-            }
+            {/* if (allRequests.length === 0){
+                return(
+                <div className = 'title' style={{fontSize: '50px'}}>NoRequests.</div> 
+                )
+            } */}
             <Box pt={3.5} pb={3.5} ml={7} mr={7}> 
                 <Grid container columns={12} rowSpacing={5}>
                     {Array.from(Array(numOfInvites)).map((_, index) => {

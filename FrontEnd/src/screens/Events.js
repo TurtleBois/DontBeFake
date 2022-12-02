@@ -37,6 +37,40 @@ const EventsScreen = () => {
     var numOfEvents = allEvents.length;
     var groupID = window.location.href.split("=")[1].split("/")[0];
     var prefix = "/group=" + groupID;
+    const intToMonth= ["","JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"];
+
+    function convertFromJackyTime(time) {
+        function indexTo24Hour(index){   
+            const thirty = (index%2) ? "30" : "00"
+            return (9 + Math.floor(index/2) + ":"+thirty + ":00");
+        }
+        const intToMonth= ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        
+        if(time[0].length == 1) {
+            time[0] = "0" + time[0];
+        }
+        
+        if(time[1].length == 1) {
+            time[1] = "0" + time[1];
+        }
+        var prelude = ""+
+        time[1]+" "+
+        intToMonth[parseInt(time[0])]+" "+
+        time[2]+" "
+        
+        var toReturn = [];
+        var startTime = prelude+indexTo24Hour(time[3]);
+        var endTime = prelude+indexTo24Hour(time[4]);
+        
+
+        toReturn.push(Date.parse(startTime));
+        toReturn.push(Date.parse(endTime));
+        
+        return toReturn;
+    }
+
+
+
     return (
         <body>
             <div>
@@ -47,6 +81,7 @@ const EventsScreen = () => {
             <Box pt={1} pb={2} ml={7} mr={7}> 
                 <Grid container columns={10} rowSpacing={3}>
                     {Array.from(Array(numOfEvents)).map((_, index) => {
+                        if(convertFromJackyTime(allEvents[index].time)[1] > Date.now())
                         return (
                             <Grid item sm={5} key={index} align={"center"} style={{ maxWidth: '100%'}}>
                                 <Event
@@ -56,8 +91,8 @@ const EventsScreen = () => {
                                 time={allEvents[index].time}
                                 location={allEvents[index].location}
                                 description={allEvents[index].description}
-                                day="25"
-                                month="DEC"
+                                day={allEvents[index].time[1]}
+                                month={intToMonth[parseInt(allEvents[index].time[0])]}
                                 />
                             </Grid> 
                         )  

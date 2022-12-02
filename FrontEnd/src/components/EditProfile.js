@@ -16,7 +16,7 @@ const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
 
 const EditProfile = () => {
     
-    var current_pfp = default_pfp;
+    var current_pfp = pfps[0];
     if(localStorage.getItem("profilePicture") != "") { // why the fuck is it an empty string here but not anywhere else???
         current_pfp = pfps[localStorage.getItem("profilePicture")];
     }
@@ -36,6 +36,8 @@ const EditProfile = () => {
     var callbackFunction = (picId) =>{
         console.log(picId);
         updateForm({ profilePicture: picId });
+        var pic = document.getElementById("display_pfp");
+        pic.src = pfps[picId];
         setPic(picId);
     }
 
