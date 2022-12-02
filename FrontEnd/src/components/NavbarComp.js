@@ -195,7 +195,7 @@ export default class NavbarComp extends Component {
                 <Route path="/heatmap=:groupID" element={<HeatMap/>}/>
                 <Route exact path="/group=:groupID/requests" element={<><MiniNav/><RequestsScreen/></>}/>
                 <Route exact path="/group=:groupID/groupcalendar" element={<><MiniNav/><HeatMap/></>}/>            
-                <Route exact path="/group=:groupID/voting" element={<><MiniNav/><VotingScreen/></>}/>   
+                <Route exact path="/voting=:votingID" element={<VotingScreen/>}/>
                 <Route exact path="/group=:groupID/events" element={<><MiniNav/><EventsScreen/></>}/>
               </Routes>
             </div>
