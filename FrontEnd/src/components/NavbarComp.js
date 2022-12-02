@@ -125,7 +125,15 @@ export default class NavbarComp extends Component {
     return (
       <div>
       {(() => {
-        if (localStorage.getItem("DBF_username") === null) {
+        if (localStorage.getItem("DBF_username") === null && 
+            window.location.href === "http://localhost:3000/SignUp") {
+          return (
+            <Router>
+              <SignUpScreen/>
+            </Router>
+          )
+        } else if (localStorage.getItem("DBF_username") === null && 
+                  window.location.href === "http://localhost:3000/login") {
           return (
             <Router>
               <LoginScreen/>

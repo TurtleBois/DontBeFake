@@ -5,7 +5,8 @@ import React from "react";
 import './styles/LogIn.css';
 
 function App() {
-    if (window.location.href === "http://localhost:3000/login") {
+    if (window.location.href === "http://localhost:3000/login" ||
+        window.location.href === "http://localhost:3000/SignUp" ) {
         return (
             <div className="App">
                 <NavbarComp/>
