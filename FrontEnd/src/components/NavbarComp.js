@@ -145,7 +145,7 @@ export default class NavbarComp extends Component {
           return (
             <Router>
             <div>
-              <Navbar bg="#181414" variant="dark" expand="md">
+              <Navbar bg="#121212" variant="dark" expand="md">
                 <Container>
                   {/* <Navbar.Toggle aria-controls="basic-navbar-nav" /> */}
                   <Navbar.Collapse id="basic-navbar-nav">
