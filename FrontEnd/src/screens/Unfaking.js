@@ -12,7 +12,7 @@ import face_winky from "../assets/face_winky.png";
 import face_XD from "../assets/face_XD.png";
 const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
 
-const minimumFakeRatio = 0.5;
+const minimumFakeRatio = 0.01;
 
 const Unfaking = () => {
     const defendent = window.location.href.split('/')[4];

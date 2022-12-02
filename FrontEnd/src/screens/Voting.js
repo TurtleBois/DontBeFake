@@ -158,7 +158,7 @@ class VotingScreen extends React.Component {
         })
         .then( () => {        
         var groupID = window.location.href.split("=")[1].split("/")[0];
-        var prefix = "/group=" + groupID + "/events/past";
+        var prefix = "/group=" + this.state.groupID + "/events/past";
         window.location.href=prefix;
         });
         
