@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 // import { padding } from '@mui/system';
 
 const EventsScreen = () => {
-    const eventIDs = ["6388945bea9ee291e8fef87f","6388945bea9ee291e8fef87f","6388945bea9ee291e8fef87f","6388945bea9ee291e8fef87f"];
+    const eventIDs = ["6388cf35e9d534a064721530","6389c60ada8a56d2bf2b63da"];
     const [allEvents, setCurrentEvent] = useState(null);
 
 
@@ -32,6 +32,7 @@ const EventsScreen = () => {
      if(allEvents == null) {
         return;
      }
+
 
     var numOfEvents = allEvents.length;
     var groupID = window.location.href.split("=")[1].split("/")[0];

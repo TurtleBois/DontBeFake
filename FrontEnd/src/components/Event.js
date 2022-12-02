@@ -4,7 +4,6 @@ import EventDetails from './EventDetails.js';
 
 
 const Event = (props) => {
-    console.log(props);
     const user_ID = localStorage.getItem("_id");
 
     async function BeReal() {
@@ -62,11 +61,40 @@ const Event = (props) => {
               
         })
         .then( () => {window.location.reload(false);});
-
     }
+    
+    function convertFromJackyTime(time) {
+        function indexTo24Hour(index){   
+            const thirty = (index%2) ? "30" : "00"
+            return (9 + Math.floor(index/2) + ":"+thirty + ":00");
+        }
+        const intToMonth= ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+        
+        if(time[0].length == 1) {
+            time[0] = "0" + time[0];
+        }
+        
+        if(time[1].length == 1) {
+            time[1] = "0" + time[1];
+        }
+        var prelude = ""+
+        time[1]+" "+
+        intToMonth[parseInt(time[0])]+" "+
+        time[2]+" "
+        
+        var toReturn = [];
+        var startTime = prelude+indexTo24Hour(time[3]);
+        var endTime = prelude+indexTo24Hour(time[4]);
+        
 
+        toReturn.push(Date.parse(startTime));
+        toReturn.push(Date.parse(endTime));
+        
+        return toReturn;
+    }
+    var altTime = convertFromJackyTime(props.time);
 
-    // console.log(props.attending);
+    console.log(props.attending);
     if(props.attending.includes(user_ID)) {
         const deterents = ["BeFake.","TheyNeedYou.","Drop.","Quit.","Abandon.","Flake.","Desert."];
         var index = Math.floor(Math.random() * deterents.length);
@@ -82,11 +110,12 @@ const Event = (props) => {
                     day = {props.day}
                     month = {props.month}
                     name = {props.eventName}
-                    beginTime = {props.time[0]}
-                    endTime = {props.time[1]}
+                    beginTime = {altTime[0]}
+                    endTime = {altTime[1]}
                     location = {props.location}
                     description = {props.description}
                     id = {props.eventID}
+                    attending = {props.attending}
 
                     />
                         <div className="content-box">
@@ -119,6 +148,7 @@ const Event = (props) => {
                     location = {props.location}
                     description = {props.description}
                     id = {props.eventID}
+                    attending = {props.attending}
                     />
                 <div className="content-box">
                     <p>
