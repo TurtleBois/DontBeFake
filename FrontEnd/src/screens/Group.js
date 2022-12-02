@@ -38,17 +38,15 @@ async function getGroupProfiles(members) {
       
     const profiles = await response.json();
     var groupMembers = [];
-    var membersList = [];
 
     for (var member of members) {
-        membersList.push(member["DBF_username"]);
-    }
-
-    for(var profile of profiles) {
-        if(membersList.includes(profile.username)) {
-            groupMembers.push(profile);
+        for(var profile of profiles) {
+            if(profile.username == member["DBF_username"]) {
+                groupMembers.push(profile);
+            }
         }
     }
+
     return groupMembers;
     
 }
@@ -70,7 +68,7 @@ class Group extends React.Component {
         var newGroupID = window.location.href.split('=')[1];
         var record = await getGroup(newGroupID);
         if(record == null) {
-            // TODO: send to this group does not exist.
+            window.location.href="/viewgroup";
         }
         
         var memberProfiles = await getGroupProfiles(record.members);
