@@ -158,7 +158,7 @@ const Event = (props) => {
                         <div id="content" className="text">
                             About: {props.description}
                         </div>
-                        <button id="bereal-button" onClick={() => BeReal() }><b>BeReal.</b></button>
+                        <button class="b-button" id="bereal-button" onClick={() => BeReal() }><b>BeReal.</b></button>
                     </p>
                 </div>
             </div>
