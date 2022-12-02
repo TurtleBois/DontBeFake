@@ -92,7 +92,7 @@ const Event = (props) => {
 
         var voters = [];
         var candidates = [];
-        for(var person in props.attending) {
+        for(var person of props.attending) {
             voters.push([person,false]);
             candidates.push([person,0]);
         }

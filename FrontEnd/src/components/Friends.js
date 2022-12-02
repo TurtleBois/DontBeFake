@@ -9,7 +9,6 @@ import face_XD from "../assets/face_XD.png";
 const pfps = [face_default,face_happy,face_ditto,face_angry,face_winky,face_XD];
 
 const Friend = (props) => {
-    console.log(props);
     var pfpID = (props.profilePicture == "") ? 0 : props.profilePicture;
     var nameID = "friend-name";
     var name = props.name;
