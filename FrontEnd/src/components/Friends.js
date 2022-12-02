@@ -17,6 +17,10 @@ const Friend = (props) => {
         nameID = "leader-name";
         name+="👑";
     }
+    if(props.role == "fake") {
+        nameID = "fake-name";
+        name = "[FAKE]" + name;
+    }
 
     return(
         <body class="friend" >

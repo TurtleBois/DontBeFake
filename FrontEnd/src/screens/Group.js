@@ -130,6 +130,7 @@ class Group extends React.Component {
                                     username={"@"+  this.state.memberProfiles[index]["username"]}
                                     role = {this.state.memberRoles[index]["role"]}
                                     profilePicture = {this.state.memberProfiles[index]["profilePicture"]}
+                                    
                                     />
                                 </Grid> 
                             )  

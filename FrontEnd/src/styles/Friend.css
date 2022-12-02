@@ -46,6 +46,19 @@
     margin-bottom: 0px;
 }
 
+#fake-name {
+    color: rgb(199, 0, 0);
+    margin-top: 25px;
+    margin-bottom: 0px;
+}
+
+#fake-username {
+    color: rgb(199, 0, 0);
+    font-size: 15px;
+    margin-top: -5px;
+    margin-bottom: 0px;
+}
+
 #friend-status {
     font-size: 15px;
 }
