@@ -152,7 +152,7 @@ export default class NavbarComp extends Component {
                     <Nav className="me-auto">
                       {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
                       {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
-                      <div style={{display:"flex", position:'absolute', left: '41vw', justifyContent: 'center'}} >
+                      <div className="navbar" style={{display:"flex", position:'absolute', left: '41vw', justifyContent: 'center', align: 'center'}} >
                         <Nav.Link style={{fontWeight: 'bolder'}} as={Link} to={"/calendar"}>MyCalendar.</Nav.Link>
                         <Nav.Link style={{fontWeight: 'bolder'}} as={Link} to={"/viewgroup"}>MyGroups.</Nav.Link>
                       </div>
