@@ -30,6 +30,15 @@ const Friend = (props) => {
         bioStyleID = "red-bio";
     }
 
+    /* check if leader first, then if leader is fake, overwrites css style to red */
+
+    if(props.status == true) {
+        styleID = "red-name";
+        name = "[Fake.] " + name;
+        userStyleID = "red-username";
+        bioStyleID = "red-bio";
+    }
+
     return(
         <body class="friend" >
             <img alt="pfp" src={pfps[pfpID]}/>

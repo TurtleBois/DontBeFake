@@ -12,7 +12,6 @@ const MiniNav = () => {
             <Link to={prefix+"/groupcalendar"}><button><b>Heatmap</b></button></Link>
             <Link to={prefix}><button><b>Members</b></button></Link>
             <Link to={prefix+"/requests"}><button><b>Requests</b></button></Link>
-            <Link to={prefix+"/voting"}><button><b>Voting</b></button></Link>
             <Link to={prefix+"/events"}><button><b>Events</b></button></Link>
         </div>
     )

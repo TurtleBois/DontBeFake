@@ -20,6 +20,7 @@ import Select from '@mui/material/Select';
 
 
 
+
 function timeScale(index)
 {   
     const thirty = (index%2) ? "30" : "00"
@@ -89,6 +90,8 @@ class Slot extends React.Component {
   {
     this.setState({description: event.target.value})
   }
+  
+
 
   createGroupEvent = () => 
   {
@@ -115,10 +118,55 @@ class Slot extends React.Component {
   }
 
 
+
   render()
   {
+    // console.log(this.props)
     const open = Boolean(this.state.anchorEl);
     const id = open ? 'simple-popover' : undefined;
+      if(this.props.isEvent !== null)
+      {
+        return(
+         
+
+          <div>
+          <Typography
+            aria-owns={open ? 'mouse-over-popover' : undefined}
+            aria-haspopup="true"
+            onMouseEnter={this.handleClick}
+            onMouseLeave={this.handleClose}
+          >
+            <CardActionArea
+              variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
+                height: 40}}
+                disableRipple
+                >
+              
+          </CardActionArea>
+          </Typography>
+          <Popover
+            id="mouse-over-popover"
+            sx={{
+              pointerEvents: 'none',
+            }}
+            open={open}
+            anchorEl={this.state.anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            onClose={this.handleClose}
+            disableRestoreFocus
+          >
+            <Typography sx={{ p: 1 }}> {this.props.eventNames[this.props.isEvent]}</Typography>
+          </Popover>
+        </div>
+        )
+      }
       return(
         <Card variant="outlined"
         style={{backgroundColor: this.state.anchorEl === null ? 'rgba(90, 52, 52, 0)': 'white' , border: "none", boxShadow: "none"} }>
