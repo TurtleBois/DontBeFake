@@ -13,7 +13,7 @@ import MyFriendsScreen from "../screens/MyFriends";
 import Profile from "../screens/Profile";
 import Schedules from "../screens/Schedules";
 import Calender from "../screens/Calender";
-import InvitesScreen from "../screens/InvitesScreen";
+import RequestsScreen from "../screens/InvitesScreen";
 import LoginScreen from "../screens/LogIn";
 import SignUpScreen from '../screens/SignUp';
 import EditProfile from "../components/EditProfile"
@@ -135,7 +135,9 @@ export default class NavbarComp extends Component {
                   {/* <Nav.Link as={Link} to={"/home"}>Home</Nav.Link> */}
                   {/* <Nav.Link as={Link} to={"/Calendar"}>Calendar</Nav.Link> */}
                   <Nav.Link as={Link} to={"/calendar"}>MyCalendar.</Nav.Link>
-                  <Nav.Link as={Link} to={"/viewgroup"}>MyGroups.</Nav.Link>=
+                  <Nav.Link as={Link} to={"/viewgroup"}>MyGroups.</Nav.Link>
+                  <Nav.Link as={Link} to={"/searchgroups"}>SearchGroups.</Nav.Link>
+                  <Nav.Link as={Link} to={"/joingroup"}>JoinGroups.</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
               <Nav className="ms-auto">

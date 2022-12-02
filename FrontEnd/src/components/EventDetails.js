@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import '../styles/Events.css';
 
 import Button from '@mui/material/Button';
@@ -20,8 +20,9 @@ const EventDetails = (props) => {
   const handleClose = () => {
     setOpen(false);
   };
-
+  
   const descriptionElementRef = React.useRef(null);
+  const [attending, setAttending] = useState(null);
   React.useEffect(() => {
     if (open) {
       const { current: descriptionElement } = descriptionElementRef;
@@ -29,9 +30,30 @@ const EventDetails = (props) => {
         descriptionElement.focus();
       }
     }
+    async function getUserGroups() {
+      const attending1 = props.attending;
+      var attendeeNames = "";
+      for(var attendee of attending1) {
+        const response = await fetch(`http://localhost:5000/profile/${attendee}`);
+        if (!response.ok) {
+          const message = `An error occurred: ${response.statusText}`;
+          window.alert(message);
+          return;
+      }
+      const profile = await response.json();
+        if(profile.name != "") {
+          if(attendeeNames != "") {
+            attendeeNames+= ", ";
+          }
+          attendeeNames+=(profile.name);
+        }
+      }
+      
+      setAttending(attendeeNames);
+    }
+    getUserGroups();
   }, [open]);
 
-    console.log(props)
     var start = new Date(props.beginTime);
     start.setTime(props.beginTime);
 
@@ -39,7 +61,10 @@ const EventDetails = (props) => {
 
     var end = new Date(props.endTime);
     end.setTime(props.endTime);
-
+    if(attending == null) {
+      return;
+    }
+    
     return(
         <div>
             <div id="box" className="box-date" onClick={handleClickOpen('paper')}>
@@ -67,7 +92,8 @@ const EventDetails = (props) => {
             Where: {props.location}
             <br></br>
             When: {props.month} {props.day} | {("0" + start.getHours()).slice(-2) + ":" + ("0" + start.getMinutes()).slice(-2) + ":" + ("0" + start.getSeconds()).slice(-2)} - {("0" + end.getHours()).slice(-2) + ":" +("0" + end.getMinutes()).slice(-2) + ":" + ("0" + start.getSeconds()).slice(-2)   } 
-            
+            <br></br>
+            Who: {attending}
 
             <DialogContent dividers={scroll === 'paper'}>
 
