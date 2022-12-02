@@ -20,6 +20,7 @@ app.use(require("./routes/schedule"));
 app.use(require("./routes/group"));
 app.use(require("./routes/event"));
 app.use(require("./routes/vote"));
+app.use(require("./routes/trial"));
 // get driver connection
 const dbo = require("./db/conn");
 
