@@ -67,15 +67,15 @@ class Slot extends React.Component {
             }}
           >
 
-          <Typography sx={{  p: 2}} >
+          <Typography sx={{  p: 2}} style={{backgroundColor: '#898989'}}>
             
             
-          <Box sx={{ minWidth: 120}}>
+          <Box sx={{ minWidth: 120}} style={{backgroundColor: '#898989', color: 'white'}}>
             {this.props.name}
             </Box>
           
             {/* {console.log(this.props.delete)}  */}
-            <Button variant="outlined"  onClick = {() => {this.props.delete(this.props.value); this.handleClose(); }} color  = {"error"} >Delete</Button>
+            <Button variant="outlined"  onClick = {() => {this.props.delete(this.props.value); this.handleClose(); }} color  = {"error"} style={{marginTop: '10px'}}>Delete</Button>
           
             
           </Typography>

@@ -169,7 +169,7 @@ class Slot extends React.Component {
       }
       return(
         <Card variant="outlined"
-        style={{backgroundColor: this.state.anchorEl === null ? 'rgba(90, 52, 52, 0)': 'white' , border: "none", boxShadow: "none"} }>
+        style={{backgroundColor: this.state.anchorEl === null ? 'rgba(90, 52, 52, 0)': '#898989' , border: "none", boxShadow: "none", opacity: '65%'} }>
 
           <CardActionArea
               variant="contained" aria-describedby={id}  onClick={this.handleClick} sx={{
@@ -194,7 +194,7 @@ class Slot extends React.Component {
           }}
           >
 
-        <Typography sx={{ p: 2 }}>
+        <Typography sx={{ p: 2 }}  style={{color: 'white', backgroundColor: '#898989'}}>
         
           <TextField
               required
@@ -202,6 +202,9 @@ class Slot extends React.Component {
               label="Event Name"
               value={this.state.name}
               onChange={this.handleChangeName}
+              InputLabelProps={{
+                style: { color: 'white'}
+              }}
             />
 
             <TextField
@@ -210,6 +213,9 @@ class Slot extends React.Component {
               label="Location"
               value={this.state.location}
               onChange={this.handleChangeLocation}
+              InputLabelProps={{
+                style: { color: 'white'}
+              }}
             />
 
 
@@ -224,6 +230,9 @@ class Slot extends React.Component {
                 fullWidth 
                 multiline
                 id="fullWidth"
+                InputLabelProps={{
+                  style: { color: 'white'}
+                }}
               />
           </Box>
             
@@ -234,7 +243,7 @@ class Slot extends React.Component {
 
           <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth >
-                <InputLabel id="demo-simple-select-label">end</InputLabel>
+                <InputLabel id="demo-simple-select-label" style={{color: 'white'}}>end</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -250,11 +259,11 @@ class Slot extends React.Component {
               </FormControl>
             </Box>
 
-            <Box sx={{ minWidth: 120}}>
+            <Box sx={{ minWidth: 120}} >
             {this.props.numEvents} people are not avaliable
             </Box>
             
-            <Button variant="outlined"  onClick = {() => {this.handleClose(); this.createGroupEvent()}} >confirm</Button>
+            <Button variant="outlined"  onClick = {() => {this.handleClose(); this.createGroupEvent()}} style={{color: "white", outlineColor: '#3c3c3c', borderColor: '#3c3c3c', marginTop: "5px"}}>confirm</Button>
 
         
         </Typography>
