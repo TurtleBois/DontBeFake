@@ -93,7 +93,7 @@ const Event = (props) => {
         return toReturn;
     }
     var altTime = convertFromJackyTime(props.time);
-
+    console.log(altTime)
     console.log(props.attending);
     if(props.attending.includes(user_ID)) {
         const deterents = ["BeFake.","TheyNeedYou.","Drop.","Quit.","Abandon.","Flake.","Desert."];
@@ -143,8 +143,8 @@ const Event = (props) => {
                     day = {props.day}
                     month = {props.month}
                     name = {props.eventName}
-                    beginTime = {props.time[0]}
-                    endTime = {props.time[1]}
+                    beginTime = {altTime[0]}
+                    endTime = {altTime[1]}
                     location = {props.location}
                     description = {props.description}
                     id = {props.eventID}

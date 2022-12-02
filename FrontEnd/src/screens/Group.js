@@ -4,7 +4,7 @@ import FindMoreFriends from "../components/FindMoreFriends";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import '../styles/group.css';
-import pencil from '../assets/pencil.png';
+import pencil from '../assets/pencil-transparent.png';
 import copy from '../assets/copy.png';
 
 // these do something i think

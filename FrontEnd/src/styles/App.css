@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #121212;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -44,11 +44,8 @@ h1 {
   padding-left: 15px;
   padding-right: 15px;
   margin: 0;
+  font-weight: bolder;
 
   color: #ffffff;
-  background: linear-gradient(to bottom, 
-                              rgb(0, 0, 0) 0%,
-                              rgb(0, 0, 0) 62%, 
-                              rgb(0, 0, 0) 62%, 
-                              rgb(0, 0, 0) 100%);
+  background: #121212;
 }

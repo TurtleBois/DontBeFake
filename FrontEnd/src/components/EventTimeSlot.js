@@ -251,7 +251,7 @@ class Slot extends React.Component {
             </Box>
 
             <Box sx={{ minWidth: 120}}>
-            {this.props.numEvents}/{this.props.maxPeople} are not avaliable
+            {this.props.numEvents} people are not avaliable
             </Box>
             
             <Button variant="outlined"  onClick = {() => {this.handleClose(); this.createGroupEvent()}} >confirm</Button>
