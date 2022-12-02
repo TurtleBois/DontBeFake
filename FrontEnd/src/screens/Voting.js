@@ -6,8 +6,7 @@ import Box from '@mui/material/Box';
 
 
 
-class VotingScreen extends React.Component 
-{
+class VotingScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,10 +16,11 @@ class VotingScreen extends React.Component
         }
         
     }
+
     render()
     {
         var groupMatesAlign = "right";
-        return(
+        return (
         <div>
             <Box pt={3.5} pb={3.5} ml={7} mr={7}> 
                 <Grid container columns={12} rowSpacing={5}>
@@ -44,8 +44,6 @@ class VotingScreen extends React.Component
         </div>
         )
     }
-
-
 }
 
 
