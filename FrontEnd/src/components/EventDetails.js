@@ -8,7 +8,29 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
+function toStandardTime(hours, min)
+{
+    var stdHours = hours; 
+    var pm = false; 
+    if(hours > 12)
+    {
+        stdHours -=12;
+        pm = true;
+    }
+    if(stdHours === 0)
+    {
+        stdHours = 12
+    }
 
+    if(pm)
+    {
+        return(stdHours +  ":" + ("0" + min).slice(-2) + "pm") 
+    }
+    else{
+        return(stdHours +  ":" + ("0" + min).slice(-2) + "am") 
+    }
+    
+}
 
 
 const EventDetails = (props) => {
@@ -59,8 +81,8 @@ const EventDetails = (props) => {
 
     var start = new Date(props.beginTime);
     start.setTime(props.beginTime);
-
-
+    console.log("begin " + props.beginTime)
+    console.log("end " + props.endTime)
 
     var end = new Date(props.endTime);
     end.setTime(props.endTime);
@@ -69,29 +91,7 @@ const EventDetails = (props) => {
     }
     
     
-    function toStandardTime(hours, min)
-    {
-        var stdHours = hours; 
-        var pm = false; 
-        if(hours > 12)
-        {
-            stdHours -=12;
-            pm = true;
-        }
-        if(stdHours === 0)
-        {
-            stdHours = 12
-        }
-
-        if(pm)
-        {
-            return(stdHours +  ":" + ("0" + min).slice(-2) + "pm") 
-        }
-        else{
-            return(stdHours +  ":" + ("0" + min).slice(-2) + "am") 
-        }
-        
-    }
+    
 
     return(
         <div>
@@ -119,6 +119,7 @@ const EventDetails = (props) => {
 
             Where: {props.location}
             <br></br>
+
             When: {props.month} {props.day} | {toStandardTime(start.getHours(), start.getMinutes())} - {toStandardTime(end.getHours(), end.getMinutes())}
             <br></br>
             Who: {attending}
