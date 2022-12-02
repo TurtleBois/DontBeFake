@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Invite from "../components/Invite";
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import '../styles/LogIn.css';
 
 const InvitesScreen = () => {
     var groupID = window.location.href.split("=")[1].split("/")[0];
@@ -38,6 +39,11 @@ const InvitesScreen = () => {
     var numOfInvites = allRequests.length;
     return (
         <div>
+            if (allRequests.length === 0){
+                   return(
+                    <div className = 'title' style={{fontSize: '50px'}}>NoRequests.</div> 
+                   )
+            }
             <Box pt={3.5} pb={3.5} ml={7} mr={7}> 
                 <Grid container columns={12} rowSpacing={5}>
                     {Array.from(Array(numOfInvites)).map((_, index) => {
