@@ -181,6 +181,44 @@ async function getEventIDs() {
       return targetRecord.events;
 }
 
+async function getEventsTimes(allEvents) {
+    var groupEvents = Array(189).fill(null);
+    var eventNames = []; 
+    var count = 0; 
+    for(const eventId of allEvents)
+    {
+        console.log(eventId)
+        const response = await fetch(`http://localhost:5000/event/${eventId}`);
+        if (!response.ok) {
+            const message = `An error occurred: ${response.statusText}`;
+            window.alert(message);
+            return;
+        }
+        const event = await response.json();
+        
+        
+        const eventTime = event.time
+        
+        const range = eventTime[4] - eventTime[3];
+        
+        // console.log(event);
+        for(let i = eventTime[5]; i < eventTime[5] + range; i++)
+        {
+            groupEvents[i] = count; 
+        }
+        eventNames.push(event.name)
+
+    }
+
+    
+    
+    var toReturn = {
+        eventNames,
+        groupEvents,
+    }
+    console.log(toReturn)
+    return toReturn;
+}
 
 class Calender extends React.Component 
 {
@@ -190,23 +228,46 @@ class Calender extends React.Component
             eventIDList: [],
             allGroups: Array(189).fill(null),
             groupEvents: Array(189).fill(null),
+            eventNames: [],
             numEvents: 0,
         }
         this.firstTime = false;
+        this.firstTimeEvent = false;
         this.initCalendar();
         
     }
     async initCalendar() {
         var allGroupsReq = await getAllGroups();
         var allEventsList = await getEventIDs();
+
+        
+
         if(allGroupsReq == null) {
             this.firstTime = true;
             return;
         }
+        if(allEventsList == null) {
+            this.firstTimeEvent = true;
+            return;
+        }
+
+
+        var groupCal = await getEventsTimes(allEventsList);
+
+        if(groupCal == null) {
+            return;
+        }
+
+        console.log(groupCal);
+
+
         // newState = newState.state;
         this.setState({
             allGroups: allGroupsReq,
             eventIDList: allEventsList,
+            groupEvents: groupCal.groupEvents,
+            eventNames: groupCal.eventNames,
+
             },
             () => {
                 console.log(this.state);

@@ -36,6 +36,8 @@ const EventsScreen = () => {
     var numOfEvents = allEvents.length;
     var groupID = window.location.href.split("=")[1].split("/")[0];
     var prefix = "/group=" + groupID;
+
+    
     return (
         <body>
             <div>
