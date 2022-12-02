@@ -40,7 +40,9 @@ class VotingScreen extends React.Component {
             // console.log(candidates[i])
             if(targetId == candidates[i][0])
             {
-                candidates[i][1]++;
+                if(isFake) {
+                    candidates[i][1]++;
+                }
             }
             if(localStorage.getItem("_id") == hasVoted[i][0]) {
                 hasVoted[i][1] = true;
@@ -70,6 +72,7 @@ class VotingScreen extends React.Component {
     }
 
     async submitVote() {
+        
         var voterID = window.location.href.split("=")[1].split("/")[0];
         const request = await fetch(`http://localhost:5000/vote/${voterID}`);
         if (!request.ok) {
