@@ -2,7 +2,7 @@
 DontBeFake, is a MERN-stack web-app for schedule planning, with a little added spice. One can create a group or join existing ones
 
 # Documentation:
-Make sure you have Node installed.
+Make sure you have Node installed. 
 
 For developers:
 ```
